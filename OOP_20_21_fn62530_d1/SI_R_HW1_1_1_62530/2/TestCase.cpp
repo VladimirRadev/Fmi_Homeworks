@@ -2,6 +2,11 @@
 TestCase::TestCase(const std::string& name, const Error& error) :name(name), error(error)
 {
 }
+TestCase::TestCase(const TestCase& copy)
+{
+	this->name = copy.name;
+	this->error = copy.error;
+}
 std::string TestCase::getName() const
 {
 	return this->name;

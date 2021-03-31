@@ -31,23 +31,34 @@ bool VendingMachine::areEqual(const char* str1Name, const char* str2Name)const
 		return flag;
 	}
 }
-VendingMachine::VendingMachine():count(0),capacity(2)
+VendingMachine::VendingMachine() :count(0), capacity(2),incomeMoney(0.0)
 {
 	drinks = new Drink[capacity];
 }
 VendingMachine::VendingMachine(const VendingMachine& from)
 {
 	delete[]this->drinks;
-	this->drinks = new Drink[from.getCount()];
-	for (int i = 0; i < from.getCount(); i++)
+	if (from.getCount() == 0)
 	{
-		this->drinks[i] = from.getDrinks()[i];
+		this->count = 0;
+		this->capacity = 1;
+		this->drinks = new Drink[this->capacity];
+		this->incomeMoney = from.incomeMoney;
 	}
-	this->count = from.getCount();
-	//because we are alocate memory only for from.getCount() elements and 
-	//if from's capacity is bigger than from's count then with add drink method 
-	//will be write in foreign memory
-	this->capacity = from.getCount();
+	else
+	{
+		this->drinks = new Drink[from.getCount()];
+		for (int i = 0; i < from.getCount(); i++)
+		{
+			this->drinks[i] = from.getDrinks()[i];
+		}
+		this->count = from.getCount();
+		//because we are alocate memory only for from.getCount() elements and 
+		//if from's capacity is bigger than from's count then with add drink method 
+		//will be write in foreign memory
+		this->capacity = from.getCount();
+		this->incomeMoney = from.incomeMoney;
+	}
 
 }
 VendingMachine& VendingMachine::operator=(const VendingMachine& from)
@@ -55,17 +66,30 @@ VendingMachine& VendingMachine::operator=(const VendingMachine& from)
 	if (this != &from)
 	{
 		delete[]this->drinks;
-		this->drinks = new Drink[from.getCount()];
-		for (int i = 0; i < from.getCount(); i++)
+		if (from.getCount() == 0)
 		{
-			this->drinks[i] = from.getDrinks()[i];
+			this->count = 0;
+			this->capacity = 1;
+			this->drinks = new Drink[this->capacity];
+			this->incomeMoney = from.incomeMoney;
 		}
-		this->count = from.getCount();
+		else
+		{
 
-		//because we are alocate memory only for from.getCount() elements and 
-		//if from's capacity is bigger than from's count then with add drink method 
-		//will be write in foreign memory
-		this->capacity = from.getCount();
+
+			this->drinks = new Drink[from.getCount()];
+			for (int i = 0; i < from.getCount(); i++)
+			{
+				this->drinks[i] = from.getDrinks()[i];
+			}
+			this->count = from.getCount();
+
+			//because we are alocate memory only for from.getCount() elements and 
+			//if from's capacity is bigger than from's count then with add drink method 
+			//will be write in foreign memory
+			this->capacity = from.getCount();
+			this->incomeMoney = from.incomeMoney;
+		}
 	}
 	return *this;
 }
@@ -142,7 +166,7 @@ int VendingMachine::buy_drink(const char* drink_name, const double money)
 					newDrinks[j] = this->drinks[j];
 
 				}
-				for (int k = i; k < count-1; k++)
+				for (int k = i; k < count - 1; k++)
 				{
 					newDrinks[k] = this->drinks[k + 1];
 				}

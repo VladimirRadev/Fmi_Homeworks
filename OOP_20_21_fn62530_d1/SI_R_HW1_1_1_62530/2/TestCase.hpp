@@ -13,6 +13,7 @@ private:
 public:
     /// Constructor we'll need to create a new TestCase
     TestCase(const std::string& name = "", const Error& error = Error::newNone());
+    TestCase(const TestCase& copy);
 
     /// Retrieve the name of the TestCase
     std::string getName() const;

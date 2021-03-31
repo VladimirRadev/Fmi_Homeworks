@@ -1,5 +1,4 @@
 #pragma once
-#include <iostream>
 #include "Error.hpp"
 int Error::sizeOfStr(const char* str)
 {
@@ -10,7 +9,7 @@ int Error::sizeOfStr(const char* str)
 	}
 	return size;
 }
-Error::Error():message(nullptr),errorType(ErrorType::None)
+Error::Error() :message(nullptr), errorType(ErrorType::None)
 {
 
 }
@@ -70,7 +69,7 @@ bool Error::hasMessage() const
 	{
 		return false;
 	}
-	else if(sizeOfStr(this->message)>=0)
+	else if (sizeOfStr(this->message) >= 0)
 	{
 		return true;
 	}

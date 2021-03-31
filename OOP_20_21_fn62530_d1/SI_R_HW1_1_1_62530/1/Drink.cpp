@@ -8,7 +8,7 @@ int Drink::sizeOfStr(const char* str)const
 	}
 	return size;
 }
-Drink::Drink():name(nullptr), quantity(0.0), calories(0),price(0.0)
+Drink::Drink() :name(nullptr), quantity(0.0), calories(0), price(0.0)
 {
 
 }

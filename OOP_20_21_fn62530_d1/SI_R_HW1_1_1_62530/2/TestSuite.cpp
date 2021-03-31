@@ -12,6 +12,7 @@ TestSuite::TestSuite(std::string name) : count(0), capacity(2)
 }
 TestSuite::TestSuite(const TestSuite& rhs)
 {
+	this->name = rhs.name;
 	delete[]this->testCases;
 	this->testCases = new TestCase[rhs.getCount()];
 	for (int i = 0; i < rhs.getCount(); i++)
@@ -25,6 +26,7 @@ TestSuite& TestSuite::operator=(const TestSuite& rhs)
 {
 	if (this != &rhs)
 	{
+		this->name = rhs.name;
 		delete[]this->testCases;
 		this->testCases = new TestCase[rhs.getCount()];
 		for (int i = 0; i < rhs.getCount(); i++)
