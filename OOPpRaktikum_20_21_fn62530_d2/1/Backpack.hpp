@@ -26,6 +26,7 @@ private:
 public:
 	Backpack<T>();
 	Backpack<T>(const Backpack<T>& rhs);
+	Backpack<T>& operator=(const Backpack<T>& rhs);
 	bool isBackpackEmpty()const;
 	bool isBackpackFull()const;
 	const unsigned int& getSlots()const;
@@ -48,6 +49,31 @@ const T& Backpack<T>::getItem()const
 	return this->item;
 }
 
+template<>
+Backpack<Money>& Backpack<Money>::operator=(const Backpack<Money>& rhs)
+{
+	if (this != &rhs)
+	{
+		this->item.clearMoney();
+		this->item.addMoney(rhs.getItem().getGold(), rhs.getItem().getSilver());
+		this->slots = rhs.getSlots();
+	}
+	return *this;
+}
+template<>
+Backpack<Materials>& Backpack<Materials>::operator=(const Backpack<Materials>& rhs)
+{
+	if (this != &rhs)
+	{
+		this->item.clearMaterials();
+		for (int i = 0; i < rhs.getItem().getMaterials().size(); i++)
+		{
+			this->item.addMaterial(rhs.getItem().getMaterials()[i].second, rhs.getItem().getMaterials()[i].first);
+		}
+		this->slots = rhs.getSlots();
+	}
+	return *this;
+}
 template<class T>
 bool Backpack<T>::isBackpackEmpty()const
 {

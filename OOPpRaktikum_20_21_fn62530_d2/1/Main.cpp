@@ -233,13 +233,13 @@ void Test7()
 	//now they take 1 slot because armorEquipment and armorEquipment1 contain a single armor within
 	assert((armorStorage == armorStorage1) == true);
 	armorEquipment.addItem(armor2);//10+5;
-	Inventory < Equipment<Armor>>armorStorage2(armorEquipment);
-	std::cout << "What contains armorStorage2?: \n";
+	armorStorage.updateItem(armorEquipment);
+	std::cout << "What contains armorStorage?: \n";
 	std::cout << "***************************** \n";
-	std::cout << armorStorage2;
-	//now armorStorage contains a single armor within but instead it, armorStorage 2 now contains 2 armors within
-	assert((armorStorage == armorStorage2) == false);
-	assert((armorStorage != armorStorage2) == true);
+	std::cout << armorStorage;
+	//now armorStorage1 contains a single armor within but instead it, armorStorage now contains 2 armors within
+	assert((armorStorage == armorStorage1) == false);
+	assert((armorStorage != armorStorage1) == true);
 }
 int main()
 {

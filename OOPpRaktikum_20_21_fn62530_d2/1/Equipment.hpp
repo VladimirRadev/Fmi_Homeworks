@@ -24,7 +24,8 @@ private:
 	unsigned int slots;
 public:
 	Equipment<T>();
-	Equipment<T>(const Equipment& rhs);
+	Equipment<T>(const Equipment<T>& rhs);
+	Equipment<T>& operator=(const Equipment<T>& rhs);
 	const std::vector<T>& getItems()const;
 	const unsigned int& getSlots()const;
 	bool isEquipmentEmpty()const;
@@ -44,7 +45,7 @@ Equipment<T>::Equipment<T>():slots(0)
 }
 
 template<class T>
-Equipment<T>::Equipment<T>(const Equipment& rhs):slots(rhs.getSlots())
+Equipment<T>::Equipment<T>(const Equipment<T>& rhs):slots(rhs.getSlots())
 {
 	for (int i = 0; i < rhs.getItems().size(); i++)
 	{
@@ -53,6 +54,38 @@ Equipment<T>::Equipment<T>(const Equipment& rhs):slots(rhs.getSlots())
 	}
 }
 
+template<>
+Equipment<Armor>& Equipment<Armor>::operator=(const Equipment<Armor>& rhs)
+{
+	if (this != &rhs)
+	{
+		this->items.clear();
+		for (int i = 0; i < rhs.getItems().size(); i++)
+		{
+			Armor armor(rhs.getItems()[i]);
+			this->items.push_back(armor);
+		}
+		this->slots = rhs.getSlots();
+	}
+	return *this;
+
+}
+template<>
+Equipment<Weapon>& Equipment<Weapon>::operator=(const Equipment<Weapon>& rhs)
+{
+	if (this != &rhs)
+	{
+		this->items.clear();
+		for (int i = 0; i < rhs.getItems().size(); i++)
+		{
+			Weapon weapon(rhs.getItems()[i]);
+			this->items.push_back(weapon);
+		}
+		this->slots = rhs.getSlots();
+	}
+	return *this;
+
+}
 template<class T>
 const std::vector<T>& Equipment<T>::getItems()const
 {

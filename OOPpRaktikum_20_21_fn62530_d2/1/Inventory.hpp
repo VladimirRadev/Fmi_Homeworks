@@ -27,6 +27,7 @@ private:
 public:
 	Inventory<T>();
 	Inventory<T>(const T&item);
+	void updateItem(const T& item);
     friend std::ostream& operator<<(std::ostream& out, const Inventory<Equipment<Armor>>& inventory);
 	friend std::ostream& operator<<(std::ostream& out, const Inventory<Equipment<Weapon>>& inventory);
 	friend std::ostream& operator<<(std::ostream& out, const Inventory<Backpack<Money>>& inventory);
@@ -40,6 +41,13 @@ Inventory<T>::Inventory<T>() : item(T()) {}
 
 template<class T>
 Inventory<T>::Inventory<T>(const T& item): item(item){}
+
+template<class T>
+void Inventory<T>::updateItem(const T& item)
+{
+	this->item = item;
+
+}
 //type, defense ,effects
 std::ostream& operator<<(std::ostream& out, const Inventory<Equipment<Armor>>& inventory)
 {
