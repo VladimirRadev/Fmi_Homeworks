@@ -1,0 +1,6 @@
+Thug deck|1|2|2
+Blue-Eyes White Dragon|This legendary dragon is a powerful engine of destruction.|3000|2500
+Magic Cylinder|Inflict damage to your opponent equal to its ATK.|TRAP
+Mystic Box|Destroy one monster.|SPELL
+OK.Lets'go! Enemy spotted!|Your aim is weak! |1914|1948|7|BUFF
+Dva operating|You slow enemy's speed! |3245|1930|3|SPELL
