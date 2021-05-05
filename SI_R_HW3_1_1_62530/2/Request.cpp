@@ -1,11 +1,10 @@
 #include "Request.hpp"
-int Request::counterForAllObjects=0;
+int Request::count=0;
 
 Request::Request(const std::string& message, const std::string& sender):message(message),sender(sender)
 {
-	Request::counterForAllObjects++;
-	count = counterForAllObjects;
-	ID = count;
+	Request::count++;
+	ID = Request::count;
 }
 std::string Request::getMessage()const
 {
@@ -17,7 +16,7 @@ std::string Request::getSender()const
 }
 int Request::getCount()const
 {
-	return this->count;
+	return Request::count;
 }
 int Request::getID()const
 {

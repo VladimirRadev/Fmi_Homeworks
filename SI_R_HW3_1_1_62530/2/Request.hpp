@@ -5,8 +5,7 @@ class Request
 private:
 	std::string message;
 	std::string sender;
-	static int counterForAllObjects;
-	int count;
+	static int count;
 	int ID;
 public:
 	Request(const std::string& message, const std::string& sender);

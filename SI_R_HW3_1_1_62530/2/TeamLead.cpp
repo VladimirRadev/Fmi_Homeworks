@@ -1,7 +1,7 @@
 #include "TeamLead.hpp"
 TeamLead::TeamLead(const std::string& name, const double& salary) :Developer(name)
 {
-	this->leader = this;
+	this->setTeamLead(this);
 	this->setInitialSalary(salary);
 }
 TeamLead::~TeamLead()
@@ -11,7 +11,9 @@ TeamLead::~TeamLead()
 		this->team[0]->setTeamLead(nullptr);
 		this->team.erase(this->team.begin() + 0);
 	}
-	this->setTeamLead(nullptr);
+	this->leavingRequests.clear();
+	this->promotionRequests.clear();
+	//this->setTeamLead(nullptr);
 }
 std::vector<Developer*> TeamLead::getTeam()const
 {
@@ -34,7 +36,6 @@ void TeamLead::removeDeveloperFromTeam(const std::string& name)
 		if (this->team[i]->getName() == name)
 		{
 			this->team[i]->setTeamLead(nullptr);
-			///*delete this->team[i];*/
 			this->team.erase(this->team.begin() + i);
 			break;
 		}
