@@ -1,0 +1,7 @@
+Magician Deck|6|2|2|2
+Blue-Eyes White Dragon|This legendary dragon is a powerful engine of destruction|43|3000|2500
+Dark Magician|The ultimate wizard.|23|2500|2100
+Magic Cylinder|Inflict damage to your opponent equal to its ATK.|9|TRAP
+Swords of Revealing Light|Your opponent's monsters cannot declare an attack.|123|SPELL
+Timegazer Magician|Your opponent cannot activate Trap Magic Cards|3|1200|600|8|SPELL
+geri nikol|twerk|3|1200|600|8|BUFF
