@@ -1,0 +1,207 @@
+#include <iostream>
+#include <list>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+#define endl '\n'
+int notUsedNumForBall = -1;
+int global_position = 0;
+class Node
+{
+
+public:
+    int color;
+    int position;
+    Node(const int& color, const int& position) :color(color), position(position) {}
+
+    bool operator==(const Node& rhs)const
+    {
+        return this->position == rhs.position;
+    }
+};
+list<Node>::iterator iterators[200003]{};
+
+list<Node>::iterator findMein(list<Node>& elements, const Node& toFind)
+{
+    list<Node>::iterator start = elements.begin();
+    list<Node>::iterator end = prev(elements.end());
+
+    while (start != end)
+    {
+        if (*start == toFind)
+        {
+            return start;
+        }
+        else if (*end == toFind)
+        {
+            return end;
+        }
+        else
+        {
+            end--;
+            start++;
+        }
+    }
+    return start;
+
+}
+pair<int, bool> countRemoves(list<Node>& elements, list<Node>::iterator& p)
+{
+    list<Node>::iterator firstToCut = p, lastToCut = p;
+    int countDown = -1, countUp = -1;
+    while (firstToCut != elements.begin() && firstToCut->color == p->color)
+    {
+        firstToCut--;
+        countDown++;
+    }
+    if (firstToCut == elements.begin() && firstToCut->color == p->color)
+    {
+        countDown++;
+    }
+    if (firstToCut->color != p->color)
+    {
+        firstToCut++;
+    }
+    while (lastToCut != std::prev(elements.end()) && lastToCut->color == p->color)
+    {
+        lastToCut++;
+        countUp++;
+    }
+    if (lastToCut == std::prev(elements.end()) && lastToCut->color == p->color)
+    {
+        countUp++;
+    }
+    if (lastToCut->color != p->color)
+    {
+        lastToCut--;
+    }
+
+    if (countDown + countUp + 1 >= 3)
+    {
+        if (firstToCut == elements.begin() && lastToCut == std::prev(elements.end()))
+        {
+            elements.clear();
+            return make_pair(countDown + countUp + 1, true);
+        }
+        else if (firstToCut == elements.begin())
+        {
+            lastToCut++;
+            elements.erase(firstToCut, lastToCut);
+            p = elements.begin();
+            return make_pair(countDown + countUp + 1, true);
+
+        }
+        else if (lastToCut == std::prev(elements.end()))
+        {
+            elements.erase(firstToCut, elements.end());
+            p = std::prev(elements.end());
+            return make_pair(countDown + countUp + 1, true);
+
+        }
+        else
+        {
+            firstToCut--;
+            lastToCut++;
+            if (firstToCut->color == lastToCut->color)
+            {
+                p = firstToCut;
+                firstToCut++;
+                elements.erase(firstToCut, lastToCut);
+                return make_pair(countDown + countUp + 1, false);
+            }
+            else
+            {
+                firstToCut++;
+                elements.erase(firstToCut, lastToCut);
+                return make_pair(countDown + countUp + 1, true);
+            }
+        }
+    }
+    else
+    {
+        return make_pair(0, true);
+    }
+}
+bool isEqual(const Node& element)
+{
+    return element.position == global_position;
+}
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(nullptr);
+    cout.tie(nullptr);
+    list<Node>elements;
+    int n = 0, input = 0, q = 0, p = 0, c = 0;
+    cin >> n;
+    for (int i = 0; i < n; i++)
+    {
+        cin >> input;
+        Node* toAdd = new Node(input, ++notUsedNumForBall);
+        elements.push_back(*toAdd);
+    }
+    int d = 0;
+    for (list<Node>::iterator i = elements.begin(); i != elements.end(); i++)
+    {
+        iterators[d++] = i;
+    }
+    cin >> q;
+    for (int i = 0; i < q; i++)
+    {
+        cin >> p >> c;
+        global_position = p;
+        if (elements.size() == 0)
+        {
+            cout << "Game Over" << endl;
+            continue;
+        }
+        list<Node>::iterator positionToInsert = ++iterators[global_position];
+        iterators[global_position]--;
+        list<Node>::iterator it = elements.insert(positionToInsert, Node(c, ++notUsedNumForBall));
+        iterators[notUsedNumForBall] = it;
+
+        pair<int, bool>results = countRemoves(elements, it);
+        int result = 0;
+        while (true)
+        {
+            if (results.first == 0 && results.second == true)
+            {
+                break;
+            }
+            else if (results.first != 0 && results.second == true)
+            {
+                result += results.first;
+                break;
+            }
+            else if (results.first != 0 && results.second == false)
+            {
+                result += results.first;
+                results = countRemoves(elements, it);
+                continue;
+            }
+            else
+            {
+                result += results.first;
+                break;
+            }
+
+        }
+        cout << result << endl;
+    }
+    if (elements.size() == 0)
+    {
+        cout << -1 << endl;
+    }
+    else
+    {
+        for (auto const& i : elements)
+        {
+            cout << i.color << ' ';
+        }
+        cout << endl;
+    }
+
+
+
+}
