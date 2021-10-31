@@ -1,0 +1,39 @@
+// Complete the findMergeNode function below.
+
+/*
+ * For your reference:
+ *
+ * SinglyLinkedListNode {
+ *     int data;
+ *     SinglyLinkedListNode* next;
+ * };
+ *
+ */
+int findMergeNode(SinglyLinkedListNode* head1, SinglyLinkedListNode* head2) {
+
+    vector<SinglyLinkedListNode*> pointers;
+    SinglyLinkedListNode* current1=head1;
+     SinglyLinkedListNode* current2=head2;
+    while(current1!=nullptr)
+    {
+        pointers.push_back(current1);
+        current1=current1->next;
+    }
+    while(current2!=nullptr)
+    {
+         auto it = find(pointers.begin(), pointers.end(), current2);
+         if(it!=pointers.end())
+         {
+             int index=it-pointers.begin();
+             return pointers[index]->data;
+         }
+        else
+        {
+            current2=current2->next;
+        }
+    }
+    return -1;
+    
+    
+
+}

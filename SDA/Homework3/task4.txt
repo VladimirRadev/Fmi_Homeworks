@@ -1,0 +1,181 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <fstream>
+using namespace std;
+int findResult(const vector<int>& numbers, const vector<long long>& sumOfNumbers, int start, int end, const int& indexOfP, const int& maxSum)
+{
+    if (start > end)
+    {
+        return 0;
+    }
+    int middle = (start + end) / 2;
+    long long intervalSum = sumOfNumbers[indexOfP] - sumOfNumbers[middle] + numbers[middle];
+    if (intervalSum > maxSum)
+    {
+        if (middle >= 0 && middle < indexOfP)
+        {
+            if (intervalSum - numbers[middle] > maxSum)
+            {
+                return findResult(numbers, sumOfNumbers, middle + 1, end, indexOfP, maxSum);
+            }
+            else
+            {
+                if (middle + 1 == indexOfP)
+                {
+                    return 1;
+                }
+                else
+                {
+                    return indexOfP - middle;
+                }
+            }
+        }
+        else
+        {
+            return 0;
+        }
+    }
+    else if (intervalSum < maxSum)
+    {
+        if (middle > 0 && middle <= indexOfP)
+        {
+            if (intervalSum + numbers[middle - 1] <= maxSum)
+            {
+                return findResult(numbers, sumOfNumbers, start, middle - 1, indexOfP, maxSum);
+            }
+            else
+            {
+                return indexOfP - (middle - 1);
+            }
+        }
+        else
+        {
+            return indexOfP + 1;
+        }
+    }
+    else
+    {
+        return indexOfP + 1 - middle;
+    }
+}
+
+int findIndexOfP(const vector<int>& nums, int start, int end, int num)
+{
+    if (start > end)
+    {
+        return -1;
+    }
+    int middle = (start + end) / 2;
+    if (num > nums[middle])
+    {
+        if (middle >= 0 && middle < nums.size() - 1)
+        {
+            if (nums[middle] < num && num < nums[middle + 1])
+            {
+                return middle;
+            }
+            else
+            {
+                return findIndexOfP(nums, middle + 1, end, num);
+            }
+        }
+        else
+        {
+            return nums.size() - 1;
+        }
+
+    }
+    else if (num < nums[middle])
+    {
+        if (middle > 0 && middle <= nums.size() - 1)
+        {
+            if (nums[middle] > num && num > nums[middle - 1])
+            {
+                return middle - 1;
+            }
+            else
+            {
+                return findIndexOfP(nums, start, middle - 1, num);
+            }
+        }
+        else
+        {
+            return -1;
+        }
+
+    }
+    else
+    {
+        if (middle + 1 < nums.size())
+        {
+            if (nums[middle + 1] == nums[middle])
+            {
+                return findIndexOfP(nums, middle + 1, end, num);
+            }
+            else
+            {
+                return middle;
+            }
+        }
+        else
+        {
+            return middle;
+        }
+    }
+}
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+
+    int n = 0, q = 0, input = 0;
+    cin >> n >> q;
+    vector<int>numbers;
+    vector<long long>sumOfNumbers(n, 0);
+    for (size_t i = 0; i < n; i++)
+    {
+        cin >> input;
+        numbers.push_back(input);
+    }
+    sort(numbers.begin(), numbers.end());
+    sumOfNumbers[0] = numbers[0];
+    for (size_t i = 1; i < n; i++)
+    {
+        sumOfNumbers[i] = numbers[i] + sumOfNumbers[i - 1];
+    }
+    int s = 0, p = 0;
+    for (int i = 0; i < q; i++)
+    {
+        cin >> s >> p;
+        int indexOfNumberNotBiggerThanP = findIndexOfP(numbers, 0, numbers.size() - 1, p);
+        int currentSum = 0;
+        if (indexOfNumberNotBiggerThanP < 0)
+        {
+            std::cout << 0 << std::endl;
+            continue;
+        }
+        else if (indexOfNumberNotBiggerThanP == 0)
+        {
+            currentSum += numbers[indexOfNumberNotBiggerThanP];
+            if (currentSum > s)
+            {
+               
+                printf("%d\n", 0);
+                continue;
+            }
+            else
+            {
+                printf("%d\n", 1);
+                continue;
+            }
+        }
+        else
+        {
+            printf("%d\n", findResult(numbers, sumOfNumbers, 0, indexOfNumberNotBiggerThanP, indexOfNumberNotBiggerThanP, s));
+
+        }
+
+    }
+}

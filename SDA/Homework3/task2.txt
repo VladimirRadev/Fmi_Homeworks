@@ -1,0 +1,74 @@
+#include <iostream>
+#include <cstdio>
+#include <vector>
+#include <cmath>
+#include <algorithm>
+using namespace std;
+int findMinCoef(int* arr, int start, int end,int& lowBarrier,int& upBarrier, int group)
+{
+    if (start > end)
+    {
+        if (group <= lowBarrier)
+        {
+            return lowBarrier;
+        }
+        else if (group >= upBarrier)
+        {
+            return upBarrier;
+        }
+        else if (group > lowBarrier && group < upBarrier)
+        {
+            if (abs(group - lowBarrier) > abs(group - upBarrier))
+            {
+                return upBarrier;
+            }
+            else if (abs(group - lowBarrier) < abs(group - upBarrier))
+            {
+                return lowBarrier;
+            }
+            else
+            {
+                return lowBarrier;
+            }
+        }
+
+    }
+    int middle = (start + end) / 2;
+    if (arr[middle] > group)
+    {
+        return findMinCoef(arr, start, middle - 1, lowBarrier, arr[middle], group);
+    }
+    else if (arr[middle] < group)
+    {
+        return findMinCoef(arr, middle + 1, end, arr[middle], upBarrier, group);
+    }
+    else
+    {
+        return arr[middle];
+    }
+
+}
+int main()
+{
+    int n = 0, m = 0,k=0,d=0,lowBarier=-1,upBarier=-1;
+    cin >> n >> m;
+    int* ptr = new int[n];
+    for (int i = 0; i < n; i++)
+    {
+        cin >> k;
+        ptr[i] = k;
+    }
+    lowBarier = ptr[0];
+    upBarier = ptr[n - 1];
+    vector<int>results;
+    for (int i = 0; i < m; i++)
+    {
+        cin >> d;
+        results.push_back(findMinCoef(ptr, 0, n - 1, lowBarier, upBarier, d));
+    }
+
+    for (int i=0; i < results.size(); i++)
+    {
+        std::cout << results[i] << std::endl;
+    }
+}

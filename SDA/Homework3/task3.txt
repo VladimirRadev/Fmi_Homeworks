@@ -1,0 +1,103 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <climits>
+using namespace std;
+const int MAX_INT = INT_MAX;
+class customPair {
+private:
+    int key = MAX_INT;
+    int value = MAX_INT;
+public:
+    customPair(const int& key = MAX_INT, const int& value = MAX_INT)
+    {
+        this->key = key;
+        this->value = value;
+    }
+    ~customPair() = default;
+    int getKey()const
+    {
+        return key;
+    }
+    int getValue()const
+    {
+        return value;
+    }
+    bool operator<(const customPair& rhs)const
+    {
+        return this->key < rhs.key&& this->value < rhs.value;
+    }
+    bool operator>(const customPair& rhs)const
+    {
+        return !(*this < rhs);
+    }
+};
+int lis(vector<int> const& a) {
+    int n = a.size();
+    const int INF = 1e9;
+    vector<int> d(n + 1, INF);
+    d[0] = -INF;
+
+    for (int i = 0; i < n; i++) {
+        int j = upper_bound(d.begin(), d.end(), a[i]) - d.begin();
+        if (d[j - 1] < a[i] && a[i] < d[j])
+            d[j] = a[i];
+    }
+
+    int ans = 0;
+    for (int i = 0; i <= n; i++) {
+        if (d[i] < INF)
+            ans = i;
+    }
+    return ans;
+}
+int main() {
+    int n = 0;
+    cin >> n;
+    int k = 0, d = 0;
+    vector<customPair>demons;
+    vector<int>defences;
+    vector<int>attacks;
+    for (int i = 0; i < n; i++)
+    {
+        cin >> k >> d;
+
+        demons.push_back(customPair(k, d));
+    }
+    sort(demons.begin(), demons.end(), [](auto& a, auto& b) {
+        if(a.getKey()<b.getKey())
+        {
+            return true;
+        }
+        else if (a.getKey()>b.getKey())
+        {
+            return false;
+        }
+        else
+        {
+            if(a.getValue()>b.getValue())
+            {
+                return true;
+            }
+            else if(a.getValue()<b.getValue())
+            {
+                return false;
+            }
+            else{
+                return false;
+            }
+        }
+    });
+  
+    for (int i = 0; i < n; i++)
+    {
+        attacks.push_back(demons[i].getKey());
+        defences.push_back(demons[i].getValue());
+    }
+
+    std::cout << min(lis(attacks), lis(defences))<< std::endl;
+
+
+}

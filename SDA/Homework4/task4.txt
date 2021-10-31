@@ -1,0 +1,208 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+
+class Node
+{
+
+    public:
+    int data;
+    Node* next;
+    Node* prev;
+    Node(const int& data,Node* next=nullptr,Node* prev=nullptr):data(data),next(next),prev(prev){}
+};
+
+
+class CustomList
+{
+    private:
+    Node* middle;
+    unsigned int size;
+  public:
+    Node* head;
+    Node* tail;
+    CustomList():middle(nullptr),size(0),head(nullptr),tail(nullptr){}
+    const unsigned int getSize()const
+    {
+        return size;
+    }
+    Node* getMiddle()
+    {
+        return middle;
+    }
+    
+    void add(const int& value)
+    {
+        if(head==nullptr)
+        {
+            head=new Node(value);
+            tail=head;
+            middle=head;
+            size++;
+            return;
+        }
+        else if(head==tail)
+        {
+            Node* toAdd=new Node(value,nullptr,tail);
+            tail=toAdd;
+            head->next=tail;
+            size++;
+            return;
+        }
+        else
+        {
+            Node* toAdd=new Node(value,nullptr,tail);
+            tail->next=toAdd;
+            tail=toAdd;
+            if((int)(size+1)%2!=0)
+            {
+                middle=middle->next;
+                size++;
+                return;
+            }
+            size++;
+        }
+    }
+    void gun()
+    {
+        if(head==tail)
+        {
+            Node* temp=tail;
+            head=nullptr;
+            tail=nullptr;
+            middle=nullptr;
+            size--;
+            delete temp;
+            return;
+        }
+        else
+        {
+            if(size==2)
+            {
+                Node* temp=tail;
+                tail->prev=nullptr;
+                head->next=nullptr;
+                tail=head;
+                delete temp;
+                size--;
+                return;
+            }
+            else if(size%2!=0)
+            {
+                
+                Node* temp=tail;
+                tail->prev->next=nullptr;
+                tail=tail->prev;
+                temp->prev=nullptr;
+                middle=middle->prev;
+                delete temp;
+                size--;
+                return;
+                
+            }
+            else 
+            {
+                Node* temp=tail;
+                tail->prev->next=nullptr;
+                tail=tail->prev;
+                temp->prev=nullptr;
+                delete temp;
+                size--;
+            }
+            
+        }
+    }
+    void milen()
+    {
+        Node* previusHead=head;
+        Node* previusTail=tail;
+        Node* previusMiddle=middle;
+        if(size==1)
+        {
+            return;
+        }
+        else if(size%2==0)
+        {
+       
+            head=previusMiddle->next;
+            head->prev=nullptr;
+            previusTail->next=previusHead;
+            previusHead->prev=previusTail;
+            middle=previusTail;
+            previusMiddle->next=nullptr;
+            tail=previusMiddle;
+            return;
+        }
+        else
+        {
+           tail=previusMiddle->prev;
+           head=previusMiddle;
+           head->prev=nullptr;
+           previusTail->next=previusHead;
+            previusHead->prev=previusTail;
+            middle=previusTail;
+            tail->next=nullptr;
+            
+            
+            return;
+          
+        
+        }
+    }
+    void print()const
+    {
+        Node* it=head;
+        while(it!=nullptr)
+        {
+            cout<<it->data<<' ';
+            it=it->next;
+        }
+        cout<<'\n';
+    }
+    
+};
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(nullptr);
+    cout.tie(nullptr);
+    
+    CustomList linkedList;
+    
+    int n=0,input=0;
+    cin>>n;
+    string command;
+    for(int i=0;i<n;i++)
+    {
+        cin>>command;
+        if(command=="add")
+        {
+            cin>>input;
+            linkedList.add(input);
+            continue;
+        }
+        else if(command=="gun")
+        {
+            linkedList.gun();
+            continue;
+        }
+        else if(command=="milen")
+        {
+            linkedList.milen();   
+            continue;
+        }
+        else
+        {
+            continue;
+        }
+        
+    }
+    cout<<linkedList.getSize()<<"\n";
+    linkedList.print();
+    
+    
+}
