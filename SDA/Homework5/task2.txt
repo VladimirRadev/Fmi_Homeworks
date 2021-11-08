@@ -1,0 +1,96 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <deque>
+using namespace std;
+void printDeque(deque<int>& deq)
+{
+    while(!deq.empty())
+    {
+        cout<<deq.front()<<' ';
+        deq.pop_front();
+    }
+}
+void battle(deque<int>&possitive,deque<int>&negative)
+{
+    while(!possitive.empty() && !negative.empty())
+    {
+        if(possitive.back() > abs(negative.front()))
+        {
+            negative.pop_front();
+            continue;
+        }
+        else if(possitive.back()<abs(negative.front()))
+        {
+            possitive.pop_back();
+            continue;
+        }
+        else
+        {
+            possitive.pop_back();
+            negative.pop_front();
+        }
+    }
+    
+}
+
+int main() {
+    int n=0,input=0;
+    cin>>n;
+    vector<int>nums;
+    deque<int>possitive;
+    deque<int>negative;
+    for(int i=0;i<n;i++)
+    {
+        cin>>input;
+        nums.push_back(input);
+    }
+    for(int i=0;i<n;i++)
+    {
+        if(nums[i]<0)
+        {
+            cout<<nums[i]<<' ';
+            continue;
+        }
+        else
+        {
+            int j=i;
+            while(j<n && nums[j]>0)
+            {
+                possitive.push_back(nums[j]);
+                ++j;
+            }
+            if(j==n)
+            {
+                printDeque(possitive);
+                break;
+            }
+            else
+            {
+                if(nums[j]<0)
+                {
+                    while(j<n && nums[j]<0)
+                    {
+                        negative.push_back(nums[j]);
+                        ++j;
+                    }
+                    
+                    battle(possitive,negative);
+                    if(possitive.empty() && !negative.empty())
+                    {
+                        printDeque(negative);
+                    }
+                    i=j-1;
+                    continue;     
+                }
+            }
+            
+        }
+    }
+    printDeque(possitive);
+    cout<<endl;
+    
+
+}
