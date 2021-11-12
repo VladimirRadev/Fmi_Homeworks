@@ -1,0 +1,66 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <map>
+using namespace std;
+
+//index,result
+long long result[1000001]={};
+class TreeNode
+{
+    public:
+    int value;
+    vector<TreeNode*>children;
+    
+    TreeNode(const int& value=0,const vector<TreeNode*>& children=vector<TreeNode*>()):value(value),children(vector<TreeNode*>()){}
+    
+};
+
+long long maxResult(TreeNode* curr)
+{
+    if(curr->children.size()==0)
+    {
+        result[curr->value]=0;
+        return 0;
+    }
+    
+    for(int i=0;i<curr->children.size();i++)
+    {
+        result[curr->value]+=1+maxResult(curr->children[i]);
+    }
+    return result[curr->value];
+}
+int main() {
+    int n=0,x=0,y=0;
+    cin>>n;
+    if(n==1)
+    {
+        cout<<0<<endl;
+    }
+    else
+    {
+        vector<TreeNode*> employers(n+1,nullptr);
+        for(int i=0;i<n-1;i++)
+        {
+            cin>>x>>y;
+            if(employers[x]==nullptr)
+            {
+                employers[x]=new TreeNode(x);
+            }
+            if(employers[y]==nullptr)
+            {
+                employers[y]=new TreeNode(y);
+            }
+            employers[x]->children.push_back(employers[y]);
+        }
+
+        maxResult(employers[0]);
+        for(int i=0;i<n;i++)
+        {
+            cout<<result[i]<<' ';
+        }
+        cout<<endl;
+    }
+}

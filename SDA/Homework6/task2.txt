@@ -1,0 +1,111 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <map>
+using namespace std;
+
+class TreeNode
+{
+    public:
+    int index;
+    int x;
+    int y;
+    TreeNode* left;
+    TreeNode* right;
+    
+    TreeNode(const int& index=-1,const int& x=-1,const int& y=-1,TreeNode* left=nullptr,TreeNode* right=nullptr):index(index),
+    x(x),y(y),left(left),right(right){}
+    
+    bool operator<(const TreeNode& rhs)const
+    {
+        return this->x < rhs.x;
+    }
+};
+
+
+map<int,TreeNode*>xOrderedResults;
+
+void firstFindPreOrderTraversal(TreeNode* root,const int& x,const int& y,bool& checked)
+{
+    if(checked)
+    {
+        return;
+    }
+    if(root!=nullptr)
+    {
+        if(root->x==x && root->y==y)
+        {
+            xOrderedResults[x]=root;
+            checked=true;
+            return;
+        }
+        firstFindPreOrderTraversal(root->left,x,y,checked);
+        firstFindPreOrderTraversal(root->right,x,y,checked);
+    }
+}
+
+
+int main() {
+    
+    int n=0,left=0,right=0;
+    cin>>n;
+    vector<TreeNode*>nodes(n,nullptr);
+    nodes[0]=new TreeNode(0,0,0);
+    for(int i=0;i<n;i++)
+    {
+        cin>>left>>right;
+        if(nodes[i]==nullptr)
+        {
+            nodes[i]=new TreeNode(i);
+        }
+        if(left!=-1)
+        {
+            if(nodes[left]==nullptr)
+            {
+                nodes[left]=new TreeNode(left);
+            }
+            nodes[left]->x=nodes[i]->x-1;
+            nodes[left]->y=nodes[i]->y-1;
+            nodes[i]->left=nodes[left];
+        }
+        if(right!=-1)
+        {
+             if(nodes[right]==nullptr)
+            {
+                nodes[right]=new TreeNode(right);
+            }
+            nodes[right]->x=nodes[i]->x+1;
+            nodes[right]->y=nodes[i]->y-1;
+            nodes[i]->right=nodes[right];
+        }
+        if(xOrderedResults[nodes[i]->x]==nullptr)
+        {
+            xOrderedResults[nodes[i]->x]=nodes[i];
+            continue;
+        }
+        else if(xOrderedResults[nodes[i]->x]->y < nodes[i]->y)
+        {
+            xOrderedResults[nodes[i]->x]=nodes[i];
+            continue;
+        }
+        else if(xOrderedResults[nodes[i]->x]->y == nodes[i]->y)
+        {
+            bool checked=false;
+            firstFindPreOrderTraversal(nodes[0],nodes[i]->x,nodes[i]->y,checked);
+        }
+        else
+        {
+            continue;
+
+        }
+    }
+    
+    for(map<int,TreeNode*>::iterator it=xOrderedResults.begin();it!=xOrderedResults.end();it++)
+    {
+        cout<<it->second->index<<' ';
+    }
+    cout<<endl;
+    
+}
