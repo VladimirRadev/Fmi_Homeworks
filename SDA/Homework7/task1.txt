@@ -1,0 +1,29 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <set>
+using namespace std;
+
+
+int main() {
+    set<int> nums;
+    int n=0,a=0;
+    cin>>n;
+    for(int i=0;i<n;i++)
+    {
+        cin>>a;
+        int k=a;
+        nums.insert(k);
+        for(int j=k-1;j>=0;j--)
+        {
+            int comp=k&j;
+            if(comp==j)
+            {
+                nums.insert(j);
+            }
+        }
+    }
+    cout<<nums.size()<<endl;
+}

@@ -1,0 +1,47 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <map>
+#include <set>
+using namespace std;
+const int maxXor=1000000007;
+
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(nullptr);
+    cout.tie(nullptr);
+    
+    int q=0,p=0,curr=0,lastMin=maxXor;
+    cin>>q;
+    set<int>nums;
+    nums.insert(0);
+    for(int i=0;i<q;i++)
+    {
+        curr=maxXor;
+        cin>>p;
+        pair<set<int>::iterator,bool>p1=nums.insert(p);
+        if(p1.second==true)
+        {
+            
+            set<int>::iterator pos=p1.first;
+            set<int>::iterator start=pos,end=pos;
+            start--;
+            end++;
+            curr=*start ^ *pos;
+            if(end!=nums.end())
+            {
+                curr=min(curr,*pos^*end);
+            }
+        }
+        if(curr<lastMin)
+        {
+            lastMin=curr;
+        }
+        printf("%d\n",lastMin);
+        
+    }
+    
+}

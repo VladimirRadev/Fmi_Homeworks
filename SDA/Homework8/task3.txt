@@ -1,0 +1,117 @@
+#include <bits/stdc++.h>
+using namespace std;
+class CustomPair
+{
+    public:
+   long long startHour;
+    long long duration;
+    CustomPair(const long long & startHour=0,const long long & duration=0):startHour(startHour),duration(duration){}
+    bool operator==(const CustomPair& rhs)const
+    {
+        return startHour==rhs.startHour && duration==rhs.duration;
+    }
+    bool operator!=(const CustomPair& rhs)const
+    {
+
+        return !(*this==rhs);
+    }
+    bool operator<(const CustomPair& rhs)const
+    {
+        if(startHour<rhs.startHour)
+        {
+           return true;
+            
+        }
+        else if(startHour>rhs.startHour)
+        {
+            return false;
+        }
+        else
+        {
+            if(duration<rhs.duration)
+            {
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+
+    }
+    bool operator>(const CustomPair& rhs)const
+    {
+        return !(*this<rhs);
+
+    }
+
+};
+
+struct compare
+{
+  bool operator()(const CustomPair& rhs,const CustomPair& lhs)const
+  {
+      if(rhs.duration==lhs.duration)
+      {
+          return rhs.startHour>lhs.startHour;
+      }
+      return rhs.duration>lhs.duration;
+  }
+};
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(nullptr);
+    cout.tie(nullptr);
+    vector<long long>avarageSubmissionCheck;
+    long long n=0,sh=0,d=0;
+    
+    
+    multiset<CustomPair> nums;
+    cin>>n;
+    for(long long i=0;i<n;i++)
+    {
+        cin>>sh>>d;
+        nums.insert(CustomPair(sh,d));
+    }
+    
+    long long currentTime=nums.begin()->startHour+nums.begin()->duration;
+    avarageSubmissionCheck.push_back(nums.begin()->duration);
+    nums.erase(nums.begin());
+    
+    priority_queue<CustomPair,std::vector<CustomPair>,compare> que;  
+   
+    auto iter=nums.begin();
+    while(iter!=nums.end())
+    {
+         while(!que.empty() && currentTime<iter->startHour)
+            {
+                avarageSubmissionCheck.push_back(currentTime-que.top().startHour+que.top().duration);
+                currentTime+=que.top().duration;
+                que.pop();
+            }
+        if(que.empty() && currentTime<iter->startHour)
+        {
+            currentTime=iter->startHour;
+        }
+            que.push(*iter);
+            iter++;
+        
+    }
+    while(!que.empty())
+    {
+         avarageSubmissionCheck.push_back(currentTime-que.top().startHour+que.top().duration);
+         currentTime+=que.top().duration;
+         que.pop();
+    }
+    
+    long long sum=0;
+    for(long long i=0;i<avarageSubmissionCheck.size();i++)
+    {
+        sum+=avarageSubmissionCheck[i];
+    }
+    
+    cout<<sum/avarageSubmissionCheck.size()<<endl;
+    
+    
+}
+
+

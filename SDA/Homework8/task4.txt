@@ -1,0 +1,70 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <map>
+using namespace std;
+
+int nums[100001]{};
+int maxScore[100001]{};
+
+int main() {
+    int n=0,k=0,t=0,l=0;
+    cin>>n>>k;
+    for(int i=0;i<n;i++)
+    {
+        cin>>t>>l;
+        
+        int indexToStart=i%k;
+        
+        bool isAccepted=false;
+        
+        for(int j=indexToStart;j<=k-1;j++)
+        {
+            if(nums[j]<=t)
+            {
+                nums[j]=t+l;
+                isAccepted=true;
+                maxScore[j]++;
+                break;
+            }
+        }
+        if(isAccepted)
+        {
+            continue;
+        }
+        for(int j=0;j<indexToStart;j++)
+        {
+            if(nums[j]<=t)
+            {
+                nums[j]=t+l;
+                isAccepted=true;
+                maxScore[j]++;
+                break;
+            }
+        }
+    }
+    int max=-1;
+    for(int i=0;i<k;i++)
+    {
+        if(maxScore[i]>max)
+        {
+            max=maxScore[i];
+        }
+    }
+    map<int,int>result;
+    for(int i=0;i<k;i++)
+    {
+        if(maxScore[i]==max)
+        {
+            result[i];
+        }
+    }
+   
+    for(auto x=result.begin();x!=result.end();x++)
+    {
+        cout<<x->first<<' ';
+    }
+    cout<<endl;
+}

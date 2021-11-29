@@ -1,0 +1,112 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <queue> 
+#include <map>
+#include <set>
+#include <climits>
+using namespace std;
+class CustomTriplet
+{
+    public:
+    int startHour;
+    int duration;
+    int index;
+    CustomTriplet(const int& startHour=0,const int& duration=0,const int& index=-1):startHour(startHour),duration(duration),index(index){}
+    bool operator==(const CustomTriplet& rhs)const
+    {
+        return startHour==rhs.startHour && duration==rhs.duration && index==rhs.index;
+    }
+    bool operator!=(const CustomTriplet& rhs)const
+    {
+
+        return !(*this==rhs);
+    }
+    bool operator<(const CustomTriplet& rhs)const
+    {
+        if(startHour<rhs.startHour)
+        {
+           return true;
+            
+        }
+        else if(startHour>rhs.startHour)
+        {
+            return false;
+        }
+        else
+        {
+            if(duration<rhs.duration)
+            {
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+
+    }
+    bool operator>(const CustomTriplet& rhs)const
+    {
+        return !(*this<rhs);
+
+    }
+
+};
+
+struct compare
+{
+  bool operator()(const CustomTriplet& rhs,const CustomTriplet& lhs)const
+  {
+      if(rhs.duration==lhs.duration)
+      {
+          return rhs.index>lhs.index;
+      }
+     return rhs.duration>lhs.duration;
+  }
+};
+int main() {
+    int n=0,sh=0,d=0;
+    
+    
+    set<CustomTriplet> nums;
+    cin>>n;
+    for(int i=0;i<n;i++)
+    {
+        cin>>sh>>d;
+        nums.insert(CustomTriplet(sh,d,i));
+    }
+    
+    long long currentTime=nums.begin()->startHour+nums.begin()->duration;
+    cout<<nums.begin()->index<<' ';
+    nums.erase(nums.begin());
+    
+    priority_queue<CustomTriplet,std::vector<CustomTriplet>,compare> que;  
+   
+    auto iter=nums.begin();
+    while(iter!=nums.end())
+    {
+         while(!que.empty() && currentTime<iter->startHour)
+            {
+                cout<<que.top().index<<' ';
+                currentTime+=que.top().duration;
+                que.pop();
+            }
+        if(que.empty() && currentTime<iter->startHour)
+        {
+            currentTime=iter->startHour;
+        }
+            que.push(*iter);
+            iter++;
+        
+    }
+    while(!que.empty())
+    {
+         cout<<que.top().index<<' ';
+         que.pop();
+    }
+    cout<<endl;
+    
+}
+    
