@@ -1,0 +1,104 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <set>
+#include <unordered_map>
+#include <unordered_set>
+
+
+
+using namespace std;
+
+unsigned long long arrNum[200006]{};
+
+unsigned long long factoriel(unsigned long long num)
+{
+    if (num == 1 || num == 0)
+    {
+        return 1;
+    }
+
+    unsigned long long result = 1;
+
+    for (unsigned long long i = 1; i <= num; i++)
+    {
+        result *= i;
+    }
+    return result;
+}
+
+
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(nullptr);
+    unsigned long long n = 0, k = 0,a=0,result=0;
+    cin >> n >> k;
+
+    //we count the nums before and after a current num, at current position when we iterate through the array, equal to that num
+    // and we make a simple calculation of all combinations using the formula: combinations=count(nums[i/k].left)*1*count(nums[i*k])
+    
+    //num,pair<right,left>
+    unordered_map<unsigned long long, pair<unsigned long long, unsigned long long>>nums;
+    for (unsigned long long i = 0; i < n; i++)
+    {
+        cin >> a;
+        arrNum[i] = a;
+        nums[a].first++;
+        nums[a].second = 0;
+    }
+    //todo
+    if (k == 1)
+    {
+        for (auto i = nums.begin(); i != nums.end(); i++)
+        {
+            if (i->second.first >= 3)
+            {
+                unsigned long long big = 1;
+                for (unsigned long long j = i->second.first-2; j <= i->second.first; j++)
+                {
+                    big *= j;
+                }
+
+                result += big / factoriel(3);
+            }
+
+        }
+        
+    }
+    else
+    {
+        
+        for (unsigned long long i = 0;  i< n; i++)
+        {
+            unsigned long long right = 0, left = 0;
+
+            if (arrNum[i] % k == 0)
+            {
+                if (nums.find(arrNum[i] / k) != nums.end())
+                {
+                    left = nums[arrNum[i] / k].second;
+                }
+            }
+
+            if (nums[arrNum[i]].first > 0)
+            {
+                nums[arrNum[i]].first--;
+            }
+
+            if (nums.find(arrNum[i] * k) != nums.end())
+            {
+                right = nums[arrNum[i] * k].first;
+            }
+            result = result + right * left;
+
+            nums[arrNum[i]].second++;
+        }
+    }
+
+    cout << result << endl;
+
+    
+}

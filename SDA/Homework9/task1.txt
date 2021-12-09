@@ -1,0 +1,44 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <unordered_map>
+using namespace std;
+
+
+int keys[5000006]{};
+int values[5000006]{};
+int main() {
+    int n=0,k=0,v=0;
+    cin>>n;
+    long long counter=0;
+    unordered_map<int,int>marioKeys;
+    
+    for(int i=0;i<n;i++)
+    {
+      cin>>k;
+      keys[i]=k;
+    }
+     for(int i=0;i<n;i++)
+    {
+      cin>>v;
+      values[i]=v;
+    }
+    
+    for(int i=0;i<n;i++)
+    {
+        marioKeys[keys[i]]++;
+        if(marioKeys[values[i]]==0)
+        {
+            counter++;
+        }
+        else
+        {
+
+            marioKeys[values[i]]--;
+        }
+    }
+    
+    cout<<counter<<endl;
+}
