@@ -1,0 +1,225 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <string>
+#include <queue>
+#include <unordered_map>
+using namespace std;
+
+
+int main() {
+    string words[101]{};
+    vector<char>alpha;
+    string word;
+    int n = 0;
+    cin >> n;
+    for (int i = 0; i < n; i++)
+    {
+        cin >> word;
+        auto f = find(alpha.begin(), alpha.end(), word[0]);
+        if (f == alpha.end())
+        {
+            alpha.push_back(word[0]);
+        }
+        words[i] = word;
+    }
+    //biggerThanMe;
+    unordered_map<char, pair<char,char>>rest;
+    for (int i = 0; i < n - 1; i++)
+    {
+        string comp1 = words[i];
+        string comp2 = words[i + 1];
+
+        int index = 0;
+        while (index < comp1.length() && index < comp2.length() && comp1[index] == comp2[index])
+        {
+            index++;
+        }
+        if (index == comp1.length() || index == comp2.length() || index == 0)
+        {
+            continue;
+        }
+        else
+        {
+            auto t = find(alpha.begin(), alpha.end(), comp1[index]);
+            auto u = find(alpha.begin(), alpha.end(), comp2[index]);
+
+            if (t == alpha.end() && u == alpha.end())
+            {
+                continue;
+            }
+            else if (t != alpha.end() && u == alpha.end())
+            {
+                if (rest[comp2[index]].first != '\0')
+                {
+                    auto c1 = find(alpha.begin(), alpha.end(), rest[comp2[index]].first);
+                    auto c2 = find(alpha.begin(), alpha.end(), comp1[index]);
+
+                    if (c1 - alpha.begin() < c2 - alpha.begin())
+                    {
+                        rest[comp2[index]].first = *c2;
+                    }
+                    else if (c1 - alpha.begin() > c2 - alpha.begin())
+                    {
+                        rest[comp2[index]].first = *c1;
+                    }
+                    else
+                    {
+                        //nothing
+                    }
+                }
+                else
+                {
+                    rest[comp2[index]].first = comp1[index];
+                }
+
+                if (rest[comp2[index]].first != '\0' && rest[comp2[index]].second != '\0')
+                {
+                    auto before = find(alpha.begin(), alpha.end(), rest[comp2[index]].first);
+                    auto nexT = find(alpha.begin(), alpha.end(), rest[comp2[index]].second);
+                    if (next(before) == nexT)
+                    {
+                        alpha.insert(nexT, comp2[index]);
+                        rest[comp2[index]] = std::pair<char, char>();
+                        continue;
+                    }
+                }
+                if (t == prev(alpha.end()))
+                {
+                    alpha.push_back(comp2[index]);
+                    rest[comp2[index]] = std::pair<char, char>();
+                    continue;
+                }
+                /*alpha.insert(next(t),comp2[index]);
+                if(left[*next(next(t))]==*next(t))
+
+                {
+                    iter_swap(next(next(t)),next(t));
+                }
+                */
+
+
+
+                /*if(t==prev(alpha.end()))
+                {
+                    alpha.push_back(comp2[index]);
+                }
+                else
+
+                {
+                     t++;
+                 alpha.insert(t,comp2[index]);
+                t--;
+                }
+                */
+
+            }
+            else if (t == alpha.end() && u != alpha.end())
+            {
+                //rest[comp1[index]].second = comp2[index];
+                if (rest[comp1[index]].second != '\0')
+                {
+                    auto c1 = find(alpha.begin(), alpha.end(), rest[comp1[index]].second);
+                    auto c2 = find(alpha.begin(), alpha.end(), comp2[index]);
+
+                    if (c1 - alpha.begin() < c2 - alpha.begin())
+                    {
+                        rest[comp1[index]].second = *c1;
+                    }
+                    else if (c1 - alpha.begin() > c2 - alpha.begin())
+                    {
+                        rest[comp1[index]].second = *c2;
+                    }
+                    else
+                    {
+                        //nothing
+                    }
+                }
+                else
+                {
+                    rest[comp1[index]].second = comp2[index];
+                }
+
+                if (rest[comp1[index]].first != '\0' && rest[comp1[index]].second != '\0')
+                {
+                    auto before = find(alpha.begin(), alpha.end(), rest[comp1[index]].first);
+                    auto nexT = find(alpha.begin(), alpha.end(), rest[comp1[index]].second);
+                    if (next(before) == nexT)
+                    {
+                        alpha.insert(nexT, comp1[index]);
+                        rest[comp1[index]] = std::pair<char, char>();
+                        continue;
+                    }
+                }
+                else if (rest[comp1[index]].first != '\0' || rest[comp1[index]].second != '\0')
+                {
+
+                }
+                else
+                {
+                    alpha.insert(u, comp1[index]);
+                }
+            }
+            else
+            {
+
+
+                if (t - alpha.begin() > u - alpha.begin())
+                {
+                    iter_swap(t, u);
+
+                }
+
+            }
+
+            //alpha.insert(find(alpha.begin(),alpha.end(),comp2[index]),comp1[index]);
+        }
+    }
+    /*while(!left.empty())
+   {
+       pair<char,char> top=left.front();
+       left.pop();
+
+         auto t=find(alpha.begin(),alpha.end(),top.first);
+        auto u=find(alpha.begin(),alpha.end(),top.second);
+
+        if(t!=alpha.end() && u!=alpha.end())
+        {
+            continue;
+        }
+         else if(t!=alpha.end() && u==alpha.end())
+           {
+               t++;
+               alpha.insert(t,top.second);
+               t--;
+           }
+           else if(t==alpha.end() && u!=alpha.end())
+           {
+               alpha.insert(u,top.first);
+           }
+           else
+           {
+               alpha.insert(alpha.begin(),top.second);
+               alpha.insert(alpha.begin(),top.first);
+           }
+
+
+   }
+   */
+
+    for (unordered_map<char, pair<char, char>>::iterator x=rest.begin();x!=rest.end();x++)
+    {
+        if (x->second != pair<char, char>())
+        {
+            alpha.insert(find(alpha.begin(), alpha.end(), x->second.second), x->first);
+        }
+    }
+
+    for (auto& x : alpha)
+    {
+        cout << x << ' ';
+    }
+    cout << endl;
+}

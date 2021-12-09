@@ -1,0 +1,65 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <unordered_map>
+#include <map>
+#include <list>
+using namespace std;
+
+void check(int current,map<int,bool>&checked,map<int,list<int>>&connections,bool& isValid)
+{
+    if(!isValid)
+    {
+        return;
+    }
+    for(auto x=connections[current].begin();x!=connections[current].end();x++)
+    {
+        if(checked[*x])
+        {
+            isValid=false;
+            break;
+        }
+        checked[*x]=true;
+        check(*x,checked,connections,isValid);
+        checked[*x]=false;
+    }
+}
+
+int main() {
+    map<int,list<int>>connections;
+    int queriues=0,k=0,start=0,end=0;
+    cin>>queriues;
+    int*answers=new int[queriues]{};
+    for(int i=0;i<queriues;i++)
+    {
+        cin>>k;
+        bool isValid=true;
+        for(int j=0;j<k;j++)
+        {
+            cin>>start>>end;
+            connections[start].push_back(end);
+        }
+        for(auto x=connections.begin();x!=connections.end();x++)
+        {
+            map<int,bool>checked;
+            checked[x->first]=true;
+            check(x->first,checked,connections,isValid);
+            if(!isValid)
+            {
+                break;
+            }
+        }
+        answers[i]=!isValid;
+        connections.clear();
+        
+    }
+    
+    for(int i=0;i<queriues;i++)
+    {
+        cout<<answers[i]<<' ';
+    }
+    cout<<endl;
+    delete[]answers;
+}
