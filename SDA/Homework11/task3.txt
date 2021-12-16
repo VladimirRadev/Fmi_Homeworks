@@ -1,0 +1,82 @@
+#include <iostream>
+#include <vector>
+#include <queue>
+#include <algorithm>
+#include <unordered_set>
+#include <unordered_map>
+#include <climits>
+
+using namespace std;
+class customPair
+{
+public:
+	int index = 0;
+	int weight = 0;
+	customPair(const int& index=0,const int& weight=0):index(index),weight(weight){}
+	bool operator<(const customPair& rhs)const
+	{
+		return this->weight > rhs.weight;
+	}
+};
+
+void shortestPathToMemberOfT(const int& start,unordered_map<int, vector<customPair>>& adj,const int& n,vector<int>&distances,vector<bool>&visited)
+{
+	priority_queue<customPair>que;
+	que.push({start,0});
+	distances[start] = 0;
+
+	while (!que.empty())
+	{
+		auto top = que.top();
+		que.pop();
+		if (visited[top.index])
+		{
+			continue;
+		}
+		visited[top.index] = true;
+		for (vector<customPair>::iterator neighbour = adj[top.index].begin(); neighbour != adj[top.index].end(); neighbour++)
+		{
+			if (distances[top.index] + neighbour->weight < distances[neighbour->index])
+			{
+				que.push({ neighbour->index,distances[top.index] + neighbour->weight });
+				distances[neighbour->index] = distances[top.index] + neighbour->weight;
+			}
+		}
+	}
+}
+int main()
+{
+	ios_base::sync_with_stdio(false);
+	cin.tie(nullptr);
+	int n = 0, m = 0, u = 0, v = 0, w = 0, k = 0, q = 0, num = 0;
+	unordered_map<int,int>S;
+	unordered_map<int,int>T;
+	unordered_map<int, vector<customPair>>adj;
+	cin >> n >> m;
+	for (int i = 0; i < m; i++)
+	{
+		cin >> u >> v >> w;
+		adj[u].push_back(customPair(v, w));
+		adj[v].push_back(customPair(u, w));
+	}
+	vector<int>distances(n + 1, INT_MAX);
+	vector<bool>visited(n + 1, false);
+	cin >> k;
+	for (int i = 0; i < k; i++)
+	{
+		cin >> num;
+		T[num] = 1;
+		adj[num].push_back({ n,0 });
+		adj[n].push_back({ num,0 });
+
+	}
+	shortestPathToMemberOfT(num,adj, n, distances, visited);
+	cin >> q;
+	for (int i = 0; i < q; i++)
+	{
+		cin >> num;
+		printf("%d\n", distances[num]);
+	}
+
+
+}

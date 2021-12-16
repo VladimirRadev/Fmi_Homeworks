@@ -1,0 +1,107 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <queue>
+#include <unordered_map>
+#include <map>
+#include <set>
+#include <climits>
+using namespace std;
+class customTriplet
+{
+public:
+	long long index;
+	long long kg;
+	long long time;
+	customTriplet(const long long& index = 0,const long long& kg=0,const long long& time=0):index(index),kg(kg),time(time){}
+	bool operator==(const customTriplet& rhs)const
+	{
+		return this->index == rhs.index && this->kg == rhs.kg && this->time == rhs.time;
+	}
+	bool operator!=(const customTriplet& rhs)const
+	{
+		return !(*this == rhs);
+	}
+	bool operator<(const customTriplet& rhs)const
+	{
+		return this->time < rhs.time;
+	}
+};
+vector<customTriplet> adj[1000005]{};
+long long globalResult = -1;
+
+bool djiekstra(long long possibleAnswer,const long long& n,const long long& batteryLife)
+{
+	vector<long long>distances(n + 1, numeric_limits<long long>::max());
+	vector<bool>visited(n + 1, false);
+
+	queue<long long>que;
+	que.push(1);
+	distances[1] = 0;
+	while (!que.empty())
+	{
+		customTriplet currTop = que.front();
+		que.pop();
+		visited[currTop.index] = true;
+
+		for (vector<customTriplet>::iterator neighbour = adj[currTop.index].begin(); neighbour != adj[currTop.index].end(); neighbour++)
+		{
+			if (neighbour->kg <= possibleAnswer)
+			{
+				if (distances[currTop.index] + neighbour->time < distances[neighbour->index])
+				{
+					distances[neighbour->index] = distances[currTop.index] + neighbour->time;
+					que.push(neighbour->index);
+				}
+
+			}
+		}
+	}
+
+	return batteryLife >= distances[n] ? true : false;
+}
+
+void calculateAnswer(long long start, long long end, const long long& n, const long long& batteryLife)
+{
+	if (start > end)
+	{
+		return;
+	}
+
+	long long middle = (long long)(start + end) / 2;
+	if (djiekstra(middle,n,batteryLife))
+	{
+		if (globalResult == -1)
+		{
+			globalResult = middle;
+		}
+		globalResult = min(globalResult, middle);
+		calculateAnswer(start, middle - 1, n, batteryLife);
+	}
+	else
+	{
+		calculateAnswer(middle + 1, end, n, batteryLife);
+	}
+}
+int main() 
+{
+	ios_base::sync_with_stdio(false);
+	cin.tie(nullptr);
+	cout.tie(nullptr);
+	long long n = 0, m = 0, k = 0,u=0,v=0,c=0,t=0;
+	cin >> n >> m >> k;
+
+	long long maxPossible = -1;
+	
+	for (int i = 0; i < m; i++)
+	{
+		cin >> u >> v >> c >> t;
+		maxPossible = max(maxPossible, c);
+		adj[u].push_back(customTriplet(v, c, t));
+	}
+	calculateAnswer(0, maxPossible, n, k);
+	cout << globalResult << endl;
+	
+}

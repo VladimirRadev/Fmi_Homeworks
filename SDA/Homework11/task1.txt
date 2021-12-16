@@ -1,0 +1,91 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <unordered_map>
+#include <queue>
+#include <map>
+
+using namespace std;
+class CustomPair
+{
+public:
+	long long index;
+	long long weight;
+	CustomPair(const long long& index = 0,const long long& weight=0):index(index),weight(weight){}
+	bool operator<(const CustomPair& rhs)const
+	{
+		return this->weight > rhs.weight;
+	}
+};
+
+void djiekstra(unordered_map<int,vector<CustomPair>>& adj,const int& n,const int& m,const int& start,const int& to)
+{
+	vector<long long>distances(n + 1, numeric_limits<long long>::max());
+	vector<int>equalDistances(n + 1, 0);
+
+	priority_queue<CustomPair>que;
+	unordered_map<long long,bool>visited;
+	que.push(CustomPair(start, 0));
+	distances[start] = 0;
+	equalDistances[start] = 1;
+
+	while (!que.empty())
+	{
+		auto t = que.top();
+		long long current = t.index;
+		que.pop();
+		if (visited[t.index])
+		{
+			continue;
+		}
+		visited[t.index] = true;
+
+		for (auto neighbour = adj[t.index].begin(); neighbour != adj[t.index].end(); neighbour++)
+		{
+			if (distances[current] + neighbour->weight == distances[neighbour->index])
+			{
+				equalDistances[neighbour->index] += equalDistances[current];
+				if (equalDistances[neighbour->index] >= 1000000007)
+				{
+					equalDistances[neighbour->index] -= 1000000007;
+				}
+				
+			}
+			if (distances[current] + neighbour->weight < distances[neighbour->index])
+			{
+				que.push(CustomPair(neighbour->index, distances[current] + neighbour->weight));
+				distances[neighbour->index] = distances[current] + neighbour->weight;
+				equalDistances[neighbour->index] = equalDistances[current];
+			}
+
+		}
+
+	}
+
+	if (distances[to] == numeric_limits<long long>::max())
+	{
+		cout << -1 << ' ' << 0 << endl;
+		return;
+	}
+	
+	cout << distances[to] << ' ' << equalDistances[to] << endl;
+
+
+}
+
+int main() {
+
+	long long n = 0, m = 0, c = 0, u = 0, v = 0;
+	cin >> n >> m;
+	unordered_map<int, vector<CustomPair>>adj;
+	for (long long i = 0; i < m; i++)
+	{
+		cin >> u >> v >> c;
+		adj[u].push_back(CustomPair(v, c));
+	}
+
+	djiekstra(adj, n, m, 1, n);
+
+}
