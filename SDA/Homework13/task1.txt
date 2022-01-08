@@ -1,0 +1,85 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+int globalResult = 0;
+void dfs(pair<int, int>current, int vertices, pair<int, int>& princess, vector<vector<bool>>& visited, vector<vector<char>>& matrix, const int& rows, const int& cols, const int& k)
+{
+    if (visited[current.first][current.second])
+    {
+        return;
+    }
+    visited[current.first][current.second] = true;
+    if(vertices==k)
+    {
+        if (current.first == princess.first && current.second == princess.second)
+        {
+            globalResult++;
+        }
+    }
+    
+    //up
+    if (current.first - 1 >= 0 && matrix[current.first - 1][current.second] != 'x')
+    {
+        dfs(make_pair(current.first - 1, current.second), vertices + 1, princess, visited, matrix, rows, cols, k);
+    }
+    //right
+    if (current.second + 1 < cols && matrix[current.first][current.second + 1] != 'x')
+    {
+        dfs(make_pair(current.first, current.second + 1), vertices + 1, princess, visited, matrix, rows, cols, k);
+    }
+    //down
+    if (current.first + 1 < rows && matrix[current.first + 1][current.second] != 'x')
+    {
+        dfs(make_pair(current.first + 1, current.second), vertices + 1, princess, visited, matrix, rows, cols, k);
+    }
+    //left
+    if (current.second - 1 >= 0 && matrix[current.first][current.second - 1] != 'x')
+    {
+        dfs(make_pair(current.first, current.second - 1), vertices + 1, princess, visited, matrix, rows, cols, k);
+    }
+    visited[current.first][current.second] = false;
+}
+
+
+int main() {
+    vector<vector<char>>matrix;
+    vector<vector<bool>>visited;
+    int rows = 0, cols = 0, timeX = 0, k = 0;
+    char input;
+    //[i]->[j]
+    pair<int, int>hamiltonPosition, princesPosition;
+
+    cin >> rows >> cols;
+    matrix.resize(rows + 1);
+    visited.resize(rows + 1);
+    for (int i = 0; i < rows; i++)
+    {
+        matrix[i].resize(cols + 1);
+        visited[i].resize(cols + 1);
+        for (int j = 0; j < cols; j++)
+        {
+            cin >> input;
+            matrix[i][j] = input;
+            visited[i][j] = false;
+            if (input == 's')
+            {
+                hamiltonPosition = make_pair(i, j);
+            }
+            if (input == 'e')
+
+            {
+                princesPosition = make_pair(i, j);
+            }
+            if (input == 'x')
+            {
+                timeX++;
+            }
+        }
+    }
+    k = rows * cols - timeX;
+    dfs(hamiltonPosition, 1, princesPosition, visited, matrix, rows, cols, k);
+    cout << globalResult << endl;
+}

@@ -1,0 +1,83 @@
+#include <iostream>
+#include <vector>
+#include <unordered_map>
+#include <algorithm>
+using namespace std;
+const char* HAS_CYCLE = "ecycle";
+const char* HAS_PATH = "epath";
+const char*  NEITHER = "none";
+
+bool isConnected(unordered_map<int, long long>& degree,const int& n)
+{
+    return degree.size() == n ? true : false;
+}
+bool hasCycle(unordered_map<int, long long>& degree)
+{
+    bool has = true;
+    for (auto& x : degree)
+    {
+        if (x.second % 2 != 0)
+        {
+            has = false;
+            break;
+        }
+    }
+    return has;
+
+}
+bool hasPath(unordered_map<int, long long>& degree)
+{
+    int countOdd = 0;
+    for (auto& x : degree)
+    {
+        if (x.second % 2 != 0)
+        {
+            countOdd++;
+        }
+    }
+    return countOdd == 2 ? true : false;
+}
+void printResult(unordered_map<int,long long>& degree,const int& n)
+{
+    if (!isConnected(degree, n))
+    {
+        printf("%s \n", NEITHER);
+        return;
+    }
+    if (hasCycle(degree))
+    {
+        printf("%s \n", HAS_CYCLE);
+        return;
+    }
+    else if (hasPath(degree))
+    {
+        printf("%s \n", HAS_PATH);
+        return;
+    }
+    else
+    {
+        printf("%s \n", NEITHER);
+        return;
+    }
+
+}
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(nullptr);
+    int queries = 0, n = 0, m = 0, a = 0, b = 0;
+    cin >> queries;
+    for (int i = 0; i < queries; i++)
+    {
+        cin >> n >> m;
+        unordered_map<int, long long>degree;
+        for (int j = 0; j < m; j++)
+        {
+            cin >> a >> b;
+            degree[a]++;
+            degree[b]++;
+        }
+        printResult(degree,n);
+    }
+
+}

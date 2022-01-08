@@ -1,0 +1,153 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <unordered_map>
+#include <queue>
+
+using namespace std;
+
+struct adjEdge
+{
+    long long to;
+    long long optimal;
+};
+struct Edge
+{
+    long long from;
+    long long to;
+    long long optimal;
+    bool operator==(const Edge& rhs)const
+    {
+        return optimal == rhs.optimal;
+    }
+
+    bool operator<(const Edge& rhs)const
+    {
+        return optimal < rhs.optimal;
+    }
+};
+
+struct answerPair
+{
+    long long min;
+    long long max;
+    answerPair& operator=(const answerPair& rhs)
+    {
+        if (this != &rhs)
+        {
+            this->min = rhs.min;
+            this->max = rhs.max;
+        }
+        return *this;
+    }
+    bool operator<(const answerPair& rhs)const
+    {
+        if (abs(max - min) == abs(rhs.min - rhs.max))
+        {
+            return min < rhs.min && max<rhs.max;
+        }
+        return abs(max - min) < abs(rhs.max - rhs.min);
+    }
+
+};
+
+answerPair answer={0,31000};
+vector<long long> parent;
+vector<long long> rank1;
+
+void make_set(long long v) {
+    parent[v] = v;
+    rank1[v] = 0;
+}
+
+long long find_set(long long v) {
+    if (v == parent[v])
+        return v;
+    return parent[v] = find_set(parent[v]);
+}
+
+void union_sets(long long a, long long b) {
+    a = find_set(a);
+    b = find_set(b);
+    if (a != b) {
+        if (rank1[a] < rank1[b])
+            swap(a, b);
+        parent[b] = a;
+        if (rank1[a] == rank1[b])
+            rank1[a]++;
+    }
+}
+
+bool kruskalLowerAndUpperBound(const long long& lower, const long long& upper, vector<Edge>& edges,const long long& n)
+{
+    for (long long i = 1; i <= n; i++)
+        make_set(i);
+
+    long long counterEdges = 0;
+    for (const Edge& edge:edges)
+    {
+        if (find_set(edge.from) != find_set(edge.to))
+        {
+            if (lower <= edge.optimal && edge.optimal <= upper)
+            {
+                counterEdges++;
+                union_sets(edge.from, edge.to);
+            }
+        }
+
+    }
+    return counterEdges == n - 1 ? true : false;
+
+}
+void searchResult(vector<Edge>& edges, const long long& n)
+{
+    long long high = 0, low = 0, optHighest = 0, optLowest = 0, opt = numeric_limits<long long>::max();
+    bool isConnected = false;
+
+
+    while(high < edges.size() - 1)
+    {
+        if(!isConnected)
+        {
+            high++;
+        }
+        else
+        {
+            low++;
+        }
+
+        isConnected = kruskalLowerAndUpperBound(edges[low].optimal,edges[high].optimal,edges,n);
+
+        if(isConnected)
+        {
+            if(edges[high].optimal - edges[low].optimal < opt)
+            {
+                opt = edges[high].optimal - edges[low].optimal;
+                optLowest = low;
+                optHighest = high;
+            }
+        }
+    }
+
+    cout << edges[optLowest].optimal << " " << edges[optHighest].optimal;
+}
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(nullptr);
+    long long n = 0, m = 0, from = 0, to = 0, optimal = 0;
+    cin >> n >> m;
+    vector<Edge>edges;
+    parent.resize(n + 1);
+    rank1.resize(n + 1);
+    for (long long i = 0; i < m; i++)
+    {
+        cin >> from >> to >> optimal;
+        edges.push_back({ from,to,optimal });
+    }
+    sort(edges.begin(), edges.end());
+    searchResult(edges,n);
+
+}

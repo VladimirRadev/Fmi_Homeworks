@@ -1,0 +1,90 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <unordered_map>
+#include <queue>
+#include <list>
+using namespace std;
+
+struct adjEdge
+{
+    long long to;
+    long long effort;
+    long long profit;
+    long long index;
+};
+struct Edge
+{
+    long long from;
+    long long to;
+    long long effort;
+    long long profit;
+    long long index;
+    
+    bool operator<(const Edge& rhs)const
+    {
+        if(effort==rhs.effort)
+        {
+            return profit < rhs.profit;
+        }
+        return effort> rhs.effort;
+    }
+    
+};
+
+list<Edge> prim(unordered_map<long long,vector<adjEdge>>& adj,const long long& n)
+{
+    list<Edge>answer;
+    vector<bool>visited(n+1,false);
+    priority_queue<Edge>que;
+    que.push({-1,1,0,0,0});
+    
+    while(!que.empty() || answer.size()!=n-1)
+    {
+        Edge current=que.top();
+        que.pop();
+        if(visited[current.to])
+        {
+            continue;
+        }
+        visited[current.to]=true;
+        
+        if(current.from!=-1)
+        {
+            answer.push_back(current);
+        }
+        for(auto neighbor=adj[current.to].begin();neighbor!=adj[current.to].end();neighbor++)
+        {
+            que.push({current.to,neighbor->to,neighbor->effort,neighbor->profit,neighbor->index});
+        }
+    }
+    return answer;
+    
+    
+}
+int main() {
+    
+    ios_base::sync_with_stdio(false);
+    cin.tie(nullptr);
+    long long n=0,m=0,a=0,b=0,c1=0,c2=0;
+    unordered_map<long long,vector<adjEdge>>adj;
+    cin>>n>>m;
+    for(long long i=1;i<=m;i++)
+    {
+        cin>>a>>b>>c1>>c2;
+        adj[a].push_back({b,c1,c2,i});
+        adj[b].push_back({a,c1,c2,i});
+    }
+    
+    list<Edge>answer=prim(adj,n);
+    
+    for(auto x=answer.begin();x!=answer.end();x++)
+    {
+        printf("%llu \n", x->index);
+        //cout<<x->index<<endl;
+    }
+    
+    
+}

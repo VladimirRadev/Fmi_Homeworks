@@ -1,0 +1,89 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <unordered_map>
+using namespace std;
+
+void dfs(int current,const int& component,unordered_map<int,vector<int>>&adj,vector<int>&components,vector<bool>&visited)
+{
+    if(!visited[current])
+    {
+        components[current]=component;
+        visited[current]=true;
+        for(auto neighbour=adj[current].begin();neighbour!=adj[current].end();neighbour++)
+        {
+            if(!visited[*neighbour])
+            {
+                dfs(*neighbour,component,adj,components,visited);
+            }
+        }
+    }
+}
+
+int main() {
+    int n=0,m=0,q=0,from=0,to=0,func=0;
+    cin>>n>>m;
+    unordered_map<int,vector<int>>adj;
+    vector<int>components(n+1,-1);
+    for(int i=0;i<m;i++)
+    {
+        cin>>from>>to;
+        adj[from].push_back(to);
+        adj[to].push_back(from);
+    }
+    vector<bool>visited(n+1,false);
+    for(int i=1;i<=n;i++)
+    {
+        if(!visited[i])
+        {
+            dfs(i,i,adj,components,visited);
+        }
+    }
+    cin>>q;
+    bool* answers=new bool[q+3];
+    int index=0;
+    for(int i=0;i<q;i++)
+    {
+        cin>>func>>from>>to;
+        //question
+        if(func==1)
+        {
+            if(components[from]==components[to])
+            {
+                answers[index++]=true;
+            }
+            else
+            {
+                answers[index++]=false;
+            }
+        }
+        //information
+        else
+        {
+            if(components[from]==components[to])
+            {
+                continue;
+            }
+            else
+            {
+                int oldComponent=components[to];
+                int newComponent=components[from];
+                for(int j=1;j<=n;j++)
+                {
+                    if(components[j]==oldComponent)
+                    {
+                        components[j]=newComponent;
+                    }
+                }
+            }
+        }
+    }
+    for(int i=0;i<index;i++)
+    {
+        cout<<answers[i];
+    }
+    cout<<endl;
+    delete[]answers;
+}

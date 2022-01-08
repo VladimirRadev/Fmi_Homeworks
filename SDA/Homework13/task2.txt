@@ -1,0 +1,80 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <unordered_map>
+#include <map>
+#include <queue>
+using namespace std;
+
+unordered_map<int, vector<int>>adj;
+unordered_map<int, int>degree;
+queue<int>leafs;
+
+void solve(int n)
+{
+    for (int i = 0; i < n; i++)
+    {
+        if (degree[i] == 1)
+        {
+            leafs.push(i);
+        }
+    }
+
+    while (n > 2)
+    {
+        int size = leafs.size();
+        n -= size;
+
+        for (int i = 0; i < size; i++)
+        {
+            int leaf = leafs.front();
+            leafs.pop();
+
+            //degree[leaf] = -1;
+            for (auto& neighbor : adj[leaf])
+            {
+                degree[neighbor]--;
+                if (degree[neighbor] == 1)
+                {
+                    leafs.push(neighbor);
+                }
+            }
+
+        }
+
+    }
+
+    map<int, int>result;
+    while (!leafs.empty())
+    {
+        result[leafs.front()] = 1;
+        leafs.pop();
+    }
+
+    for (auto& x : result)
+    {
+        cout << x.first << ' ';
+    }
+    cout << endl;
+
+}
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(nullptr);
+    int n = 0, a = 0, b = 0;
+    cin >> n;
+    for (int i = 0; i < n - 1; i++)
+    {
+        cin >> a >> b;
+        adj[a].push_back(b);
+        adj[b].push_back(a);
+        degree[a]++;
+        degree[b]++;
+    }
+    solve(n);
+
+
+}
