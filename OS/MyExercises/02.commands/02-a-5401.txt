@@ -1,0 +1,1 @@
+head /etc/services -n 5
