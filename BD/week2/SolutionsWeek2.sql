@@ -91,11 +91,18 @@ and p1.model<p2.model
 
 --II.6--
 
-SELECT *
-FROM product pr,pc p1
-WHERE pr.model=p1.model
-and p1.speed>=400
-
+select distinct pr1.maker
+  from pc p1,
+	   product pr1
+ where pr1.model = p1.model
+   and p1.speed >= 400
+   and exists (select 1
+			     from pc,
+					  product pr12
+				where pr12.model = pc.model
+				  and pc.speed>=400
+				  and pc.code != p1.code
+				  and pr12.maker = pr1.maker);
 --III.1--
 SELECT distinct s.NAME
 FROM SHIPS s, CLASSES cl
