@@ -1,0 +1,2 @@
+find /bin/* -perm 777 | cut -d '/' -f 3 > test2.txt
+cat test2.txt

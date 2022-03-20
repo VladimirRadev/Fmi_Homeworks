@@ -1,0 +1,2 @@
+tail test1.txt -n 10 > 5500.txt
+cat 5500.txt

@@ -1,0 +1,4 @@
+cd ~
+find /tmp -type f -perm -g+w ! -perm -o+w 2> ~/err.txt > ~/5504.txt
+rm err.txt
+cat 5504.txt
