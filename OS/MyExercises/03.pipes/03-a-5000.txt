@@ -1,0 +1,4 @@
+1.cat /etc/passwd | grep "Владимир Радев"
+2.cat /etc/passwd | grep "Владимир Радев" -B 2
+3.cat /etc/passwd | grep "Владимир Радев" -A 3 -B 2	
+4.cat /etc/passwd | grep "Владимир Радев" -A 3 -B 2 | head -n 1

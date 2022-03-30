@@ -1,0 +1,7 @@
+1.
+2. head -n 12 /etc/passwd
+3. head -c 26 /etc/passwd
+4. head -n -4 /etc/passwd
+5. tail -n 17 /etc/passwd
+6. head -n 151 /etc/passwd | tail -n 1
+7. head -n 13 /etc/passwd | tail -n 1 | cut -d '/' -f 6 | cut -c 4-8

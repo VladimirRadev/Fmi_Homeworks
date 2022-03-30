@@ -1,0 +1,2 @@
+df -P > df.txt
+cat df.txt | tail -n +2 | tr -s ' ' | sort -n -k 2

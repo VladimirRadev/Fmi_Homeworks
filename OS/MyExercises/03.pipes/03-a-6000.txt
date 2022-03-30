@@ -1,0 +1,7 @@
+1.cat emp.data | awk -v i=0 '{i++} END {print i}'
+2.cat emp.data | awk -v i=0 '{if(++i==3) {print $0}}'
+3.cat emp.data | awk '{print $3}'
+4.cat emp.data | awk ' BEGIN {i=0} {d[++i]=$3} END {printf("%s \n",d[i])}'
+5.cat emp.data | awk -F ' ' 'length($4) > 0 {printf("%s \n",$0)}'
+6.cat emp.data | awk ' $3 + 0.  > 4 + 0. {printf ("%s \n",$0)}'
+7.
