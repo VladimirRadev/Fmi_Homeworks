@@ -1,0 +1,12 @@
+mkdir dir5
+touch dir5/..
+vim dir5/..
+cat dir5/file1 | wc -mlw }
+cat dir5/file2 | wc -mlw } =>  purva.*)
+cat dir5/file3 | wc -mlw }
+
+
+cat dir5/file1 dir5/file2 dir5/file3  | wc -lm } => vtora.*)
+ 
+cat dir5/file1 dir5/file2 dir5/file3  | wc -l  } => treta.*)
+

@@ -1,0 +1,3 @@
+sed  's/\([a-z]*\)/\U\1/' dir5/file2 > test
+cp test dir5/file2
+cat dir5/file2

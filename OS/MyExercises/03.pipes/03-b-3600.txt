@@ -1,0 +1,1 @@
+find /home/ -type f -maxdepth 3 ! -readable 2>/dev/null

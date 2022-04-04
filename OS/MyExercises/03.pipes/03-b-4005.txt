@@ -1,0 +1,3 @@
+vim file1 ( записваме в него S \n q \n R \n)
+cat file1 | awk '{print tolower($0)}' > dir5/file2
+cat dir5/file2
