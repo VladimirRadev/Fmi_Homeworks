@@ -1,0 +1,1 @@
+find -type f -exec grep -Iq /bin {} \; -print | tr '.' ' ' | cut -d ' ' -f 3
