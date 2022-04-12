@@ -1,0 +1,1 @@
+cat population.csv | grep Bulgaria | sort -rn -t ',' -k4,4 | head -n 1 | cut -d ',' -f 3

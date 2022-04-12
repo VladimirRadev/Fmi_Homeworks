@@ -1,0 +1,1 @@
+cat rightEmails.txt | egrep '^[a-z_0-9]+' | egrep -v '(\.{2,}|\ |")' | egrep '^[^@]*[^\.-]@[^\.-][^@]*$'

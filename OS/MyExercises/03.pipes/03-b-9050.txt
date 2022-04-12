@@ -1,0 +1,2 @@
+find / -iname population.csv  2>/dev/null
+cp /srv/fmi-os/exercises/data/population.csv ~/

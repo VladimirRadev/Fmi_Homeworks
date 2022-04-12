@@ -1,0 +1,1 @@
+find /usr | grep '\.sh$' | xargs -n 1 cat | grep '\#\!' | sed -r  's/\#\!|\#\! //g' | awk '{d[$0]++} END {for(h in d){printf("%d %s\n",d[h],h)}}' | sort -rn -t ' ' -k1,1 |head -n 1 | cut -d ' ' -f 2,2

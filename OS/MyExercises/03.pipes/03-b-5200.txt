@@ -1,0 +1,1 @@
+grep -o -i [^'a'] /etc/passwd | sort | uniq -c | sort -n | awk 'BEGIN {i=0} {i+=$1} END {print i}'

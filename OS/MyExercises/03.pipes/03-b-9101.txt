@@ -1,0 +1,2 @@
+mkdir songs
+tar -xvzf songs.tar.gz -C ~/songs/

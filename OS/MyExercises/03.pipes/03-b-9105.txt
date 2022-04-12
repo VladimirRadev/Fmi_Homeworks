@@ -1,0 +1,4 @@
+What are the songs? : find songs/* |sed 's/^songs\///g' | awk -F '-' '{print $0}' | sed 's/\.ogg//g' | grep -E  '^Beatles |^Pink -' 
+How many are the songs? : find songs/* |sed 's/^songs\///g' | awk -F '-' '{print $0}' | sed 's/\.ogg//g' | grep -E  '^Beatles |^Pink -' | wc -l
+
+ 

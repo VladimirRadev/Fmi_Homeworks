@@ -1,0 +1,2 @@
+1. find ~/ -type f | xargs -I {} stat -c '%a %n' {}  > perm.txt
+2. find /etc -type f 2>/dev/null| xargs -I {} stat -c '%s %a %n' {} | sort -rn -t ' ' -k1,1 | head -n 1 | cut -d ' ' -f2 | xargs -I {} grep -E '^{} ' perm.txt  2>/dev/null

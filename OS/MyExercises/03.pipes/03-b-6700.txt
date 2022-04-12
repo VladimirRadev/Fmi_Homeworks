@@ -1,0 +1,1 @@
+find /tmp -type f -readable -exec ls -lhr {} \; | cut -d ' ' -f 1,10

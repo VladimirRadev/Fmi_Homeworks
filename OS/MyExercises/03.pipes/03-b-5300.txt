@@ -1,0 +1,1 @@
+ cat /etc/passwd | awk -F ':' '{print $5}' | tr -s ',' | awk -F ',' '{print $1}' | tr -s '\n' | grep -o -i . | tr -s ' ' | sort | uniq -c | sort -n| wc -l

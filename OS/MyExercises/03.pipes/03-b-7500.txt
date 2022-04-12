@@ -1,0 +1,1 @@
+cat /etc/services  | awk '{for(i=1;i<=NF;i++){d=$i;if(length(d)>0)hist[d]++}} END {for(h in hist){printf("%d %s\n",hist[h],h);}}' | sort -rn -t ' ' -k 1 | head -n 10

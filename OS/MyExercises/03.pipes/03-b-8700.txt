@@ -1,0 +1,2 @@
+1. cat /etc/passwd | awk -F ':' '{print $2,$4}' | awk '{d[$2]++} END {for(h in d){printf("%d %s\n",d[h],h)}}' | sort -rn -t ' ' -k1,1| head -n 5 | awk '{print $2}'
+2. cat /etc/passwd | awk -F ':' '{print $2,$4}' | awk '{d[$2]++;s[$2]=$1;} END {for(h in d){printf("%d %s %s\n",d[h],h,s[h])}}' | sort -rn -t ' ' -k1,1 | head -n 5 | cut -d ' ' -f 3,3 | uniq -c

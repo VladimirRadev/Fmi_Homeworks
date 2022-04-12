@@ -1,0 +1,1 @@
+find songs/* |sed 's/^songs\///g' | awk -F '-' '{print $0}' | sed 's/\.ogg//g' | cut -d '-' -f1,1 | sort | uniq | sed 's/ //g' | xargs -I {} mkdir {}

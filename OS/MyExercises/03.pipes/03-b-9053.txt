@@ -1,0 +1,2 @@
+Most populated country of 2016- fgrep $(cat population.csv | grep '.*,2016,.*' | sed 's/^["(A-Z].*[a-z)"],//g' | sed 's/^[A-Za-z]* [A-Z]*,//' | sort -rn -t ',' -k 3,3 | head -n 1 | awk -F ',' '{print $1}') population.csv | grep 2016 | cut -d ',' -f1,1
+What is the least populated country in 2016? - fgrep $(cat population.csv | grep '.*,2016,.*' | sed 's/^["(A-Z].*[a-z)"],//g' | sed 's/^[A-Za-z]* [A-Z]*,//' | sort -n -t ',' -k 3,3 | head -n 1 | awk -F ',' '{print $1}') population.csv | grep 2016 | cut -d ',' -f1,1

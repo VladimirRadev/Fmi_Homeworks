@@ -1,0 +1,2 @@
+cat population.csv | grep 2008 | sed 's/.*,2008,//g' | awk 'BEGIN{i=0;} {i+=$1} END{printf("%li \n",i)}'
+cat population.csv | grep 2016 | sed 's/.*,2016,//g' | awk 'BEGIN{i=0;} {i+=$1} END{printf("%li \n",i)}'
