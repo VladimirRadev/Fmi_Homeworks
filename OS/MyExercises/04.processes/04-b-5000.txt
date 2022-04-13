@@ -1,0 +1,1 @@
+ps -eo pid,group,%mem | grep root | tr -s ' ' | awk 'BEGIN{i=0;} {i+=$3} END {print i}'

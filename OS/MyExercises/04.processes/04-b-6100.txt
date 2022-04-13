@@ -1,0 +1,1 @@
+ps -eo user,command | grep vim | cut -d ' ' -f 1,1 | sort | uniq -c | tr -s ' ' | awk '{if($1>=2){print $2}}'
