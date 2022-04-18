@@ -1,0 +1,9 @@
+#!/bin/bash
+command=("ps -eo pid=,ppid=")
+${command} | while read pid ppid;do
+		pidChCount=$(${command} | egrep -wc ${pid})
+		ppidChCount=$(${command} | egrep -wc ${ppid})
+		if [ ${pidChCount} -gt ${ppidChCount} ];then	
+			echo "${pid}"	
+		fi
+	done

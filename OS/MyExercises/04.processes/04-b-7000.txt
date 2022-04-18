@@ -1,0 +1,1 @@
+ps -eo group,%mem | grep -e '^root.*$'| tr -s ' '| cut -d ' ' -f2,2|sort -n -k1,1| awk -v KEY=0 -F ' ' '{KEY+=$1} END{if(NR==0){print 0} else{KEY=KEY/NR;printf("%s\n",$KEY)}}'
