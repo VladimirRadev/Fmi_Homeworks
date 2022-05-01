@@ -1,0 +1,19 @@
+#!/bin/bash
+if [ $# -eq 2 ]; then
+	if [ $1 == "-r" ]; then
+		echo -e "\033[0;31m $2"
+	elif [ $1 == "-g" ]; then
+		echo -e "\033[0;32m $2"
+	elif [ $1 == "-b" ]; then
+		echo -e "\033[0;34m $2"
+	else
+		echo -e "\033[0m Unknown colour"
+	fi	
+
+elif [ $# -eq 1 ];then
+	echo -e "\033[0m $1"
+else
+	echo "It didn't have arguments"	
+fi
+
+echo -en "\033[0m"

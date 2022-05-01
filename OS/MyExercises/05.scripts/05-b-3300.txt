@@ -1,0 +1,13 @@
+#! /bin/bash
+echo "insert 3 files: "
+read file1 file2 file3
+temp=$(mktemp)
+result=$(mktemp)
+paste -d '' <(cat $file1 | sed 's/\s//g') <(cat $file2 | sed 's/\s//g') > $temp
+while read d; do
+        echo $d | perl -F -lane 'print sort @F' >> $result
+done < <(cat $temp | tr -s '\n')
+
+cp $result $file3
+cat $file3
+

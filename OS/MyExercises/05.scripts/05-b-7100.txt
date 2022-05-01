@@ -1,0 +1,15 @@
+#!/bin/bash
+if ! [[ $# -eq 2 ]]; then
+	echo "Please type exact 2 arguments"
+	exit 2
+fi
+dirRegex='[^a-zA-Z0-9\.\_\-\/]'
+numRegex='[^0-9]'
+if [[ $1 =~ $dirRegex ]] || [[ $2 =~ $numRegex ]]; then
+  echo 	"Invalid format to one of the arguments"
+  exit 1
+fi
+files=$(mktemp)
+find $1 -mindepth 1 -type f -printf "%P %s\n" > $files
+awk -F ' ' -v num=$2 '{if($2 > num ){print $1}}' $files | xargs -I {} basename {}
+

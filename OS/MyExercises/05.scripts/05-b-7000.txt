@@ -1,0 +1,6 @@
+#!/bin/bash
+echo -n "Input the charArray to check: ";IFS="" read -r charArr
+for file in "${@}"; do
+	echo "\""${charArr}"\" occurs the $file on $(cat $file | grep -x "$charArr" | wc -l) lines"
+done
+

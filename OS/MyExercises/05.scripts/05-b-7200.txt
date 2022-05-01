@@ -1,0 +1,21 @@
+#!/bin/bash
+for fORd in "$@"; do
+	isFile=$(find ~ -mindepth 1 -type f -name $fORd | wc -l)
+	isDir=$(find ~ -mindepth 1 -type d -name $fORd | wc -l)
+	if [ $isFile -eq 1 ];then
+
+		echo -en "\nIs "${fORd}" (f) readable? : "
+		if [[ $(find ~ -name "${fORd}" -readable | wc -l ) -eq 0 ]]; then
+			echo -en "No\n"
+		else
+			echo -en "Yes\n"
+		fi
+	else
+		echo -e  "\n"${fORd}" (d) , names of files with size less than total count files within the dir:"
+		filesCount=$(find ~ -mindepth 1 -type d -name $fORd | head -n 1 |xargs -I {} find {} -mindepth 1 -type f |  wc -l)
+
+		awk -F ' ' -v num=$filesCount '{if($2 < num){print $1}}'  <(find ~ -mindepth 1 -type d -name $fORd | head -n 1 |xargs -I {} find {} -mindepth 1 -type f -printf "%P %s\n") | xargs -I {} basename {}
+
+	fi
+done
+

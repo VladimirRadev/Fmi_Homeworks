@@ -1,0 +1,10 @@
+1. vi .bashrc
+2. add to the bottom of the file this line: PS1="mashinkanomer1 "
+3. :wq to file and exit 
+4. source ~/.bashrc 
+
+
+--to resolve to the past state--
+1.vi .bashrc 
+2. delete last line
+3. source ~/.bashrc 

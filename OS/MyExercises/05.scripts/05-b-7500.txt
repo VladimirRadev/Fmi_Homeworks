@@ -1,0 +1,21 @@
+#!/bin/bash
+if ! [[ $1 -lt $2 ]]; then
+	echo "Not a valid interval"
+	exit 1
+fi
+tries=0;
+rand=$(((RANDOM % $2) + $1))
+#echo "${rand}"
+while [ 1 -eq 1 ];do
+	echo -n "Guess? ";read -r try
+	tries=$(($tries + 1))
+	if [[ $try -eq $rand ]]; then
+		echo "RIGHT! Guessed $rand in $tries tries!"
+		break
+	elif [[ $try -lt $rand ]]; then
+		echo "...bigger!"
+	else
+		echo "...smaller!"
+	fi
+done
+

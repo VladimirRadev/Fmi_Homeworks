@@ -1,0 +1,3 @@
+#! /bin/bash
+echo "please insert userName: " ;read userName
+who | tr -s ' ' |tail -n +2 | cut -d ' ' -f1,1 | tr -s '\n' | uniq -c | tr -s ' ' | grep $userName | sed ' s/^\ //g' | awk -F ' ' '{print $1}'

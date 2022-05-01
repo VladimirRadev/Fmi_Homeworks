@@ -1,0 +1,2 @@
+#!/bin/bash
+ps -eo user=,rss=,vsz= | grep -E "^$1"| tr -s ' ' | sort -n -k3,3 | awk -F ' ' '{fraction=$2/$3;printf("%f\n",fraction)}'

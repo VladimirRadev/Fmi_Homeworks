@@ -1,0 +1,13 @@
+#!/bin/bash
+files=$(mktemp)
+uniqExt=$(mktemp)
+find $1 -mindepth 1 -type f > $files
+cat $files | sed -e 's/.*\.//g' | sort | uniq > $uniqExt
+cat $uniqExt | xargs -I {} mkdir $2/{}
+
+while IFS= read -r file; do
+	ext=$(echo $file | sed -e 's/.*\.//g')
+	mv $file $2/$ext/
+done < $files
+
+rm $uniqExt $files

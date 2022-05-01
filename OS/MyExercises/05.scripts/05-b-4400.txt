@@ -1,0 +1,22 @@
+#! /bin/bash
+recieverDirName="This is dir name"
+if [[ $# -ge 2 ]]; then
+	recieverDirName=$2
+else
+	now=$(date +'%d_%m_%Y')
+	mkdir "${now}"
+	recieverDirName=$now
+fi
+files=$(mktemp)
+find $1 -mtime -45 -type f > $files
+cat $files
+while read file; do
+	cp -fi $file $recieverDirName
+done < $files
+
+echo -n "Do u want to archive the result dir? [Y/N]:  "
+read answer
+if [[ $answer == 'Y' ]]; then
+	tar -cJf $recieverDirName.tar.xz $recieverDirName
+fi
+

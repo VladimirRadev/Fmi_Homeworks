@@ -1,0 +1,10 @@
+#!/bin/bash
+files=$(mktemp)
+inputFileHash=$(sha256sum $1 | cut -d ' ' -f1,1)
+find $2 -type f > $files
+while read line; do
+	if [[ $inputFileHash == $(sha256sum $line | cut -d ' ' -f1,1) ]]; then
+		echo "$line"
+	fi
+done < $files
+rm $files

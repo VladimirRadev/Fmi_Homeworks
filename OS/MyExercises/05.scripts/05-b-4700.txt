@@ -1,0 +1,19 @@
+#!/bin/bash
+separator="";
+if [[ $# -eq 1 ]]; then
+	separator=" "
+else
+	separator=$2
+fi
+foo=$(echo $1 | rev)
+result=$(mktemp)
+for((i=0;i<${#foo};i+=3)); do
+	echo -n "${foo:$i:3}"${separator}"" >> $result
+done
+if [[ $separator == " " ]]; then
+	cat $result |rev | sed 's/^\ //g' |  sed 's/$/\n/g' | sed 's/^[^0-9]//g'
+else
+	cat $result |tr -d ' ' | rev | sed 's/^\${separator}//g' |  sed 's/$/\n/g' | sed 's/^[^0-9]//g'
+fi
+
+rm $result

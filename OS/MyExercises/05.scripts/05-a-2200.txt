@@ -1,0 +1,3 @@
+alias clSp="tr -s ' ' "
+(It replaces sequance of empty spaces to a single whitespace)
+(Usage: cat emp.data | clSp)
