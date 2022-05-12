@@ -1,0 +1,6 @@
+1.Izteglih WinSCP
+2.Dobavih 66666 direktoriqta
+3.Smenih imeto i imeto s komandata mv
+4.Napisah si lubimiq dinozavur s echo komandata
+Opisah vsichko v tozi file
+Sega shte go achieve-na

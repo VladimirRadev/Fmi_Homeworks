@@ -1,0 +1,15 @@
+cd /srv/homeworks/0
+cp 66666.tar.xz /home/students/s62516/firstDir
+cd
+cd firstDir
+tar -xf 66666.tar.xz
+mv 66666 62516
+cd 62516
+cat problem.txt
+vim dinosaur.txt
+i
+pterodactyl
+esc
+:wq
+cat dinosaur.txt
+vim documentation.txt

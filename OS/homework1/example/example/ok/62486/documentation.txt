@@ -1,0 +1,8 @@
+1) Copied file from the destination using cp command.
+2) Used xz -d to decompress the file.
+3) Used tar -xf command.
+4) cat problem.txt 
+5) Used vim dinosaur.txt to open file and write in it.
+6) Forgot to rename so rename now using mv 66666 62486 command.
+
+Sources xz --help and tar --help.

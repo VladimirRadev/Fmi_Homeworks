@@ -1,0 +1,10 @@
+# First I unarchived the given archived file.
+#Then changed the directory name from 66666 to my faculty number.
+#After that I wrote my favourite dinosaur in the dinosaur.txt.
+#With the last command line I compressed the new file.
+
+tar -xf 66666.tar.xz
+mv 66666 62337
+cd ./62337
+vim dinosaur.txt
+tar -cJf 62337.tar.xz 62337

@@ -1,0 +1,2 @@
+I used command echo "my_fav_dino", and redirected std out to the file dinosaur.txt
+comman is: echo "Pachycephalosaurus" > dinosaur.txt

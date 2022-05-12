@@ -1,0 +1,16 @@
+1. Untar the file : tar -xvf 66666.tar.xz
+
+2. Rename the directory mv 66666 62623
+
+3. Go in the dir : cd 62623
+
+4. Add the dinosaur to the file : echo "Pterodactyl" >> dinosaur.txt
+
+5. Go back cd ../
+
+6.Make the final TAR : tar -cvf 62623.tar.xz ./62623
+
+Sources :
+
+For the TAR : https://www.geeksforgeeks.org/tar-command-linux-examples/
+

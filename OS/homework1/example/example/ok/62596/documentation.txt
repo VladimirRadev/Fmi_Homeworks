@@ -1,0 +1,40 @@
+Общо взето изпълнението на домашното се сведе до следния scrollback от терминала:
+
+s62596@astero:~$ cd /srv/homeworks/0
+s62596@astero:/srv/homeworks/0$ ls -l
+total 4
+-rw-r--r-- 1 human faculty 356 Mar 19 15:23 66666.tar.xz
+s62596@astero:/srv/homeworks/0$ cd ~/solutions
+s62596@astero:~/solutions$ mkdir -p homeworks/0
+s62596@astero:~/solutions$ cd homeworks/0
+s62596@astero:~/solutions/homeworks/0$ man tar
+s62596@astero:~/solutions/homeworks/0$ tar --extract -f /srv/homeworks/0/66666.tar.xz
+s62596@astero:~/solutions/homeworks/0$ ls -l
+total 8
+drwxr-xr-x 2 s62596 students 4096 Mar 19 15:22 66666
+s62596@astero:~/solutions/homeworks/0$ cd 66666
+s62596@astero:~/solutions/homeworks/0/66666$ ls -l
+total 4
+-rw-r--r-- 1 s62596 students   0 Mar 19 15:11 dinosaur.txt
+-rw-r--r-- 1 s62596 students   0 Mar 19 15:22 documentation.txt
+-rw-r--r-- 1 s62596 students 125 Mar 19 15:10 problem.txt
+s62596@astero:~/solutions/homeworks/0/66666$ cat problem.txt
+Задача
+======
+
+Във файла dinosaur.txt попълнете вида на любимия си динозавър.
+s62596@astero:~/solutions/homeworks/0/66666$ echo 'Littlefoot от "Земята преди време", който е дългошийка :D' > dinosaur.txt
+
+
+След което следваха малко meta-терминал операции, за да си копирам scrollback-а и да го издъмпя в documentation.txt.
+
+Източници: 
+- man tar
+- https://en.wikipedia.org/wiki/The_Land_Before_Time#Principal_characters (за справка с името на главния герой - малкото динозавърче)
+
+След това преименуването и архивирането стават с командите:
+
+s62596@astero:~/solutions/homeworks/0$ mv 66666 62596
+s62596@astero:~/solutions/homeworks/0$ tar --create -f 62596.tar.xz 62596
+
+Останалото е копиране с WinSCP и прикачване на архива в мудъл.

@@ -1,0 +1,7 @@
+cp /srv/homoworks/0/66666.tar.xz ~	copy file to home directory
+tar xf 66666.tar.xz			unzip the archive
+mv 66666 62594		rename the directory 66666 to 62594
+cd 62594		change the working directory to 62594
+cat problem.txt			print the content of problem.txt
+vi dinosaur.txt			open dinosaur.txt to text editor
+

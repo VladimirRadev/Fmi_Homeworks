@@ -1,0 +1,3 @@
+mv 66666 62520				// rename 66666 dir to 62520
+echo Velociraptor > dinosaur.txt	// write my favourite dinosaur in dinosaur.txt
+cat dinosaur.txt			// see if in dinosaur.txt writes Velociraptor 

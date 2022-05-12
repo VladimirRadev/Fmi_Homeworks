@@ -1,0 +1,8 @@
+1. Kopirah faila ot /srv/homeworks/0/ v moqta direktoriq
+2. Razarhivirah go
+3. Pregledah vsichki failove
+4. otvorih problem.txt, prochetoh uslovieto
+5. napisah svoq liubim dinozavyr
+6. arhivirah i kompresirah cqlata direktoriq 62576
+7. izpratih domashnata si rabota
+

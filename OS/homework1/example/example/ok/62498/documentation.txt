@@ -1,0 +1,3 @@
+https://devconnected.com/how-to-rename-a-directory-on-linux/
+https://linuxize.com/post/how-to-extract-unzip-tar-xz-file/
+https://ostechnix.com/how-to-archive-files-and-directories-in-linux-part-1/

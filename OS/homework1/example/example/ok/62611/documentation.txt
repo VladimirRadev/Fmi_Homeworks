@@ -1,0 +1,7 @@
+1. I downloaded 66666.tar.xz using VMWare Workstation Player (Ubuntu virtual machine)
+2. I unzipped the tar
+3. I opened problem.txt and googled exactly what my favourite dinosaur's name was
+4. I wrote the dinosaur's name into dinosaur.txt
+5. I wrote each step that I did into documentation.txt
+6. I zipped the files back and changed the tar's name to my faculty number (62611)
+7. I uploaded it to moodle using my virtual machine

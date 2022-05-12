@@ -1,0 +1,1 @@
+used cp /srv/homeworks/0/66666.tar.xz /home/students/s62408 to add the file to my directory, than decompressed it with xz -dv 66666.tar.xz, extracted the archive with tar -xvf 66666.tar and than renamed it with mv 66666 62408 and added rex to dinosaur.txt with echo rex > dinosaur.txt

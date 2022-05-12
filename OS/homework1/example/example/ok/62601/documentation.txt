@@ -1,0 +1,5 @@
+Extract file with - tar -xf 66666.tar.xz
+Rename file with -  mv 66666 62601
+Edit dinosaur.txt with vi
+Archive and compress with - tar -cJf 62601.tar.xz 62601/
+

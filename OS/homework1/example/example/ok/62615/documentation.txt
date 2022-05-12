@@ -1,0 +1,8 @@
+I created a new directory homework using mkdir
+I copied the archive using cp
+I extracted the content of the archive using tar
+I opened the 66666 directory using cd
+Then opened the problem.txt file to see the problem
+After that i wrote my favourite dinosaur in the file using echo command
+Finally I wrote down the process of working in this file using echo command
+For this homework I used the materials given from the course and a website called dev.to

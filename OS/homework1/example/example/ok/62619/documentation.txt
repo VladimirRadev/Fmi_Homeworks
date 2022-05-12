@@ -1,0 +1,12 @@
+Hello! This is my documentation.
+First I used the command "cp /srv/homework/0/66666.tar.xz /home/students/s62619"
+to copy the file that I need for my homework.
+After that I used "tar -xf 66666.tar.xz"(found it on google) to extract my files.
+I needed to rename the directory that I got from "66666" to "626219" so I used the
+command "mv 66666 62619".
+My task was to write some info about my favourite dinosaur inside the dinosaur.txt file
+so I did that useing "echo '(info)' > dinosaur.txt".
+And in the end I had to write this documentation so I decided to use "vim" just to 
+try it out.
+
+Now I will use "tar cf" to archive my final directory.

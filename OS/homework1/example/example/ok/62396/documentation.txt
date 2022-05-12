@@ -1,0 +1,16 @@
+1. Connect to astero
+2. Copy the file to my home direcorty
+3. Decompress and unarchive it
+4. Search for dinasaur breeds
+5. Copy the breed from internet to the file
+6. Write this into documentation.txt
+7. Archive and compress it
+8. Try to scp into my local machine
+9. Try harder for another 30 minutes
+10. Write sudo while frustrated
+11. Get banned from astero
+12. Write email to get my permission to login back
+13. Don't get reply
+14. Step 1-7 done on my local machine
+15. Finish this "homework" derived of motivtion.
+

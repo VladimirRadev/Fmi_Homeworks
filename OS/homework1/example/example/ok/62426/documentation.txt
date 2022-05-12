@@ -1,0 +1,9 @@
+Документация:
+
+Декомпресирах файла чрез xz -d 66666.tar.xz
+Разархивирах файла чрез tar -xf 66666.tar
+Промених името на 66666 чрез mv 66666 62426
+Проверих видове динозаври в google.com и си избрах от 
+https://en.wikipedia.org/wiki/Brachiosaurus
+Архивирах файла отново чрез tar -cf 62426.tar dinosaur.txt documentation.txt problem.txt
+Компресирах файла чрез xz -z 62426.tar

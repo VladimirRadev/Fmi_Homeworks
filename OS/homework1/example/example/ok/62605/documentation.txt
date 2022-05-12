@@ -1,0 +1,9 @@
+kopiram faila 66666.tar.xz v moqta direktoriq chrez komandata cp /srv/homeworks/0/66666.tar.xz /home/students/s62605
+decompresiram go chrez unxz 66666.tar.xz
+dearchiviram go chrez tar xopf 66666.tar
+preimenuvam go chrez mv 66666 62605
+vlizam chrez cd 62605
+vizhdam uslovieto chrez cat problem.txt
+izpalnqvam uslovieto chrez echo "T-Rex" > dinosaur.txt
+zapisvam stapkite v documentation.txt chrez vim
+archiviram i compresiram chrez tar -cJf 62605.tar.xz 62605

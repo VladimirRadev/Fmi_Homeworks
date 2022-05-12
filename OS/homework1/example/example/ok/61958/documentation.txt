@@ -1,0 +1,3 @@
+С командата echo и пренасочване на нейния output попълваме файла dinosaur.txt по следния начин:
+
+echo 'Velociraptor' > dinosaur.txt

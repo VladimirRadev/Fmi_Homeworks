@@ -1,0 +1,9 @@
+Използвах WinSCP за да прехвърля папката в моята директория в астеро и я
+преименувах с командата "mv". Във файла "dinosaur.txt" записах името
+на динозавара ми. След това с "vim" записах този текст в "documentation.txt"
+Накрая архивирах всичко и го предадох.
+
+Източниците, които съм използвал за решаването на задачата:
+https://training.linuxfoundation.org/blog/how-to-create-and-manage-archive-
+files-in-linux/
+https://devconnected.com/how-to-rename-a-directory-on-linux/

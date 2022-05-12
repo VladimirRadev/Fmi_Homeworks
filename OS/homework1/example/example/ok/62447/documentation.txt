@@ -1,0 +1,13 @@
+Процес на решение на задачата:
+
+1. Копирам архива от зададената директория с командата tar xfv и флага -C(специфицира в коя директория да се extract-не файла). 
+2. Преименувам архива от 66666 на 62447.
+3. Във файла dinosaur.txt въвеждам информацията за избрания динозавър - Тиранозавър рекс (с команда vim -> i).
+4. Архивирам 62447 с команда tar cfv.
+5. Компресирам 62447.tar с команда xz -z.
+
+Източници:
+ - https://bg.wikipedia.org/wiki/%D0%A2%D0%B8%D1%80%D0%B0%D0%BD%D0%BE%D0%B7%D0%B0%D0%B2%D1%80%D0%B8
+ - https://www.dechica.com/documents/nauki/dinosaurs/trex.htm
+ - https://nauka.offnews.bg/news/Novini_1/Paleontolozi-opisaha-naj-golemiia-tirannozavar-v-sveta_124857.html
+ - https://www.nationalgeographic.bg/a/tiranozavr-reks-deistvitelno-e-bil-nai-straxovitiyat-xishhnik-prez-perioda-kreda

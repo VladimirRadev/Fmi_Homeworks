@@ -1,0 +1,9 @@
+cp /srv/homeworks/0/66666.tar.xz ~ //Copy File in Home directory
+tar --xz -xf 66666.tar.xz //Decompress and Dearchive
+mv 66666 62580 //rename directory
+cd 62580 //move in dir
+echo "Archaeopteryx" >> dinosaur.txt // Append text to dinosaur.txt 
+cd .. // move one dir back
+tar -cvJf 62580.tar.xz 62580 //archive and compress
+
+Source man tar and Google Dino names  

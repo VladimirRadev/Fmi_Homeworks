@@ -1,0 +1,11 @@
+go to given directory
+copy archive
+create directory for homework0
+place archive in firectory
+extract files from archive
+rename 66666 directory using mv
+read task and complete it with echo command
+write every step in documentation.txt with echo commands
+sources used for tar command www.tecmint.com/18-tar-command-examples-in-linux/
+sources used for archive and compress with xz:
+www.cyberciti.biz/faq/compress-the-whole-directory-using-xz-and-tar

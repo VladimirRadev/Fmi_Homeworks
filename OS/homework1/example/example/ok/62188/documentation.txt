@@ -1,0 +1,7 @@
+Resuorces:
+cyberciti.biz
+linuxize.com
+baeldung.com
+1.Extract archive
+3.Write fav. kind dinosaur
+2.Rename directory

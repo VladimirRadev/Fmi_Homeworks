@@ -1,0 +1,8 @@
+cp /srv/homeworks/0/66666.tar.xz ~  copy from /srv/homeworks/0/ the archive to our home directory(~)
+tar xf 66666.tar.xz  unzip the archive
+mv 66666 62568  rename the directory 66666 to my fn number
+cd 62568  open the directory
+cat problem.txt  show the content of file to the input
+vi dinosaur.txt  open file to edit
+
+

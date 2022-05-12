@@ -1,0 +1,1 @@
+I first copied the archive in my home directory using the command cp /srv/homeworks/0/66666.tar.xz /home/students/s62526 and then I extracted the file using the command tar -xvf 66666 after which I cd 66666 into the directory and then used the command cat dinosaur.txt | echo text , where text is the text of the file I wrote and then I repeated this same process for this file.

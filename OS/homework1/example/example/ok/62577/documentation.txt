@@ -1,0 +1,15 @@
+2022-03-27 10:35:52 tar -xf 66666.tar.xz
+https://www.cyberciti.biz/faq/how-to-extract-tar-xz-files-in-linux-and-unzip-all-files/
+
+2022-03-27 10:35:55 ls
+2022-03-27 10:37:18 mv 66666 62577
+2022-03-27 10:37:25 ls
+2022-03-27 10:37:47 cd 62577
+2022-03-27 10:37:48 ls
+2022-03-27 10:38:00 cat problem.txt
+2022-03-27 10:38:41 cat dinosaur.txt
+2022-03-27 10:39:34 vi dinosaur.txt
+https://stackoverflow.com/questions/35695160/how-to-edit-a-text-file-in-my-terminal
+https://en.wikipedia.org/wiki/Oviraptor
+
+2022-03-27 10:45:03 cat dinosaur.txt

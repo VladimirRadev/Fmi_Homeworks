@@ -1,0 +1,13 @@
+Resource for types of dinosaurs with images:
+https://www.amnh.org/dinosaurs/types-of-dinosaurs
+
+#no other material was required
+
+Process:
+navigate to ~ , copy archive to s62226 dir using cp command.
+extract zip using tar -xf command and copy files into 62226 folder.
+Edit documentation.txt and dino.txt with vi command
+zip/archive using tar - cJf 62226.tar.xz 62226
+Attach to moodle via WinSCP.
+#end
+

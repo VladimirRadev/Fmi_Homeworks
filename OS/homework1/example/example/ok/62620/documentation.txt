@@ -1,0 +1,10 @@
+Работя на Ubuntu Subsystem on Windows
+1. Тегля tar архива и влизам в Downloads: cd /mnt/d/Downloads (https://ridicurious.com/2018/10/18/2-ways-to-copy-files-from-windows-10-to-windows-sub-system-for-linux/)
+2. Копирам си файла в ~/OS/dom_0, където си работя: cp 66666.tar.xz ~/OS/dom_0
+3. Резархивирам tar-a: tar -xf 66666.tar.xz (https://linuxize.com/post/how-to-extract-unzip-tar-xz-file/)
+4. Преименувах директорията- mv 66666/ 62620 (https://devconnected.com/how-to-rename-a-directory-on-linux/)
+5. Прочетох условието от problem.txt: cat problem.txt
+6. Влязох с vim в dinosaur.txt: vim dinosaur.txt
+7. Във vim влязох в Insert mode (i) и си написах динозавъра, след което запазих и излязох (Esc -> :wq)
+8. Архивирах папката в tar: tar -cvf 62620.tar 62620
+9. Компресирах tar-a: xz 62620.tar 

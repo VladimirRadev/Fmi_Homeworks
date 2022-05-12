@@ -1,0 +1,5 @@
+Otidoh pri arhiviraniq fail s komandata cd /srv/homeworks/0
+Kopirah go s komandata cp /srv/homeworks/0/66666.tar.xz ~/66666.tar.xz
+Razarhivirahme go s tar -xf 66666.tar.xz
+Smenih mu imeto s mv 66666 855327
+S komandata vim dinosaur.txt otvorih fail i zapisah moq lubim dinosaur

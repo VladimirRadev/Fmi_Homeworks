@@ -1,0 +1,3 @@
+just wrote this command: echo "triceratops" > dinosaur.txt
+after that i used: tar -cf 62567.tar 62567/
+lastly i ran: xz 62567.tar

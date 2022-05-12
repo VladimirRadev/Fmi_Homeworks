@@ -1,0 +1,5 @@
+First copy 66666.tar.xz to my home directory
+Second use tar command on the copied file
+Third add text to dinosaur.txt
+Fourth add text to documentation.txt
+Fifth archive 66666 dir

@@ -1,0 +1,11 @@
+Директно си копирах файла от /srv/homeworks/0/. 
+Разархивирах го с командата tar -xf
+Преименувах папката да е с моя факултетен номер
+След като прочетох условието, отидох във файла динозавър и записах моя
+любимец чрез vim
+
+Източници:
+https://www.geeksforgeeks.org/cp-command-linux-examples/
+https://www.javatpoint.com/rename-folder-in-linux#mv
+https://linuxize.com/post/how-to-extract-unzip-tar-gz-file/
+https://www.geeksforgeeks.org/tar-command-linux-examples/

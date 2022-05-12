@@ -1,0 +1,15 @@
+0) cd ~
+1) cp /srv/homeworks/0/66666.tar.xz .
+2) xz --decompress 66666.tar.xz
+3) tar -xvf 66666.tar
+4) mv 66666 62558
+5) cat ./62558/problem.txt
+6) google types of dinosaurs 
+   -> https://www.amnh.org/dinosaurs/types-of-dinosaurs
+   -> choose Stegosaurus stenops because it has spikes along its backbone
+7) vi ./62558/dinosaur.txt -> Stegosaurus stenops -> esc -> :x
+8) vi ./62558/documentation.txt 
+   -> https://stackoverflow.com/questions/21797615/how-to-paste-to-vim-when-using-putty
+   -> copy theese notes -> shift + rmb -> esc -> :x
+9) tar -cvf 62558.tar ./62558
+10) xz 62558.tar

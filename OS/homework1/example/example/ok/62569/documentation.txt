@@ -1,0 +1,6 @@
+Decompress: xz -d 66666.tar.xz
+Unarchive: tar -xvf 66666.tar
+Rename: mv 66666 62569
+Solve problem: echo 'Velociraptor' >> dinosaur.txt
+Archive: tar -cvf 62569.tar 62569
+Compress: xz 62569.tar

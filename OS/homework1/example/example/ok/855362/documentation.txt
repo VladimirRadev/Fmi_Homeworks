@@ -1,0 +1,9 @@
+I downloaded and unzipped the archive from moodle. 
+Renamed it to match my faculty number.                                         
+Using WinSCP copied the directory to the remote file system on astero.          
+Opened the directory using cd 855362.                                           
+Using cat problem.txt I opened the problem.txt file containing the 
+instructions for the task.                                                                   
+Using echo Oviraptor 1>dinosaur.txt I wrote what my favourite dinosaur 
+is and redirected the output of echo into the dinosaur.txt file 
+[q-files.com/prehistoric/dinosaur-species for help with the choice]

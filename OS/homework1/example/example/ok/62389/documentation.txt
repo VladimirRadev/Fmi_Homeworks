@@ -1,0 +1,13 @@
+Step  1. pdw -> Make sure you ar in /home/students/62389 dir
+Step  2. cp /srv/homeworks/0/66666.tar.xz 62389.tar.xz
+Step  3. Type tar --help
+Step  4. Type tar -xaf 62389.tar.xz Dearchive and Decompress
+Step  5. mv 66666 62389 Rename
+Step  6. cd 62389 
+Step  7. ls
+Step  8. cat problem.txt You need to find out what is the description the the task
+Step  9. echo yourFavDino > dino.txt
+Step 10. OR... vim dino.txt -> type 'i' to go in insert mode -> type newFavDino -> ESC -> :wq to write and quit
+Step 11. Check everything is saved and you finished the task
+Step 12. You need to Archive and Compress -> tar -caf 62389.tar.xz
+Step 13. Well done!

@@ -1,0 +1,12 @@
+*downloaded file*
+used "cd Downloads" to enter directory with the file
+unarchived using "tar xvf 66666.tar.xz"
+used "mv 66666 855264" to rename the directory
+used "cd 855264" to enter the renamed directory
+used "ls" to check files in the directory
+used "cat problem.txt" to read the content of the file problem.txt
+used echo "t-rex">>dinosaur.txt" to add the favorite type of dinosaur in the dinosaur.txt file
+used "cat dinosaur.txt" to verify if the change has been made
+used "cd -" to go back in "Downloads" directory
+used "tar -cvf 855264.tar 855264" to archive the directory
+used "xz 855264.tar" to compress the file

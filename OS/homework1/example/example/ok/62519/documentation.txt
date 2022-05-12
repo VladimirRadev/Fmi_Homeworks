@@ -1,0 +1,9 @@
+first i go to the 66666.tar.xz directory
+use website: phoenixnap.com to read about how to move
+this file in mu home directory(~).
+The I read in website: linuxsize.com about how to extract .tar.xz file
+Then I read in website phoenixnap.com about how to rename this file with my facu
+lty number
+Then open website linuxize.com and reading information about how to use at comma
+nt for writing in the file
+As a final stage I use cat command to fill my documentation.txt file

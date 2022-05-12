@@ -1,0 +1,5 @@
+1. Copy the file in home directory  using cp/srv/homeworks/0/66666.tar.xz
+2. Extract the archive using tar -xf 66666.tar.xz
+3. Rename with command mv 66666 855364
+4. Go into my home directory with cd 855364 and then cat problem.txt to read the description of the task
+5. At the end write favorite dinosaur into the dinosaur.txt using echo My favorite dinosaur is Allosaurus > dinosaur.txt

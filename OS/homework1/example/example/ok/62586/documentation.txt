@@ -1,0 +1,8 @@
+Steps to complete the task
+1. We copy from /srv/homeworks/0/ the archive to our home directory(~)      with the command cp /srv/homework/0/66666.tar.xz ~/66666.tar.xz
+2. Then we unzip the archive                                                with the command tar -x -f 66666.tar.xz
+3. Then we rename the unarchived contents to our fn number in my case 62586 with the command mv 66666 62586
+4. After we enter the renamed directory                                     with the command cd 62586
+5. We redirect the result(trex) from stdout to dinosaur.txt file            with the command echo trex >> dinosaur.txt 
+6. We archive the directory 	                                            with the command tar -c -J -f 62586.tar.xz 62586
+7. We download via WinSCP

@@ -1,0 +1,6 @@
+1. cp /srv/homeworks/0/66666.tar.xz ~
+2. cd ~
+3. tar xf 66666.tar.xz
+4. mv 66666 62190
+5. cd 62190
+6. echo "Птеродактил" > dinosaur.txt

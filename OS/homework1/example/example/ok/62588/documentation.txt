@@ -1,0 +1,1 @@
+extracted using tar -xf after that echo text > [FILE] and after that tar -cjf

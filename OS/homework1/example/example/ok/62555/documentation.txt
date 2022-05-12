@@ -1,0 +1,1 @@
+vim dinosaur.txt<CR>ipterodactyl<Esc>ZZ

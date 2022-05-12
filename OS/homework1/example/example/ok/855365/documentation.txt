@@ -1,0 +1,17 @@
+//I have copied the file 66666.tar.xz into my directory
+cp /srv/homeworks/0/66666.tar.xz /home/students/s855365
+
+//extracted the archive 66666.tar.xz
+tar -xf 66666.tar.xz
+
+//changed the name of the file 66666 to my faculty number 855365
+mv 66666 855365
+
+//entered the file 855365
+cd 855365
+
+//read the problem.txt file
+cat problem.txt
+
+//wrote which is my favorite dinosaur into dinosaur.txt file
+echo My favorite dinosaur is Tyrannosaurus > dinosaur.txt 

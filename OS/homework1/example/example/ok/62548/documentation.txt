@@ -1,0 +1,4 @@
+First I read the task with cat problem.txt
+And I checked dinosaur.txt - it is empty
+A quick google seach for a random dinosaur name, from random site https://www.kids-dinosaurs.com/different-types-of-dinosaurs.html
+To write in dinosaur.txt: echo Cerapods! > dinosaur.txt

@@ -1,0 +1,13 @@
+Ключови команди, които използвах:
+cd /srv/homework/0
+cp 66666.tar.xz ~
+unxz 66666.tar.xz
+tar xf 66666.tar
+mv 66666 62564
+vi dinosaur
+tar cvf 62564.tar ~/62564
+xz 62564.tar
+
+Източници, откъдето съм взел информация:
+
+bg.wikipedia.org/wiki/Трицератопси

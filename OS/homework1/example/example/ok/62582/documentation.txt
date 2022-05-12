@@ -1,0 +1,7 @@
+1.Copy archive 66666.tar.xz from /srv/homeworks/0 to my home directory with the                                                                                                              command -------- cp /srv/homeworks/0/66666.tar.xz ~
+2. Extract 66666.tar.xz in my home directory with the command -------- tar xf ~/                                                                                                             66666.tar.xz
+3. Rename directory 66666 to 62582 in my home directory with the command -------                                                                                                             - mv ~/66666 ~/62582
+4. Read content of file problem.txt with the command ------ cat ~/62582/problem.                                                                                                             txt
+5. Write name of my favourite dinosaur on stdout and redirect result from stdout                                                                                                              to file dinosaur.txt with the command ----- echo ankylosaurus >> dinosaur.txt
+6. Describe the solution of the problem in file ~/62582/documentation.txt with t                                                                                                             he command ------ cat >> ~/62582/documentation.txt
+7. After finish with the description of the solution, archive and compress directory 62582 with the command ----- tar cvfa 62582.tar.xz 62582/

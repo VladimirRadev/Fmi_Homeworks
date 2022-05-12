@@ -1,0 +1,14 @@
+1) Copy the compressed tar archive into my home directory:
+   cmd: cp /srv/homeworks/0/66666.tar.xz ~ ;
+2) Decompress the compressed archive:
+   cmd: unxz 66666.tar.xz ;
+3) Extract the files from the archive:
+   cmd: tar -xf 66666.tar ;
+4) Rename directory 66666/ to 62528/:
+   cmd: mv 66666/ 62528/ ;
+5) Read "problem.txt" file:
+   cmd: cat problem.txt ;
+6) Write the solution into "dinosaur.txt":
+   cmd: echo ". . ." >> dinosaur.txt ;
+7) Write a report with the steps of the solution into "documentation.txt";
+8) Finish.

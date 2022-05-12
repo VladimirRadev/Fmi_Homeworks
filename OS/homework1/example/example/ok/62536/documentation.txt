@@ -1,0 +1,2 @@
+Otvorih faila chrez vim. Preminah v rejim insert, zapisah lybimia si dinozaver, zapazih faila i zatvorih vim. 
+

@@ -1,0 +1,6 @@
+I opended the homework from moodle then downloaded WinSCP. 
+
+Using WinCP I coppied it and uploaded it to astero, archived and compressed it and then coppied it back from astero and uploaded it to moodle. I used the following commands:
+
+tar -cf 62585.tar 62585
+xz 62585.tar

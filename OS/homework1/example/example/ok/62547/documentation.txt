@@ -1,0 +1,17 @@
+1.  xz -d 66666.tar.xz
+2.  tar xfv 66666.tar
+3.  mv 66666/ 62547/
+4.  cd 62547
+5.  cat problem.txt
+6.  nvim dinosaur.txt
+7.  i - преминаване в insert mode
+8.  Въвеждане на динозавър
+9.  escape (моя shortcut) за преминаване в Normal mode
+10. :wq
+11. nvim documentation.txt
+12. i - преминаване в insert model
+13. Въвеждане на този текст
+14. escape
+15. :wq
+16. tar cvf 62547.tar /62547
+17. xz 62547.tar

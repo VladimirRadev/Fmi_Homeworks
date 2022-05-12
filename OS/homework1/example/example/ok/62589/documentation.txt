@@ -1,0 +1,6 @@
+Download the archive and navigate to it via 'cd'
+We extract the archive with 'tar -xf 66666.tar.xz'
+Rename the folder with 'mv 66666 62589'
+We enter the directory with 'cd' and edit the text file with vi
+We create an archive with the tar command 
+To add it as an compressed tar.xz file we also use xz command

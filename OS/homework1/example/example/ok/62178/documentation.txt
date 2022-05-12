@@ -1,0 +1,21 @@
+Приемаме, че текущата работеща директория (current directory) е тази, в която се намира файла 66666.tar.xz
+
+Разархивираме файла
+tar -xf 66666.tar.xz
+https://www.cyberciti.biz/faq/how-to-extract-tar-xz-files-in-linux-and-unzip-all-files/
+
+Преименуваме файла 66666 с моят ФН
+mv 66666 62178
+https://devconnected.com/how-to-rename-a-directory-on-linux/
+
+Принтираме стринг в терминала и после чрез redirect-ване на изхода от командата echo записваме отговора в файла dinosaur.txt
+
+cd 62178
+echo "kentrosaurus" > dinosaur.txt
+
+или
+echo "kentrosaurus" > 62178/dinosaur.txt
+
+Архивираме и компресираме директорията 62178
+tar -cJf 62178.tar.xz 62178
+https://www.cyberciti.biz/faq/compress-the-whole-directory-using-xz-and-tar/

@@ -1,0 +1,11 @@
+1. За извличането на архива в моята директория използвах cp /srv/homeworks/0/66666.tar.xz ./
+2. За разархивирането използвах командата tar -xf 66666.tar.xz
+3. За преименуването на директорията mv 66666 62468
+4. За писане във файла vim dinosaur.txt 
+5. За намиране на вид динозавър https://www.chudesa.net/динозаври-видове/
+6. За запазване на файла dinosaur.txt ESC :wq
+7. За компресирането на файла използвах командата tar cfJ 62468.tar.xz 62468
+https://stackoverflow.com/questions/18855850/create-a-tar-xz-in-one-command
+8. След 30 мин търсене на начин как да си славя файла от Putty на декстопа с командата scp ми писна и ползвах оказанията от https://docs.google.com/document/d/1Qq-cMxVxnpUaFNWd00IzAc1sCxsHyVliKWvY2ERlyfg/edit
+
+Хубав ден! 

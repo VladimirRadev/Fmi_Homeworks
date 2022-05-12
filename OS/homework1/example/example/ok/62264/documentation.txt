@@ -1,0 +1,4 @@
+1 tar -xf 62264
+2 echo "velociraptor" > dinasur.txt
+3 tar -cvzf 62264.tar.xz /62264
+

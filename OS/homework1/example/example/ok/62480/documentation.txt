@@ -1,0 +1,11 @@
+cd ~
+tar -cf 66666.tar
+xz 66666.tar
+cd /srv/homeworks/0
+cp 66666.tar.xz ~/66666.tar.xz
+cd ~
+xz -d 66666.tar.xz
+tar -xf 66666.tar
+cd 62123
+mv 62123 62480
+echo "Tyrannosaurus rex" > dinosaur.txt

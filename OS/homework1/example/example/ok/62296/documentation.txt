@@ -1,0 +1,12 @@
+1. Download the file to my windows laptop and put it in my Ubuntu shared folder
+2. Go to my Ubuntu virtual machine and go to the shared directory
+3. Unarchive the archive (with tar -xf)
+4. Rename the directory with my faculty id (with mv)
+5. Open the directory (cd)
+6. See the problem file (less)
+7. Open the dinosaur file for editing (vi)
+8. Edit the file and save (i, esc, D, dd, :wq, A, a...)
+9. Edit the documentation (same commands)
+10. Check for errors (less)
+11. Went back a directory and archived the directory with my faculty number (tar -cf)
+12. Went back on windows and sent the newly created archive in moodle

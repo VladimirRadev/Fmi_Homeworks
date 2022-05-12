@@ -1,0 +1,5 @@
+Connect to asatero.openfmi.net using the documentation in moodle.
+Unarchive the tar.xz file 
+Rename the directory 
+Type my favorite dinosaur
+Archive the renamed directory.

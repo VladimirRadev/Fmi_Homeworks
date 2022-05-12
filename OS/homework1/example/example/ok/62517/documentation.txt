@@ -1,0 +1,9 @@
+1. Copy task archive to home directory using command 'cp'.
+2. Unzip and extract content from task archive uzing commands 'xz' and 'tar'.
+3. Rename task directory file to student's faculty number using command 'mv' in current folder.
+4. Read problem.txt using 'cat' command.
+5. Search for dinosaur types and images in Google.
+6. Compete task writing in dinosaur.txt using stdout to a file via '>'.
+7. Explain the process of dealing with the task in documentation.txt.
+8. Archive and compress task directory.
+9. Submit homework.

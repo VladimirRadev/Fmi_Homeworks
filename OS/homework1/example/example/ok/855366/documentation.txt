@@ -1,0 +1,5 @@
+first we copy the file with cp /srv/homeworks/0/66666.tar.xz .
+then with tar -xf 66666.tar.xz i extracted the archieve
+mv 66666 855366 to change the name to my faculty number
+cd 855366 and then cat problem.txt to read the problem
+echo "my favourite dinosaur is triceratops" > dinosaur.txt to write into the dinosaur.txt file

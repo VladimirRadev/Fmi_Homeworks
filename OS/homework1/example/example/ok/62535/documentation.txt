@@ -1,0 +1,17 @@
+Процес:
+
+0) tar -xvf 66666.tar.xz
+1) mv 66666 62535
+2) cd 62535
+3) vim dinosaur.txt и i за insert
+4) Въвеждане на любим динозавър
+5) :wq за запазване и изход от vim редактора
+6) vim documentation.txt и i за insert
+7) Въвеждане на документация
+8) :wq за запазване и изход от vim редактора
+9) cd ..
+10) tar -cvJf 62535.tar.xz 62535/ 
+
+Използвани източници:
+https://en.wikipedia.org/wiki/Dinosaur
+https://en.wikipedia.org/wiki/Triceratops

@@ -1,0 +1,6 @@
+extracting with command  xz -v -d
+extracting with command tar xf
+rename folder to 62028 with command mv
+include fav dino with command echo
+
+checked in stackoverflow how to compress/decompress
