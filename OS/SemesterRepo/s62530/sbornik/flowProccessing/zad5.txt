@@ -1,0 +1,2 @@
+ls -li ./ | tr -s ' '| cut -d ' ' -f2,3,10 | grep -Ev '^d'| tail -n +2 | sort -rn -t ' ' -k2,2 | head -n 5 | cut -d ' ' -f3,3
+

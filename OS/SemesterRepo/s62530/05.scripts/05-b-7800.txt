@@ -1,0 +1,7 @@
+#!/bin/bash
+sum=0;
+while read -d ':' -r dir;do
+	sum=$(($sum + $(find $dir -type f -executable | wc -l)))
+	#echo -en "sum after $dir is : $sum\n"
+done < <(echo "${PATH}")
+echo $sum

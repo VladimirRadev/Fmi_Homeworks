@@ -1,0 +1,15 @@
+#! /bin/bash
+echo -n "Enter name of file: "
+read file
+echo -n "Enter char array: "
+IFS=""
+read charArray
+cat $file | grep -q $charArray
+#if [[ $(cat $file | grep $charArray | wc -l ) -ge 1 ]]; then
+#	echo "Char array does exist somewhere in the input file "
+#else	
+#	exit 1
+#fi
+echo "exit status of the last command: $?"
+
+	

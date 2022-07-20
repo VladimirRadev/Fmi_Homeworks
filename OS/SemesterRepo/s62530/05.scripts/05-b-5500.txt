@@ -1,0 +1,28 @@
+#!/bin/bash
+echo " <table>"
+cat 05.scripts/header
+inputInfo=$(mktemp)
+groupByGroupId=$(mktemp)
+temp=$(mktemp)
+ps -eo group,gid > $groupByGroupId
+cat /etc/passwd  | cut -d ':' -f1,4,5,7 > $inputInfo
+while IFS= read line; do
+	
+	userName=$(echo $line | cut -d ':' -f1,1)
+	group=$(echo $line | cut -d ':' -f2,2 | xargs -I {} grep {} $groupByGroupId |head -n 1|cut -d ' ' -f 1,1 | sed -e 's/\s//g')
+	gecko=$(echo $line | cut -d ':' -f3,3)
+	loginShell=$(echo $line | cut -d ':' -f4,4)
+	cat 05.scripts/element > $temp 
+	loginShell=$(echo $loginShell | sed -e 's/\//\?/g')
+	sed -i "s/Username/'${userName}'/g" $temp
+	sed -i "s/group/'${group}'/g" $temp
+   	sed -i "s/login shell/'$loginShell'/g" $temp
+	sed -i "s/GECKO/'$gecko'/g" $temp
+	sed -i "s/'//g" $temp
+	sed -i 's/\?/\//g' $temp
+	cat $temp
+done < $inputInfo
+
+echo " </table>"
+rm $inputInfo $groupByGroupId $temp
+

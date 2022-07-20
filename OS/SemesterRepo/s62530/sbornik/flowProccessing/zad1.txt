@@ -1,0 +1,2 @@
+#!/bin/bash
+cat philip-j-fry.txt | grep -E '[02468]' | grep -E -v '[a-w]' | wc -l| xargs -I {} echo -en "Broqt na tursenite redove e: {}\n"

@@ -1,0 +1,23 @@
+#!/bin/bash
+usId=$(id -unr)
+#if [ $usId !=  "root" ];then
+	#exit 1
+#fi
+inputUsers=$(mktemp)
+uniqUsers=$(mktemp)
+temp=$(mktemp)
+ps -eo user,pid,rss | tail -n +2 |tr -s ' '| sort -k 1,1 -k 3,3n > $inputUsers
+awk -F ' ' '{print $1}' $inputUsers |tr -s ' '| uniq > $uniqUsers
+for user in $uniqUsers;do
+   awk -F ' ' -v "v="${user}"" 'BEGIN{sum=0;maxpid=0} {if($1=="${v}"){sum+=$3;maxpid=$2}} END{print sum,maxpid}' $inputUsers > $temp
+    read -d ' ' -p sumUs,maxPidUs -s $temp
+    echo "sum=$sumUs,  maxPidUs=$maxPidUs"	
+	if [ $sumUs -ge $1 ];then
+		kill $maxPidUs
+		echo "killing ${maxPidUs}"
+		sleep 2
+		kill -9 $maxPidUs
+	fi
+done
+
+rm $inputUsers $uniqUsers $temp

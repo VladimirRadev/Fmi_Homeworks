@@ -1,0 +1,29 @@
+#!/bin/bash
+files=$(mktemp)
+find $1 -type f > $files
+declare -A d
+while IFS= read -r file; do
+	currSha=$(sha1sum $file | tr -s ' ' | cut -d ' ' -f1,1)
+	d[$currSha]=$file
+	#echo "${d[$currSha]}"
+	while IFS= read -r other; do
+		otherSha=$(sha1sum $other | tr  -s ' ' | cut -d ' ' -f1,1)
+		#echo "curr- $currSha  , other - $otherSha"
+		if [[ $file != $other ]]; then
+			if [[ $currSha == $otherSha ]] && [[ $other < $file ]]; then
+				d[$currSha]=$other
+				#echo "promqna : $currSha veche e sus value $other"
+			fi
+		fi
+	done < $files
+done < $files
+#echo "${!d[@]}"
+while IFS= read -r file; do
+	currSha=$(sha1sum $file | tr -s ' ' | cut -d ' ' -f1,1)
+	for sha in "${!d[@]}"; do
+		if [[ $sha == $currSha ]] && [[ "${d[$sha]}" != $file ]]; then
+			rm $file
+		fi
+	done
+done < $files
+

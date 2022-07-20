@@ -1,0 +1,3 @@
+cut -d ':' -f 7 /etc/passwd | sort | uniq -c 
+
+e tova ot komanda v shela sami da si napisehm c code koito pipovete sami gi pishem

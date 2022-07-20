@@ -1,0 +1,13 @@
+#! /bin/bash
+i=0
+
+#program will wait up to 10 seconds for change, after then will stop
+while [[ 1 -eq 1 ]] && [[ $i -le 10 ]]; do
+	grep -q $1 <(who)
+	if [[ $? -eq 0 ]]; then
+		break 2
+	fi 
+	sleep 1
+	i=$(($i + 1))
+done
+echo "${i}"

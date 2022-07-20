@@ -1,0 +1,21 @@
+#!/bin/bash
+
+if [ $# -ne 1 ];then
+	echo -en "Not valid format of arguments : ./zad2.sh <filename>"
+	exit 1
+fi
+
+tp=$(mktemp)
+bookTitles=$(mktemp)
+idx=1;
+cat -n <(cat "${1}" | sed -E 's/^[0-9]{4} г. - //') > $tp
+cat <(cat -n <(cat "${1}" | sed -E 's/^[0-9]{4} г. - //')) | sed -E 's/^\s+([0-9]+)\s+/\1. /' > $tp
+cat $tp | sed -E 's/^[0-9]+. („.*“).*/\1/' | sort > $bookTitles
+
+while read line;do
+	#echo -en "${line} \n"	
+	grep -E "${line}" $tp
+done < <(cat $bookTitles)
+
+rm -r $tp $bookTitles
+

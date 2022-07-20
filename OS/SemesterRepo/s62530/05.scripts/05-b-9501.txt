@@ -1,0 +1,25 @@
+#!/bin/bash
+declare -A d
+declare -A commands
+d["-r"]="-g"
+d["-g"]="-b"
+d["-b"]="-r"
+commands["-r"]='\033[0;31m'
+commands["-g"]='\033[0;32m'
+commands["-b"]='\033[0;34m'
+
+
+if [[ $1 == "-x" ]];then
+	echo -en "\033[0m"
+	cat $2 
+else
+	current=$1
+	while IFS="" read -r line; do
+		com="${commands[$current]}"
+		echo -en "$com $line\n"
+		current=${d[$current]}
+	done < $2
+
+fi
+
+echo -en "\033[0m"

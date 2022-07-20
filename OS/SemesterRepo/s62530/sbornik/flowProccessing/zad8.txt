@@ -1,0 +1,1 @@
+ cat /etc/passwd | cut -d ':' -f1,5,6 | grep -E '^s.*' | grep -E '.*,СИ:' | sed -e 's/^s//' | sort -n -t ':' -k1,1 | sed -e 's/,*СИ//g' | cut -d ':' -f2,3

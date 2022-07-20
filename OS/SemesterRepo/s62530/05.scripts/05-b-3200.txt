@@ -1,0 +1,5 @@
+#! /bin/bash
+echo "Insert FullDir path: "
+read dir
+echo "Number of  files: $(find $dir -type f | wc -l)"
+echo "Number of directories: $(($(find $dir -type d | wc -l ) - 1)) " 

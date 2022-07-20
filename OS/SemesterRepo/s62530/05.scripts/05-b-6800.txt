@@ -1,0 +1,20 @@
+#!/bin/bash
+documents=$(mktemp)
+files=$(mktemp)
+result=$(mktemp)
+find $1 -mindepth 1 -type d | xargs -I {} basename {} > $documents
+find $1 -mindepth 1 -type f | xargs -I {} basename {} > $files
+while IFS= read -r file; do
+	echo "$(find $1 -mindepth 1 -name $file -printf "%P" | xargs -I {} basename {}) ($(find $1 -mindepth 1 -name $file -printf "%s bytes"))" >> $result
+
+done < $files
+
+while IFS= read -r doc; do
+	echo "$(find $1 -mindepth 1 -name $doc -printf "%P" | xargs -I {} basename {}) ($(find $1 -mindepth 1 -name $doc | head -n 1 | xargs -I {} find {} -mindepth 1 -type f,d | wc -l) entries)" >> $result
+
+done < $documents
+
+cat $result | sort
+rm $documents $files $result
+
+

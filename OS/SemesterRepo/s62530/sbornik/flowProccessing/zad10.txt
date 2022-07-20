@@ -1,0 +1,22 @@
+#!/bin/bash
+lowerBound=$(date -d "2022-05-01 00:00:00" '+%s')
+upperBound=$(date '+%s')
+#echo "[$lowerBound , $upperBound]"
+siStudents=$(mktemp)
+result=$(mktemp)
+cat /etc/passwd | grep -E '.*,СИ' | grep -E '^s' | cut -d ':' -f1,5,6| sed -e 's/,*СИ//' | sed -e 's/^s//' > $siStudents
+IFS=':'
+while read facNum name dir; do
+	#echo "$facNum $name $dir"
+	lastMod=$(stat -c %Y $dir)
+	if [[ $lastMod -ge $lowerBound ]] && [[ $lastMod -le $upperBound ]]; then
+		echo -e "$facNum\t$name" >> $result
+	fi
+
+done < $siStudents
+IFS=$'\n\t '
+
+cat $result
+rm $siStudents $result
+
+

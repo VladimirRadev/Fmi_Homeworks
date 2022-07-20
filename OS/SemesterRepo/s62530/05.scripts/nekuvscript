@@ -1,0 +1,10 @@
+#!/bin/bash
+users=$(mktemp);
+sorted=$(mktemp);
+cat /etc/passwd | awk -F ':' '{printf ("%s %s\n",$1,$6)}' > $users
+cat $users
+#while read u h; do 
+#	find $h -mindepth 1 -type f -printf "%U %p %T@\n" 2> /dev/null >> $sorted
+#done < <(cat $users) 
+#cat $sorted | sort -t ' ' -rn -k 3,3 | head -n 1 | awk -F ' ' '{print $1,$2}'
+rm -r $users $sorted

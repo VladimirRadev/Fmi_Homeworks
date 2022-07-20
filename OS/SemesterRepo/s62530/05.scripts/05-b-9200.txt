@@ -1,0 +1,24 @@
+#!/bin/bash
+echo -n "" > ~/logs/remove.log
+for i in "$@";do
+	if [[ $i == "-r" ]]; then
+		continue
+	fi
+	isFile=$(find ~/ -mindepth 1 -type f -wholename $i | wc -l)		
+	if [[ $isFile -eq 1 ]]; then
+		rm $(find ~/ -mindepth 1 -type f -wholename $i) 
+		echo "[$(date)] Removed file $i" >> ~/logs/remove.log
+	else
+		isEmptyDir=$(find ~/ -mindepth 1 -type d -wholename $i | xargs -I {} find {} -mindepth 1 -type f,d | wc -l)
+		if [[ $isEmptyDir -eq 0 ]]; then
+			rmdir $(find ~/ -mindepth 1 -type d -wholename $i) 
+			echo "[$(date)] Removed directory $i" >> ~/logs/remove.log
+		else
+			rm -r $(find ~/ -mindepth 1 -type d -wholename $i) 
+
+			echo "[$(date)] Removed recursively $i" >> ~/logs/remove.log
+		fi
+	fi
+done
+
+
