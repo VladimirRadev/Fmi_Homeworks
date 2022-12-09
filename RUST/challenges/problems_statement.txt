@@ -1,0 +1,2 @@
+Фибоначи - https://fmi.rust-lang.bg/challenges/1
+Color parsing- https://fmi.rust-lang.bg/challenges/2

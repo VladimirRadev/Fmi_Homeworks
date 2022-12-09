@@ -1,0 +1,2 @@
+CSS ЦВЕТОВЕ - https://fmi.rust-lang.bg/tasks/1
+Wordle - https://fmi.rust-lang.bg/tasks/2
