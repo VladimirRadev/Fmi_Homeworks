@@ -1,8 +1,0 @@
-{
-    "rust-analyzer.inlayHints.closureReturnTypeHints.enable": "never",
-    "rust-analyzer.inlayHints.parameterHints.enable": false,
-    "editor.parameterHints.enabled": false,
-    "rust-analyzer.inlayHints.typeHints.enable": false,
-    "editor.parameterHints.cycle": false,
-    "editor.inlayHints.enabled": "off"
-}
