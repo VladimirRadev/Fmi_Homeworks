@@ -1,0 +1,42 @@
+#form-container {
+    margin: auto;
+    width: 50%;
+
+    margin-top: 50px;
+    border: 2px black solid;
+
+}
+#form-container .form-header {
+    color: white;
+    background-color: forestgreen;
+    text-align: center;
+    border-bottom: 2px black solid;
+    padding: 10px;
+}
+.form-content {
+    
+    margin: 20px;
+    
+}
+.form-item {
+    padding: 10px;
+    margin: auto;
+
+}
+.form-item input {
+    height: 30px;
+    width: 100%;
+    display: block;
+    box-sizing: border-box;
+}
+.form-item .btn {
+    margin: auto;
+    display: block;
+    padding: 10px;
+    background-color: forestgreen;
+    color: white;
+}
+.form-item .btn:hover {
+    background-color: aqua;
+    cursor: pointer;
+}
