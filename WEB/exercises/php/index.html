@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FormSubmission</title>
+    <link rel="stylesheet" href="./styles.css">
+    <script src="./post-handler.js" defer></script>
+</head>
+<body>
+    <main id="form-container">
+        <div class="form-header">
+            <h1>РЕГИСТРАЦИЯ</h1>
+        </div>
+        
+        <section class="form-content">
+            <form id="subject_form" >
+            <div class="form-item">
+                <input  id="email" type="email" placeholder="Email" required>
+            </div>
+            <div class="form-item">
+                <input  id="first_name" type="text" placeholder="Име" >
+            </div>
+            <div class="form-item">
+                <input  id="last_name" type="text" placeholder="Фамилия">
+            </div>
+
+            <div class="form-item">
+                <select id="subject_type" class="subject_type">
+                    <optgroup label="Тип на предмета">
+                        <option value="ЯКН">ЯКН</option>
+                        <option value="ОКН">ОКН</option>
+                        <option value="Други">Други</option>
+                    </optgroup>
+                </select>
+            </div>
+            <div class="form-item">
+                <input  id="password" type="password" placeholder="Парола" required>
+            </div>
+            <div class="form-item">
+                <input  id="passoword_confirm" type="password" placeholder="Повтори парола" required>
+            </div>
+            
+            <div class="form-item">
+                <button  class="btn">РЕГИСТРАЦИЯ</button>
+            </div>
+        </form>
+        </section>
+    </main>
+
+    <section>
+        <ul id="records">
+
+        </ul>
+    </section>
+    
+</body>
+</html>
