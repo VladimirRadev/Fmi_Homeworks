@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="bg">
+
+<head>
+    <title>Laravel Web Framework</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="./css/styles.css">
+    <link rel="stylesheet" href="./javascript/highlight/styles/default.css">
+    <script src="./javascript/highlight/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="./javascript/scripts.js"></script>
+</head>
+
+<body>
+    <div id="fixedButton">
+        <h5><a onclick="openNav()">Съдържание</a></h5>
+        <h5><a href="#resources">Източници</a></h5>
+    </div>
+
+    <header id="header">
+        <img src="./img/laravel-logo.png" class="logo" alt="Logo">
+        <div class="title">
+            <h1>Laravel Web Framework</h1>
+        </div>
+        <h5><a href="#resources">Източници</a></h5>
+        <h5><a onclick="openNav()">Съдържание</a></h5>
+    </header>
+
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a class="sidenav-item" href="#intro">Въведение</a>
+        <a class="sidenav-item" href="#framework">Какво са софтуерен и уеб фреймуърк?</a>
+        <a class="sidenav-item" href="#mvc">Архитектурен шаблон Model-View-Controller (MVC)</a>
+        <a class="sidenav-item" href="#depmng">Управление на зависимостите</a>
+        <a class="sidenav-item" href="#artisan">Artisan CLI</a>
+        <a class="sidenav-item" href="#auth">Автентикация</a>
+        <a class="sidenav-item" href="#eloquent">Eloquent ORM</a>
+        <a class="sidenav-item" href="#cache">Кеширане</a>
+        <a class="sidenav-item" href="#templeng">Template engine</a>
+        <a class="sidenav-item" href="#routing">Маршрутизация</a>
+        <a class="sidenav-item" href="#controllers">Контролери</a>
+        <a class="sidenav-item" href="#testing">Автоматично тестване</a>
+        <a class="sidenav-item" href="#homestead">Homestead</a>
+    </div>
+
+    <main id="main">
+        <div id="page-content-wrapper">
+            <div class="page-content inset" data-spy="scroll" data-target="#spy">
+                <div class="row">
+                    <div>
+                        <h2 id="intro">Въведение</h2>
+                        <p><strong>Laravel</strong> e един от най-популярните <a class="text-item" href="#framework">PHP
+                                уеб фреймуърци</a>. С безплатен и отворен код е и е създаден от Тейлър Отуел през 2011.
+                            Основната идея зад него е да служи за бърза и лесна разработка на уеб приложения. Laravel
+                            следва <a class="text-item" href="#mvc">архитектурния шаблон Model-View-Controller
+                                (MVC)</a>. Базиран е върху друг php фреймуърк - Symfony. Изходният код на Laravel се
+                            съхранява в GitHub и е лисензиран под условията на MIT лиценз. <a class="text-item"
+                                href="#link2">[2]</a>
+                        </p>
+                        <p>Някои от по-използваните и интересни вградени функционалности на фреймуърка са <a
+                                class="text-item" href="#link3">[3]</a>:</p>
+                        <ul>
+                            <li>Модулна система за управление на пакети със собствен инструмент за <a class="text-item"
+                                    href="#depmng">управление на зависимостите (dependency manager Composer)</a>. Това
+                                значи, че могат лесно да се добавят функционалности към Laravel приложението без да
+                                трябва да се започват от нулата. Всеки разработчик може да създаде свои пакети за код,
+                                който се използват редовно, или да инсталира готовите за ползване пакети през Composer.
+                            </li>
+                            <li>Цялостна система за <a class="text-item" href="#auth">автентикация</a>.</li>
+                            <li>Object-relational mapping (ORM) система - <a class="text-item" href="#eloquent">Eloquent
+                                    ORM</a> заедно с Laravel представят таблици от базата данни като класове с цел
+                                по-лесен достъп и манипулация на данните.</li>
+                            <li>Интерфейс с команден ред - <a class="text-item" href="#artisan">Artisan CLI</a>, който
+                                идва с много вградени команди.</li>
+                            <li><a class="text-item" href="#testing">Автоматично тестване</a> - автоматизирани тестове
+                                се предоставят като неразделна част от Laravel.</li>
+                            <li>Преносима, виртуална среда за разработване. <a class="text-item"
+                                    href="#homestead">Homestead</a> предоставя на програмистите всички инструменти,
+                                необходими за разработка чрез Laravel, директно готови за използване.</li>
+                        </ul>
+                        <p>За тези и други интересни вградени функционалности, можете да прочетете подробности по-долу.
+                        </p>
+                    </div>
+                    <div>
+                        <h2 id="framework">Какво са софтуерен и уеб фреймуърк?</h2>
+                        <p><strong>Софтуерен фреймуърк</strong> според Уикипедия <a class="text-item"
+                                href="#link5">[5]</a> е абстракция, в която софтуер, който предоставя общи
+                            функционалности, може да се промени избирателно чрез добавяне на допълнително написан код,
+                            като по този начин предоставя софтуер за специфични нужди. Освен това ни дава и
+                            стандартизиран начин, по който да изграждаме и внедряваме приложения. По-просто казано,
+                            софтуерен фреймуърк е структура, която можеш да използваш, за да изградиш нещо по-бързо и
+                            по-лесно. Позволява ти да ползваш различни компоненти, да комуникираш с външни
+                            приложно-програмни интерфейси (APIs) и да дефинираш структурата на твоето приложение.</p>
+                        <p>Софтуерният фреймуърк ти позволява <a class="text-item" href="#link4">[4]</a>:</p>
+                        <ul>
+                            <li>да намалиш сложността - той прави по-лесно справянето със сложни ситуации, разбивайки ги
+                                на различни малки парченца;</li>
+                            <li>да пишеш чист код - той ти помага да пишеш чист и използваем код;</li>
+                            <li>да тестваш и дебъгваш - той прави тестването и дебъгването лесни и забавни;</li>
+                            <li>да следваш ръководства за разработка - той кара теб и екипа ти да следвате стриктни
+                                правила и ръководства, които насърчават консистентността в базата код и спомагат за
+                                намаляване на бъговете;</li>
+                            <li>да скалираш - той ти помага да скалираш лесно при нужда, без значение колко бързо
+                                приложението ти расте.</li>
+                        </ul>
+                        <p><strong>Уеб фреймуъркът</strong> е просто друг вид софтуерен фреймуърк, който ти помага да
+                            изграждаш уеб апликации, включително уеб услуги и приложно-програмни интерфейси. Един уеб
+                            фреймуърк ти позволява да създаваш компоненти, които могат да се преизползват и да
+                            изпълняваш ежедневните си задачи по-лесно.</p>
+                    </div>
+                    <div>
+                        <h2 id="mvc">Архитектурен шаблон Model-View-Controller (MVC)</h2>
+                        <img src="./img/mvc.png" class="images" alt="MVC architecture" />
+                        <p class="annotations">Фигура 1. Диаграма на архитектурния шаблон <i>Model-View-Controller</i>
+                        </p>
+                        <p>Както името на този шаблон сочи, приложението се разделя на три основни компонента - модел
+                            (model), изглед (view) и контролер (controller).</p>
+                        <ul>
+                            <li>Модел - представя оформянето на данните и бизнес логиката, т.е. репрезентира знанието.
+                                Поддържа данните на приложението. Обектите-модели извличат и съхраняват състоянието на
+                                модела в базата данни.</li>
+                            <li>Изглед - това е потребителският интерфейс, т.е. визуалната репрезентация на данните. Той
+                                показва данните на потребителя, използвайки модела, и също му позволява да модифицира
+                                данните.</li>
+                            <li>Kонтролер - приема заявките от потребителя, т.е. това е връзката между системата и
+                                потребителя. Обикновено потребителят взаимодейства с изгледа, който като отговор изпраща
+                                подходяща URL заявка. Тази заявка се поема от контролера- той изрисува подходящия изглед
+                                заедно с данните от модела като отговор на действието на потребителя. <a
+                                    class="text-item" href="#link6">[6]</a>, <a class="text-item" href="#link7">[7]</a>
+                            </li>
+                        </ul>
+                        <p>За моделите можете да прочете повече в секцията за <a class="text-item"
+                                href="#eloquent">Eloquent</a>, за изгледите - в тази за <a class="text-item"
+                                href="#templeng">Templatе Engine</a>, a за контролерите - в темите <a class="text-item"
+                                href="#routing">Маршрутизация</a> и <a class="text-item"
+                                href="#controllers">Контролери</a>.</p>
+                    </div>
+                    <div>
+                        <h2 id="depmng">Управление на зависимостите</h2>
+                        <p>Зависимостите са пакети или основно модули/плъгини от трети страни, които са нужни, за да
+                            може проекта ти да се изпълни. Например, PHPUnit е лесен за интеграция, независим фреймуърк
+                            за тестване и затова, ако приложението ти се нуждае от компонентно тестване (unit testing),
+                            следователно се нуждаеш от PHPUnit и той автоматично се превръща в зависимост. Управлението
+                            на зависимостите решава тези проблеми чрез автоматизация и стандартизация.</p>
+                        <p>Ръчното управление на зависимостите на който и да е програмен език е тежка работа. Затова
+                            можем да забележим, че днес всички езици за програмиране имат имплементация на система за
+                            управление на зависимостите(dependancy manager) или общо казано пакетен мениджър.</p>
+                        <p>При PHP, се ползва NPM (Node Package Manager) за фронтенд технологии като JavaScript, VueJS.
+                            За бекенда де факто Composer е инструмента за управление на зависимостите. <a
+                                class="text-item" href="#link8">[8]</a>
+                            <p>След инсталиране на Composer всичко, което ти е нужно, за да започнеш да го използваш в
+                                проекта си, е <kbd>composer.json</kbd> файл. Този файл описва зависимостите на проекта и
+                                може да съдържа други метаданни.
+                                <pre><code>
+{
+    "require": {
+        "monolog/monolog": "1.0.*"
+    }
+}
+                            </code></pre>
+                                <p class="annotations">Код 1. Пример за <i>composer.json</i> файл. <a class="text-item"
+                                        href="#link1">[1]</a></p>
+                                <p>Първото (и много често единственото) нещо, което специфицираме в
+                                    <kbd>composer.json</kbd> е ключът <kbd>require</kbd>. Чрез него показваме на
+                                    Composer от кои пакети точно зависи проекта ни. Ключът приема за стойност обект,
+                                    който съпоставя имена на пакети (в случая <kbd>monolog/monolog</kbd>) и ограничения
+                                    на версията (в случая <kbd>1.0.*</kbd>). <a class="text-item" href="#link9">[9]</a>
+                                </p>
+                    </div>
+                    <div>
+                        <h2 id="artisan">Artisan CLI</h2>
+                        <p>Artisan е интерфейсът с команден ред зад Laravel. Предоставя много полезни команди, които
+                            могат да ви асистират, докато изграждате приложението си. По този начин можете да избегнете
+                            ръчното изпълнение на повечето повтарящи се задачи. За да видите списък с всички налични
+                            Artisan команди, можете да използвате командата <kbd>list</kbd>:</p>
+                        <pre><code>
+php artisan list
+                            </code></pre>
+                        <p class="annotations">Код 2. Пример за използване на Artisan <i>list</i> командата в командния
+                            ред. <a class="text-item" href="#link1">[1]</a></p>
+                        <p>В допълнение на командите предоставени от Artisan, можете също така да създавате свои
+                            собствени команди. Командите обикновено се съхраняват в директорията
+                            <kbd>app/Console/Commands</kbd>, но сте свободни да изберете своя локация за съхранение,
+                            стига командите да могат да се заредят от Composer.</p>
+                        <p>За да генерирате нови команди, използвайте <kbd>make:command</kbd> командата на Artisan. Тази
+                            команда ще създаде нов команден клас в директорията <kbd>app/Console/Commands</kbd>.
+                            Генерираната команда ще включи множество от член-данни и член-функции по подразбиране, които
+                            са налични за всички команди.</p>
+                        <pre><code>
+php artisan make:command SendEmails
+                            </code></pre>
+                        <p class="annotations">Код 3. Пример за използване на Artisan <i>make:command</i> командата в
+                            командния ред. <a class="text-item" href="#link1">[1]</a></p>
+                        <p>Създавайки вашата команда, трябва да попълните полетата <kbd>signature</kbd> и
+                            <kbd>description</kbd> на класа, които ще се ползват при показването на командата на екрана
+                            чрез <kbd>list</kbd>. Методът <kbd>handle</kbd> ще се извика, когато командата бъде
+                            изпълнена. Можете да добавите логиката на командата в този метод.</p>
+                        <p>Нека погледнем примерна команда. Забележете, че можем да добавим всякакви зависимости, от
+                            които имаме нужда, към <kbd>handle</kbd> метода на командата.</p>
+                        <pre><code>
+&lt;?php
+namespace App\Console\Commands;
+ 
+use App\DripEmailer;
+use App\User;
+use Illuminate\Console\Command;
+ 
+class SendEmails extends Command
+{
+    /**
+     * The name and signature of the console command.
+     *
+     * @var string
+     */
+    protected $signature = 'email:send {user}';
+ 
+    /**
+     * The console command description.
+     *
+     * @var string
+     */
+    protected $description = 'Send drip e-mails to a user';
+ 
+    /**
+     * Create a new command instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
+ 
+    /**
+     * Execute the console command.
+     *
+     * @param  \App\DripEmailer  $drip
+     * @return mixed
+     */
+    public function handle(DripEmailer $drip)
+    {
+        $drip->send(User::find($this->argument('user')));
+    }
+}
+                            </code></pre>
+                        <p class="annotations">Код 4. Пример за php логика на новогенерирана Artisan команда. <a
+                                class="text-item" href="#link1">[1]</a></p>
+                    </div>
+                    <div>
+                        <h2 id="auth">Автентикация</h2>
+                        <p>Автентикацията е основна част от всяко модерно уеб приложение. Пишейки автентикационна
+                            система сам от нулата, както в други фреймуърци, може да отнеме много от времето за
+                            разработка. Laravel предоставя автентикация наготово - само чрез изпълнение на проста
+                            команда можете да създадете напълно функционираща и конфигурирана автентикационна система.
+                            Освен това Laravel предоставя добра документация, чрез която можете да имплементираме
+                            собствена автентикация.</p>
+                        <p>Автентикационният конфигурационен файл се намира в <kbd>config/auth.php</kbd> и съдържа някои
+                            добре документирани опции за настройване на поведението на автентикационната услуга. В
+                            същността си автентикацията на Laravel се състои от <strong>“пазачи”(guards)</strong> и
+                            <strong>“доставчици”(providers)</strong>.</p>
+                        <p>Пазачите дефинират как потребителите се автентикират за всяка заявка. Например в Laravel
+                            съществува <kbd>session</kbd> пазач, който поддържа състоянието, използвайки хранилището за
+                            текущата сесия и бисквитки (HTTP cookies).</p>
+                        <p>Доставчиците дефинират как потребителите се извличат от постоянното си хранилище. Laravel
+                            поддържа извличане чрез <a class="text-item" href="#eloquent">Eloquent</a> и инструмента за
+                            създаване на заявки към базата данни. Освен това, имаш свободата да дефинираш допълнителни
+                            доставчици, ако това е нужно за приложението ти. <a class="text-item" href="#link1">[1]</a>,
+                            <a class="text-item" href="#link4">[4]</a>
+                            <p>
+                    </div>
+                    <div>
+                        <h2 id="eloquent">Eloquent ORM</h2>
+                        <p>Laravel е базиран на <strong>Eloquent ORM</strong>, който предоставя поддръжка за почти
+                            всички системи за бази от данни. Работи перфектно с MySQL и SQLite. Laravel има подробна
+                            документация за всички Eloquent функции.</p>
+                        <p>Всяка таблица от базата данни има кореспондиращ клас на модел, който се използва за
+                            взаимодействие с тази таблица. Моделите ви позволяват да правите заявки за данни, както и да
+                            добавяте нови записи в базата.</p>
+                        <p>Моделите обикновено живеят в директорията <kbd>app</kbd>, но се чувствайте свободни да ги
+                            сложите навсякъде, където те да могат автоматично да се заредят спрямо
+                            <kbd>composer.json</kbd> файла. Всички Eloquent модели наследяват класа
+                            <kbd>Illuminate\Database\Eloquent\Model</kbd>.</p>
+                        <p>Най-лесният начин да създадете инстанция на модел е да ползвате Artisan командата
+                            <kbd>make:model</kbd>:</p>
+                        <pre><code>
+php artisan make:model Flight
+                            </code></pre>
+                        <p class="annotations">Код 5. Пример за използване на Artisan <i>make:model</i> командата в
+                            командния ред. <a class="text-item" href="#link1">[1]</a></p>
+                        <p>Ето как изглежда примерният модел <kbd>Flight</kbd>, който ще използваме, за да можем да
+                            извличаме и запазваме информация от нашата таблица в базата данни <kbd>flights</kbd>:</p>
+                        <pre><code>
+&lt;?php
+namespace App;
+use Illuminate\Database\Eloquent\Model;
+class Flight extends Model
+{
+    //
+}
+                            </code></pre>
+                        <p class="annotations">Код 6. Пример за новогенериран модел. <a class="text-item"
+                                href="#link1">[1]</a></p>
+                        <p>Примерна работа с модел:</p>
+                        <ul>
+                            <li>извличане на данни от базата данни
+                                <pre><code>
+&lt;?php
+$flights = App\Flight::all();
+ 
+foreach ($flights as $flight) {
+    echo $flight->name;
+}
+                                  </code></pre>
+                                <p class="annotations">Код 7. Примерен php код за извличане на данни. <a
+                                        class="text-item" href="#link1">[1]</a></p>
+                            </li>
+                            <li> добавяне на допълнителни ограничения при извличане на данни
+                                <pre><code>
+$flights = App\Flight::where('active', 1)
+               ->orderBy('name', 'desc')
+               ->take(10)
+               ->get();
+                                  </code></pre>
+                                <p class="annotations">Код 8. Примерен php код за добавяне на допълнителни ограничения.
+                                    <a class="text-item" href="#link1">[1]</a></p>
+                            </li>
+                            <li>добавяне на модели
+                                <pre><code>
+$flight = new Flight;
+$flight->name = 'New Flight Name';
+$flight->save();
+                                  </code></pre>
+                                <p class="annotations">Код 9. Примерен php код за добавяне на данни. <a
+                                        class="text-item" href="#link1">[1]</a></p>
+                            </li>
+                            <li>обновяване на модели
+                                <pre><code>
+$flight = App\Flight::find(1);
+$flight->name = 'New Flight Name';
+$flight->save();
+                                  </code></pre>
+                                <p class="annotations">Код 10. Примерен php код за обновяване на данни. <a
+                                        class="text-item" href="#link1">[1]</a></p>
+                            </li>
+                            <li>изтриване на модели
+                                <pre><code>
+$flight = App\Flight::find(1);
+$flight->delete();
+                                  </code></pre>
+                                <p class="annotations">Код 11. Примерен php код за изтриване на данни. <a
+                                        class="text-item" href="#link1">[1]</a></p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h2 id="cache">Кеширане</h2>
+                        <p>Кеширането е техника за съхранение на данни във временно място, от където те бързо могат да
+                            се извлекат при нужда. Кеширането се използва, за да повиши производителността на
+                            приложението. Laravel кешира почти всякакви данни от изгледи (views) до маршрути (routes), с
+                            което понижава времето за обработка на данните. <a class="text-item" href="#link4">[4]</a>
+                        </p>
+                        <p>Кеш конфигурацията се намира в <kbd>config/cache.php</kbd>, където може да се специфицира кой
+                            кеш драйвър ще се използва по разбиране от приложението ви. По начало е зададен
+                            <kbd>file</kbd> кеш драйвъра, който съхранява сериализирани, кеширани обекти във файловата
+                            система. За по-големи апликации обаче се препоръчва използването на по-стабилни драйвъри
+                            като <a class="text-item" href="https://memcached.org/" target="_blank">Memcached</a> или <a
+                                class="text-item" href="https://redis.io/" target="_blank">Redis</a>. Могат дори да се
+                            конфигурират няколко кеш конфигурации за един и същ драйвър.</p>
+                        <ul>
+                            <li>извличане на елемент от кеша
+                                <p>Използва се методът <kbd>get</kbd> от фасадния клас <kbd>Cache</kbd>. Ако артикулът
+                                    не е присъства в кеша, <kbd>null</kbd> ще се върне като резултат. Може да се подаде
+                                    втори незадължителен аргумент на метода, който специфира стойността по подразбиране,
+                                    която да се върне, ако артикулът не съществува:</p>
+                                <pre><code>
+$value = Cache::get('key');
+ 
+$value = Cache::get('key', 'default');
+                                  </code></pre>
+                                <p class="annotations">Код 12. Примерен php код за извличане на елемент от кеша. <a
+                                        class="text-item" href="#link1">[1]</a></p>
+                            </li>
+                            <li>инкрементиране/декрементиране на стойности
+                                <p>Методите <kbd>increment</kbd> и <kbd>decrement</kbd> могат да се ползват за промяна
+                                    на стойностите на цели числа в кеша. И двата метода приемат опционален втори
+                                    аргумент, който показва количеството, с което да се инкрементира или декрементира
+                                    стойността на артикула:</p>
+                                <pre><code>
+Cache::increment('key');
+Cache::decrement('key', $amount);
+                                  </code></pre>
+                                <p class="annotations">Код 13. Примерен php код за инкрементиране/декрементиране на
+                                    стойности в кеша. <a class="text-item" href="#link1">[1]</a></p>
+                            </li>
+                            <li>записване на елементи в кеша
+                                <p>Може да се ползва методът <kbd>put</kbd> от фасадния клас <kbd>Cache</kbd>, за да се
+                                    запишат елементи в кеша:</p>
+                                <pre><code>
+Cache::put('key', 'value', $seconds);
+                                  </code></pre>
+                                <p class="annotations">Код 14. Примерен php код за записване на елемент в кеша. <a
+                                        class="text-item" href="#link1">[1]</a></p>
+                                <p>Ако времето за съхранение (третият аргумент) не се посочи, артикулът ще се запази за
+                                    недефиниран период от време. Също така освен подаване на цяло число за броя секунди,
+                                    може да се подаде и инстанция на класа <kbd>DateTime</kbd>, която представлява
+                                    моментът, в който кешираният елемент ще загуби валидността си.</p>
+                                <pre><code>
+Cache::put('key', 'value', now()->addMinutes(10));
+                                  </code></pre>
+                                <p class="annotations">Код 15. Примерен php код за записване на елемент в кеша за 10
+                                    минути след текущия момент. <a class="text-item" href="#link1">[1]</a></p>
+                            </li>
+                            <li>записванe на елементи завинаги
+                                <p>Методът <kbd>forever</kbd> може да се ползва за съхранение на елемент в кеша за
+                                    постоянно. Тъй като тези артикули никога не губят валидност, те могат да бъдат
+                                    премахнати от кеша ръчно чрез метода <kbd>forget</kbd>:</p>
+                                <pre><code>
+Cache::forever('key', 'value');
+                                  </code></pre>
+                                <p class="annotations">Код 16. Примерен php код за записване на елемент в кеша завинаги.
+                                    <a class="text-item" href="#link1">[1]</a></p>
+                            </li>
+                            <li>изтриване на елементи от кеша
+                                <p>Методът <kbd>forget</kbd> споменат по-горе:</p>
+                                <pre><code>
+Cache::forget('key');
+                                  </code></pre>
+                                <p class="annotations">Код 17. Примерен php код за изтриване на елемент от кеша. <a
+                                        class="text-item" href="#link1">[1]</a></p>
+                                <p>Могат също да се премахват елементи чрез задаване на нулево или отрицателно време за
+                                    съхранение:</p>
+                                <pre><code>
+Cache::put('key', 'value', -5);                             
+                                  </code></pre>
+                                <p class="annotations">Код 18. Друг начин за изтриване на елемент от кеша. <a
+                                        class="text-item" href="#link1">[1]</a></p>
+                                <p>Целият кеш може да се зачисти чрез метода <kbd>flush</kbd>:</p>
+                                <pre><code>
+Cache::flush();
+                                  </code></pre>
+                                <p class="annotations">Код 19. Примерен php код за зачистване на целия кеш. <a
+                                        class="text-item" href="#link1">[1]</a></p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h2 id="templeng">Template engine</h2>
+                        <p><strong>Blade</strong> е системата за шаблони (templating engine) в Laravel. Тя предоставя
+                            огромно количество от помощни функции, с които да форматираме данните си през изгледите
+                            (views). Blade също имплементира шаблонното наследяване, което може да се използва за
+                            създаването на сложни оформления. Всички шаблони на Blade ползват разширението
+                            <kbd>.blade.php</kbd>. <a class="text-item" href="#link4">[4]</a></p>
+                        <p>Blade е уникална в сравнение с други подобни системи, защото:</p>
+                        <ul>
+                            <li>Не ограничава разработчика от това да използва обикновен PHP код в изгледите.</li>
+                            <li>Изгледите на Blade след техния дизайн се компилират и се кешират, докато не се променят.
+                            </li>
+                        </ul>
+                        <p>Всички изгледи се съхраняват в директорията <kbd>resources/views</kbd>, a изгледът по
+                            подразбиране за Laravel е <kbd>welcome.blade.php</kbd>. <a class="text-item"
+                                href="#link11">[11]</a>
+                            <p>Повече за изгледите и Blade можете да прочетете в следващата секция за <a
+                                    class="text-item" href="#routing">Маршрутизация</a>.</p>
+                    </div>
+                    <div>
+                        <h2 id="routing">Маршрутизация</h2>
+                        <p>В Laravel всички заявки се разпределят с помощта на <strong>маршрути (routes)</strong>. В
+                            същността си маршрутизирането се ползва за изпращане на заявката от потребителя до свързания
+                            с нея <a class="text-item" href="#controllers">контролер</a>.</p>
+                        <p>Всички маршрути на приложението се регистрират във файла <kbd>app/routes.php</kbd>. Този файл
+                            казва на Laravel кои са унифицираните идентификатори на ресурси (URI), на които трябва да
+                            отговори, а свързаният контролер ще направи специфичното извикване.</p>
+                        <p>Примерен маршрут за начална страница може да видите по-долу:</p>
+                        <pre><code>
+Route::get ('/', function () {
+   return view('welcome');});
+                        </code></pre>
+                        <p class="annotations">Код 20. Примерен php код за маршрутизация на страница. <a
+                                class="text-item" href="#link10">[10]</a></p>
+                        <pre><code>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+   &lt;head&gt;
+      &lt;title&gt;Laravel&lt;/title&gt;
+      &lt;link href = &quot;https://fonts.googleapis.com/css?family=Lato:100&quot; rel = &quot;stylesheet&quot; 
+         type = &quot;text/css&quot;&gt;
+      
+      &lt;style&gt;
+         html, body {
+            height: 100%;
+         }
+         body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            display: table;
+            font-weight: 100;
+            font-family: 'Lato';
+         }
+         .container {
+            text-align: center;
+            display: table-cell;
+            vertical-align: middle;
+         }
+         .content {
+            text-align: center;
+            display: inline-block;
+         }
+         .title {
+            font-size: 96px;
+         }
+      &lt;/style&gt;
+   &lt;/head&gt;
+   
+   &lt;body&gt;
+      &lt;div class = &quot;container&quot;&gt;
+         
+         &lt;div class = &quot;content&quot;&gt;
+            &lt;div class = &quot;title&quot;&gt;Laravel 5&lt;/div&gt;
+         &lt;/div&gt;
+            
+      &lt;/div&gt;
+   &lt;/body&gt;
+&lt;/html&gt;
+                        </code></pre>
+                        <p class="annotations">Код 21. Примерен html код на страница (изглед). <a class="text-item"
+                                href="#link10">[10]</a></p>
+                        <p>Механизмът на маршрутизация е показан по-долу:</p>
+                        <img src="./img/routing.png" class="images" alt="routing" />
+                        <p class="annotations">Фигура 2. Примерна схема на принципа за маршрутизиране.</p>
+                        <ul>
+                            <li>Стъпка 1
+                                <p>Първоначално трябва да изпълним началния универсален указател на ресурс (root URL) на
+                                    приложението.</p>
+                            </li>
+                            <li>Стъпка 2
+                                <p>Сега въведеният URL трябва да отговаря на аргументите на подходящ метод в
+                                    <kbd>route.php</kbd> файла. В текущия случай аргументът трябва да отговаря на
+                                    началния (‘/’) URL. Това ще изпълни свързаната с него функция, т.е. втория аргумент
+                                    на търсения метод.</p>
+                            </li>
+                            <li>Стъпка 3
+                                <p>Функцията извиква шаблонния файл <kbd>resources/views/welcome.blade.php</kbd>. Това
+                                    става посредством викането на функцията <kbd>view()</kbd> с аргумент
+                                    <kbd>'welcome'</kbd>, т.е. без да се уточнява формата на файла (blade.php). Това ще
+                                    произведе изходен HTML, както е показано на изображението по-долу:</p>
+                            </li>
+                        </ul>
+                        <img src="./img/welcome-page.png" class="no-extension" alt="Welcome page" />
+                        <p class="annotations">Фигура 3. Резултат в браузъра след осъществяване на маршрутизацията.</p>
+                        <h3>Параметри на маршрута</h3>
+                        <p>Понякога в уеб апликацията имаш нужда да прихванеш параметрите подадени през URL. За тази
+                            цел, трябва да модифицирате кода в <kbd>routes.php</kbd> файла.</p>
+                        <ul>
+                            <li>Задължителни параметри
+                                <p>Тези параметри са онези, които трябва задължително да бъдат прихванати при
+                                    маршрутизирането на уеб приложението. Например е важно да захванете потребителския
+                                    идентификационен номер от URL. Това би било възможно чрез дефинирането на параметри
+                                    на маршрута както е показано по-долу:</p>
+                                <pre><code>
+Route::get('ID/{id}',function($id) {
+   echo 'ID: '.$id;
+});
+                                  </code></pre>
+                                <p class="annotations">Код 22. Примерен php код с дефиниция на задължителни параметри в
+                                    маршрута. <a class="text-item" href="#link10">[10]</a></p>
+                            </li>
+                            <li>Опционални параметри
+                                <p>Понякога програмистите могат да създадат опционални параметри и е възможно чрез
+                                    включването на <kbd>?</kbd> след името на параметъра в URL. Важно е да се пази името
+                                    по подразбиране споменато като име на параметър. Вижте следния пример, който показва
+                                    как се дефинира опционален параметър:</p>
+                                <pre><code>
+Route::get('user/{name?}', function ($name = 'TutorialsPoint') { return $name;});
+                                  </code></pre>
+                                <p class="annotations">Код 23. Примерен php код с дефиниция на опционални параметри в
+                                    маршрута. <a class="text-item" href="#link10">[10]</a></p>
+                                <p>Примерът проверява дали стойността отговаря на <kbd>'TutorialsPoint'</kbd> и спрямо
+                                    това маршрутизира до дефинирания URL.</p>
+                            </li>
+                        </ul>
+                        <h3>Именовани маршрути</h3>
+                        <p>Именованите маршрути позволяват удобен начин за създаване на маршрути. Навързването на
+                            маршрути може да бъде специфицирано, използвайки метода <kbd>name()</kbd> в дефиницията на
+                            маршрута. Следният код показва пример за създаване на наименовани маршрути с контролер:</p>
+                        <pre><code>
+Route::get('user/profile', 'UserController@showProfile')->name('profile');
+                            </code></pre>
+                        <p class="annotations">Код 24. Примерен php код с именован маршрут. <a class="text-item"
+                                href="#link10">[10]</a></p>
+                        <p>Контролерът на потребителя ще извика член-функцията си <kbd>showProfile()</kbd>, като за
+                            параметър ще ползва <kbd>'profile'</kbd>.</p>
+                    </div>
+                    <div>
+                        <h2 id="controllers">Контролери</h2>
+                        <p>Вместо да се дефинира цялата логика за справяне със заявки в единичен <kbd>routes.php</kbd>
+                            файл, може да искате организирате това поведение чрез контролер класове. Контролерите могат
+                            да групират логиката по взаимосвързани HTTP заявки в един клас. Контролерите типично се
+                            съхраняват в директорията <kbd>app/Http/Controllers</kbd>. Ето пример за основен клас на
+                            контролер, като всички Laravel контролери трябва да наследяват базовия клас на контролер.
+                        </p>
+                        <pre><code>
+&lt;?php
+ 
+namespace App\Http\Controllers;
+ 
+use App\User;
+use App\Http\Controllers\Controller;
+ 
+class UserController extends Controller
+{
+    /**
+     * Show the profile for the given user.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function showProfile($id)
+    {
+        return view('user.profile', ['user' => User::findOrFail($id)]);
+    }
+}
+                            </code></pre>
+                        <p class="annotations">Код 25. Примерен клас на контролер. <a class="text-item"
+                                href="#link1">[1]</a></p>
+                        <p>Можем да навигираме до действието в контролера по следния начин:</p>
+                        <pre><code>
+Route::get('user/{id}', 'UserController@showProfile');
+                            </code></pre>
+                        <p class="annotations">Код 26. Примерно викане на метода на контролер класа в <i>routes.php</i>
+                            файла. <a class="text-item" href="#link1">[1]</a></p>
+                        <p>Сега, когато заявката съответства на специфицирания URI, методът <kbd>showProfile</kbd> от
+                            класа <kbd>UserController</kbd> ще се изпълни. Разбира се, параметрите на маршрута също ще
+                            се подадат на метода.
+                        </p>
+                    </div>
+                    <div>
+                        <h2 id="testing">Автоматично тестване</h2>
+                        <p>Laravel е написан, като се е обърнало голямо внимание на тестването. Всъщност, поддръжката за
+                            тестване с PHPUnit е вградена и <kbd>phpunit.xml</kbd> файлът е настроен за вашето
+                            приложение. Фреймуъркът също предоставя удобни помощни методи, които ви позволяват да
+                            тествате подробно апликациите си.</p>
+                        <p>По подразбиране, директорията на приложението ви <kbd>tests</kbd> съдържа 2 поддиректории в
+                            себе си: <kbd>Feature</kbd> и <kbd>Unit</kbd>.<strong> Компонентните тестове (Unit
+                                tests)</strong> са тестове, които се фокусират върху много малка, изолирана част от кода
+                            ти. Всъщност, повечето unit тестове най-вероятно се съсредоточават върху един-единствен
+                            метод. <strong>Feature тестовете</strong> могат да тестват по-голяма порция код, включително
+                            как няколко обекта се държат помежду си или дори как цяла HTTP заявка стига до крайната си
+                            точка (endpoint) в JSON формат. Файлът <kbd>ExampleTest.php</kbd> присъства и в двете
+                            тестови директории <kbd>Feature</kbd> и <kbd>Unit</kbd>. След инсталиране на ново Laravel
+                            приложение, изпълнете <kbd>phpunit</kbd> в командния ред, за да изпълните тестовете.</p>
+                        <p>За да създадете нов тестови случай (test case) използвайте Artisan командата
+                            <kbd>make:test</kbd>:</p>
+                        <pre><code>
+// Create a test in the Feature directory...
+php artisan make:test UserTest
+// Create a test in the Unit directory...
+php artisan make:test UserTest --unit
+                            </code></pre>
+                        <p class="annotations">Код 27. Примери за използване на Artisan make:test командата в командния
+                            ред. <a class="text-item" href="#link1">[1]</a></p>
+                        <p>Веднъж щом тестът е бил генериран, вие можете да дефинирате тестови методи, както бихте
+                            ползвали по принцип PHPUnit. За да изпълните тестовете, изпълнете командата
+                            <kbd>phpunit</kbd> или <kbd>artisan test</kbd> в терминала си.</p>
+                        <pre><code>
+&lt;?php
+ 
+namespace Tests\Unit;
+ 
+use PHPUnit\Framework\TestCase;
+ 
+class ExampleTest extends TestCase
+{
+    /**
+     * A basic test example.
+     *
+     * @return void
+     */
+    public function testBasicTest()
+    {
+        $this->assertTrue(true);
+    }
+}
+                            </code></pre>
+                        <p class="annotations">Код 28. Примерен php код на генериран тестови файл. <a class="text-item"
+                                href="#link1">[1]</a></p>
+                    </div>
+                    <div>
+                        <h2 id="homestead">Homestead</h2>
+                        <p>Laravel се стреми да направи цялостната PHP разработка едно приятно усещане включително и
+                            локалната среда за разработка. <a class="text-item" href="https://www.vagrantup.com/"
+                                target="_blank">Vagrant</a> ни предоставя прост, елегантен начин да управляваме и
+                            осигуряваме виртуални машини.</p>
+                        <p><strong>Laravel Homestead</strong> е официална, препакетирана Vagrant кутия (box), която ти
+                            предоставя чудесна среда за разработка без да изисква инсталация на PHP, уеб сървър или
+                            какъвто и да е друг сървърен софтуер на локалната ти машина. Без повече притеснения, че в
+                            операционната ти система ще настъпи безпорядък. Vagrant кутиите са изцяло безплатни - ако
+                            нещо се обърка, можеш да унищожиш и създадеш наново кутията за броени минути. Homestead
+                            се изпълнява на всяка Windows, Mac, или Linux система и включва Nginx, PHP, MySQL,
+                            PostgreSQL, Redis, Memcached, Node.</p>
+                    </div>
+                    <div>
+                        <h2>Обобщение</h2>
+                        <p>Laravel се е доказал като един от най-добрите PHP фреймуърци заради по-горе изброените, както
+                            и много други функционалности и непрекъснатото си подобрение и усъвършенстване. Laravel
+                            помага в създаването на стабилни приложения, използвайки прост, но експресивен подход -
+                            затова Laravel е най-използваният PHP фреймуърк.</p>
+                    </div>
+                    <div>
+                        <h2 id="resources">Източници</h2>
+                        <p id="link1"><i>[1]</i> Paul Tero, "Introduction To URL Rewriting" [<a
+                            href="https://www.smashingmagazine.com/2011/11/introduction-to-url-rewriting/" target="_blank"
+                            class="resource-link">  https://www.smashingmagazine.com/2011/11/introduction-to-url-rewriting/ </a> ], последно посетено на 09.04.2020.
+                        </p>
+                        <p id="link2"><i>[2]</i> Laravel Wikipedia page (in English) [<a
+                                href="https://en.wikipedia.org/wiki/Laravel" target="_blank"
+                                class="text-item">https://en.wikipedia.org/wiki/Laravel</a>], последно посетено на
+                            09.04.2020.</p>
+                        <p id="link3"><i>[3]</i> 'What is Laravel? Explain it like I`m five.', публикуван 09.12.2019 [<a
+                                href="https://updivision.com/blog/post/what-is-laravel-explain-it-like-i-m-five"
+                                target="_blank"
+                                class="text-item">https://updivision.com/blog/post/what-is-laravel-explain-it-like-i-m-five</a>],
+                            последно посетено на 09.04.2020.
+                        </p>
+                        <p id="link4"><i>[4]</i> 'What is Laravel and Why You Should Learn it?', публикуван 05.10.2018
+                            [<a href="https://www.larashout.com/what-is-laravel-and-why-you-should-learn-it"
+                                target="_blank"
+                                class="text-item">https://www.larashout.com/what-is-laravel-and-why-you-should-learn-it</a>],
+                            последно посетено на 09.04.2020.
+                        </p>
+                        <p id="link5"><i>[5]</i> Software framework Wikipedia page (in English) [<a
+                                href="https://en.wikipedia.org/wiki/Software_framework" target="_blank"
+                                class="text-item">https://en.wikipedia.org/wiki/Software_framework</a>], последно
+                            посетено на 09.04.2020.</p>
+                        <p id="link6"><i>[6]</i> 'MVC Architecture' [<a
+                                href="https://www.tutorialsteacher.com/mvc/mvc-architecture" target="_blank"
+                                class="text-item">https://www.tutorialsteacher.com/mvc/mvc-architecture</a>], последно
+                            посетено на 09.04.2020.</p>
+                        <p id="link7"><i>[7]</i> 'Understanding Model-View-Controller', публикуван 05.05.2008 [<a
+                                href="https://blog.codinghorror.com/understanding-model-view-controller/"
+                                target="_blank"
+                                class="text-item">https://blog.codinghorror.com/understanding-model-view-controller/</a>],
+                            последно посетено на 09.04.2020.
+                        </p>
+                        <p id="link8"><i>[8]</i> 'What is dependency management in Laravel?', публикуван 09.07.2019,
+                            Dinesh Suthar [<a
+                                href="https://decodeweb.in/php/php-frameworks/laravel-framework/what-is-dependency-management-in-laravel/"
+                                target="_blank"
+                                class="text-item">https://decodeweb.in/php/php-frameworks/laravel-framework/what-is-dependency-management-in-laravel/</a>],
+                            последно посетено на 09.04.2020.
+                        </p>
+                        <p id="link9"><i>[9]</i> Официална документация на Composer Dependency Manager [<a
+                                href="https://getcomposer.org/doc/01-basic-usage.md" target="_blank"
+                                class="text-item">https://getcomposer.org/doc/01-basic-usage.md</a>], последно посетено
+                            на 09.04.2020.</p>
+                        <p id="link10"><i>[10]</i> 'Laravel - Routing' [<a
+                                href="https://www.tutorialspoint.com/laravel/laravel_routing.htm" target="_blank"
+                                class="text-item">https://www.tutorialspoint.com/laravel/laravel_routing.htm</a>],
+                            последно посетено на 09.04.2020.</p>
+                        <p id="link11"><i>[11]</i> 'Laravel - Blade Templates' [<a
+                                href="https://www.tutorialspoint.com/laravel/laravel_blade_templates.htm"
+                                target="_blank"
+                                class="text-item">https://www.tutorialspoint.com/laravel/laravel_blade_templates.htm</a>],
+                            последно посетено на 09.04.2020.
+                        </p>
+                    </div>
+                    <div>
+                        <h2>Автор</h2>
+                        Таня Христова, Ф.№ 62132, спец. Софтуерно инженерство
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <h5><a href="#header">Начало</a></h5>
+    </footer>
+</body>
+
+</html>

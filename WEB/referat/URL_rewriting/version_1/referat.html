@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="bg">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL rewriting referat</title>
+    <link rel="stylesheet" href="./css/styles.css">
+    <script src="./javascript/scripts.js"></script>
+</head>
+
+<body>
+    <nav id="site-sideNav" class="sideNav">
+        <a class="sideNav-item" href="#intro">Въведение</a>
+        <a class="sideNav-item" href="#url_def">Какво е URL?</a>
+        <a class="sideNav-item" href="#url_overview">Преглед на URL адрес</a>
+        <a class="sideNav-item" href="#chars_not_allowed">Забранени символи в URL</a>
+        <a class="sideNav-item" href="#url_rewriting">Какво е URL пренаписване и за какво ни помага?</a>
+        <a class="sideNav-item" href="#platforms_and_tools">Платформи и инструменти</a>
+        <a class="sideNav-item" href="#configure_apache">Как да конфигурираме Apache системата , за да започнем да
+            пренаписваме URL
+            адреси ?</a>
+        <a class="sideNav-item" href="#.htaccess_files">Какво са .htaccess файлове в Аpache системата?</a>
+        <a class="sideNav-item" href="#basic_example">Основно презаписване на URL</a>
+        <a class="sideNav-item" href="#patterns_and_replacements">Шаблони и замествания</a>
+        <a class="sideNav-item" href="#my_xp_with_rewrite">Тестваме, това което научихме</a>
+        <a class="sideNav-item" href="#regex">Регулярни изрази</a>
+        <a class="sideNav-item" href="#flags">Флагове</a>
+        <a class="sideNav-item" href="#conditions">Състояния</a>
+        <a class="sideNav-item" href="#resources">Източници</a>
+    </nav>
+    <header id="header">
+        <img src="./img/link_logo.png" class="logo" alt="Logo">
+        <div class="title">
+            <h1 class="title-text">URL Rewriting</h1>
+        </div>
+    </header>
+
+    <main id="main">
+        <div id="page-content-wrapper">
+            <div class="page-content inset" data-spy="scroll" data-target="#spy">
+                <div class="row">
+                    <div>
+                        <h2 id="intro">Въведение</h2>
+                        <p><strong>Много уеб компании </strong> прекарват часове и часове в агонизиране за най-добрите
+                            имена на <a class="section-link" href="https://www.computerhope.com/jargon/d/domain.htm"
+                                target="_blank">домейни</a> за своите клиенти.
+                            Те се опитват да намерят име на домейн, което е подходящо.
+                            Звучи професионално, но е отличително, лесно се изписва и запомня и чете по телефона,
+                            изглежда добре на визитни картички. <a class="section-link" href="#link1">[1]</a> </p>
+
+                        <p>За щастие има техника, наречена пренаписване на <a class="section-link" href="#url_def">URL
+                                адреси</a>, която може да превърне грозните URL адреси
+                            в хубави — с много по-малко агония и разходи, отколкото избирането на добро име на домейн.
+                            Позволява ви да попълните вашите URL адреси с удобни, четливи ключови думи, без да засягате
+                            основната структура на вашите страници. <a class="section-link" href="#link1">[1]</a> </p>
+
+                        <p> В настоящият реферат ще разгледаме някои от основните неща , които трябва да знаем за <a
+                                class="section-link" href="#url_rewriting">презаписването на URL</a> :
+                        <ul>
+                            <li>
+                                Ще прегледаме <a class="section-link" href="#url_overview">от какво се състои един URL
+                                    адрес</a>
+                            </li>
+                            <li>
+                                Ще разберем кои <a class="section-link" href="#chars_not_allowed">забранени символи </a>
+                                не може да
+                                ползваме в един URL адрес
+                            </li>
+                            <li>
+                                Ще разберем кои <a class="section-link" href="#platforms_and_tools">платформи и
+                                    инстументи</a> може да
+                                ползваме, ако искаме и ние да презаписваме URL-и
+                            </li>
+                            <li>
+                                Как да <a class="section-link" href="#configure_apache">конфигурираме</a> локално нашата
+                                <a class="section-link" href="https://www.wpbeginner.com/glossary/apache/"
+                                    target="_blank">Apache</a> система , за да започнем да пренаписваме URL-и
+                            </li>
+
+                            <li>
+                                Какво са <a class="section-link" href="#.htaccess_files">.htaccess файлове</a> в Аpache
+                                системата?
+                            </li>
+
+                            <li>
+                                Ще разгледаме <a class="section-link" href="#basic_example">основен пример</a> за
+                                пренаписване на
+                                URL-и и ще надградим малко нивото на обхващане на URL-и чрез използването на <a
+                                    class="section-link" href="#patterns_and_replacements">шаблони и замествания</a>
+                            </li>
+
+                            <li>И накрая ще се запознаем с понятия като <a class="section-link" href="#regex">регулярни
+                                    изрази</a> , <a class="section-link" href="#flags">флагове</a> , <a
+                                    class="section-link" href="#conditions">състояния</a> , които ще ни дадат повече
+                                възможности да боравим с
+                                презаписването на URL-и</li>
+                        </ul>
+                        </p>
+                    </div>
+
+
+                    <div>
+                        <h2 id="url_def">Какво е URL?</h2>
+                        <p><strong>Uniform Resource Locator(URL) </strong>, разговорно наричан уеб адрес, е препратка
+                            към уеб ресурс, който указва местоположението му в компютърна мрежа и механизъм за
+                            извличането му. <a class="section-link" href="#link3">[3]</a> </p>
+
+                        <p>
+                            URL е форма на <a class="section-link" href="https://www.computerhope.com/jargon/u/uri.htm"
+                                target="_blank">URI</a> и стандартизирана конвенция за именуване за адресиране на
+                            документи, достъпни чрез <i>Интернет</i> и <i>Интранет</i>. Пример за URL адрес е
+                            <kbd>//www.computerhope.com</kbd>, който е URL за уебсайта на <a class="section-link"
+                                href="https://www.computerhope.com/" target="_blank">Computer Hope</a>
+                            <a class="section-link" href="#link2">[2]</a>
+                        </p>
+                    </div>
+
+                    <div>
+                        <h2 id="url_overview">Преглед на URL адрес</h2>
+                        <p> По-долу е допълнителната информация за всеки раздел от HTTP URL адреса на тази страница.</p>
+
+                        <img class="section-img" src="./img/url_overview.png" alt="url_overview">
+                        <p class="section-annotations">Фиг.1 Преглед на URL адрес <a class="section-link"
+                                href="#link2">[2]</a></p>
+
+
+                        <ul>
+                            <li class="section-li-bold">
+                                http:// или https://
+                                <p> <a class="section-link" href="https://en.wikipedia.org/wiki/HTTP"
+                                        target="_blank">HTTP</a> означава <kbd>Hypertext Transfer Protocol </kbd> . Той
+                                    позволява на браузъра да знае кой протокол се използва за достъп до информацията,
+                                    посочена в домейна. Протоколът <a class="section-link"
+                                        href="https://en.wikipedia.org/wiki/HTTPS" target="_blank">HTTPS</a> е
+                                    съкращение от <kbd>Hypertext Transfer Protocol Secure</kbd> и показва, че
+                                    информацията, предавана през HTTP, е криптирана и защитена.
+                                    След HTTP или HTTPS, двоеточие <kbd>( : )</kbd> и две наклонени черти <kbd>( //
+                                        )</kbd> отделят протокола от останалата част от URL адреса.</p>
+                            </li>
+                            <li class="section-li-bold">
+                                www.
+                                <p>
+                                    След това <a class="section-link"
+                                        href="https://en.wikipedia.org/wiki/World_Wide_Web" target="_blank">WWW</a>
+                                    означава <kbd>World Wide Web</kbd> и отличава съдържанието. Тази част от URL адреса
+                                    не е задължителна и може да бъде пропусната. Например, въвеждането на
+                                    <kbd>http://computerhope.com</kbd> пак ще ви отведе до уебсайта Computer Hope.
+                                    Адресната част може също да бъде заменена с важна подстраница, известна като
+                                    поддомейн.
+                                </p>
+                            </li>
+
+                            <li class="section-li-bold">
+                                computerhope.com
+                                <p>
+                                    След това <kbd>computerhope.com</kbd> е името на домейна за уебсайта. Последната
+                                    част от домейна е известна като домейн суфикс или TLD. Използва се за идентифициране
+                                    на типа или местоположението на уебсайта. Например <kbd>.com</kbd> е съкращение от
+                                    търговски, <kbd>.org</kbd> е съкращение от организация, а <kbd>.co.uk</kbd> е
+                                    Обединеното кралство. Има няколко налични
+                                    <a class="section-link" href="https://guides.lib.uw.edu/research/evaluate/domains"
+                                        target="_blank">суфикса на домейн</a> . Регистрирате името чрез регистратор на
+                                    домейни, за да получите домейн.
+                                </p>
+                            </li>
+
+                            <li class="section-li-bold">
+                                /jargon/u/
+
+                                <p>
+                                    След това <kbd>jargon</kbd> и <kbd>u</kbd> са директориите, в които се намира уеб
+                                    страницата на сървъра. В този пример уеб страницата съдържа две директории. За да
+                                    намерите файла на сървъра, той ще бъде в директорията
+                                    <kbd>/public_html/jargon/u</kbd>. Директорията <kbd>public_html</kbd> е директорията
+                                    по подразбиране, съдържаща <a class="section-link"
+                                        href="https://www.w3schools.com/html/html_intro.asp" target="_blank">HTML</a>
+                                    файловете с повечето сървъри.
+                                </p>
+                            </li>
+
+                            <li class="section-li-bold">
+                                url.htm
+
+                                <p>И накрая, <kbd>url.htm</kbd> е действителната уеб страница в домейна, който
+                                    преглеждате. Завършващият <kbd>.htm</kbd> е файловото разширение на уеб страницата,
+                                    което показва, че файлът е HTML файл. Други често срещани файлови разширения в
+                                    Интернет включват <kbd>.html, .php, .asp, .cgi, .xml, .jpg и .gif </kbd>. Всяко от
+                                    тези файлови разширения изпълнява различна функция, каkто всички различни типове
+                                    файлове на вашия компютър. <a class="section-link" href="#link2">[2]</a></p>
+                            </li>
+                        </ul>
+
+                    </div>
+
+                    <div>
+                        <h2 id="chars_not_allowed">Забранени символи в URL</h2>
+
+                        <p>Повечето хора осъзнават, че интервалите не са разрешени в URL адрес. Въпреки това е също така
+                            важно да се осъзнае, както е документирано в RFC 1738 <a class="section-link"
+                                href="#link2">[2]</a> , URL низът може да съдържа само <kbd>буквено-цифрови</kbd> знаци
+                            и
+                            символите <kbd>!$-_+*'()</kbd> . Всички други знаци, които са необходими в URL адреса,
+                            трябва да бъдат <a class="section-link"
+                                href="https://www.computerhope.com/jargon/e/encode.htm" target="_blank">encoded</a>.</p>
+
+                    </div>
+
+                    <div>
+                        <h2 id="url_rewriting">Какво е URL пренаписване и за какво ни помага ?</h2>
+
+                        <p>Повечето динамични сайтове включват променливи в своите URL адреси, които казват на сайта
+                            каква информация да покаже на потребителя. Обикновено това дават URL адресите като следните,
+                            казвайки на съответния скрипт на сайт да зареди продукт <kbd>номер 7</kbd></p>
+
+                        <pre>
+                            <code>
+                                http://www.pets.com/show_a_product.php?product_id=7
+                            </code>
+                        </pre>
+                        <p class="section-annotations">Код.1 Показване на продукт номер 7 <a class="section-link"
+                                href="#link4">[4]</a></p>
+
+                        <p>Проблемите с този вид URL структура са, че URL адресът изобщо не се запомня. Трудно е да се
+                            чете по телефона (ще се изненадате колко много хора предават URL адреси по този начин).
+                            Търсачките и потребителите не получават полезна информация за съдържанието на страница от
+                            този URL адрес. Не можете да разберете от този URL адрес, че тази страница ви позволява да
+                            закупите норвежки син папагал (прекрасно оперение). Това е доста стандартен URL адрес .
+                            Сравнете предишния с този URL адрес:</p>
+
+                        <pre>
+                            <code>
+                                http://www.pets.com/products/7/
+                            </code>
+                        </pre>
+                        <p class="section-annotations">Код.2 Показване на продукт номер 7 само че с презаписан URL <a
+                                class="section-link" href="#link4">[4]</a></p>
+
+                        <p>Очевидно много по-чист и кратък URL адрес. Много по-лесно се запомня и много по-лесно четим.
+                            Но ние можем да направим повече:</p>
+
+                        <pre id="norwegian-blue">
+                            <code>
+                                http://www.pets.com/parrots/norwegian-blue/
+                            </code>
+                        </pre>
+                        <p class="section-annotations">Код.3 Показване на секция с папагали <a class="section-link"
+                                href="#link4">[4]</a></p>
+                        <p> Можете да разберете от URL адреса, дори когато е изваден от контекста, какво е вероятно да
+                            намерите на тази страница. Това е лесен URL адрес за запомняне и предаване на друг човек.
+                        </p>
+
+                        <p>
+                            За съжаление, <a class="section-link" href="#norwegian-blue">последният URL адрес</a> не
+                            може да бъде <kbd>разбран</kbd> лесно от сървър без малко работа от наша страна. Когато се
+                            направи заявка за този URL адрес, сървърът трябва да разбере как да обработи този URL адрес,
+                            така че да знае какво да изпрати обратно на потребителя. <strong>Пренаписването на
+                                URL</strong> е техниката, използвана за <kbd>превеждане</kbd> на URL като последния в
+                            нещо, което сървърът може да разбере.</p>
+                    </div>
+
+                    <div>
+                        <h2 id="platforms_and_tools">Платформи и инструменти</h2>
+
+                        <p>В зависимост от софтуера, който изпълнява сървърът ви, може вече да имате достъп до модули за
+                            пренаписване на URL адреси. Ако не, повечето хостове ще активират или инсталират съответните
+                            модули вместо вас . <kbd>Apache</kbd> е най-лесната система да стартирате пренаписване на
+                            URL-и. <a class="section-link" href="#link4">[4]</a></p>
+
+                        <p>HTTP сървърът на Apache е безплатен междуплатформен уеб сървърен софтуер с отворен код,
+                            пуснат съгласно условията на <a class="section-link"
+                                href="https://en.wikipedia.org/wiki/Apache_License" target="_blank">Apache License
+                                2.0</a> . Apache се разработва и поддържа от отворена общност от разработчици под
+                            егидата на <a class="section-link"
+                                href="https://en.wikipedia.org/wiki/The_Apache_Software_Foundation"
+                                target="_blank">Apache Software Foundation</a>.
+                            Apache поддържа различни функции, много от които са реализирани като компилирани модули,
+                            които разширяват основната функционалност. Те могат да варират от схеми за удостоверяване до
+                            поддръжка на езици за програмиране от страна на сървъра като Perl, Python, Tcl и PHP.
+                            Модулът , който ще използваме за пренаписване на URL адреси се нарича
+                            <kbd>mod_rewrite</kbd>. <a class="section-link" href="#link5">[5]</a>
+                        </p>
+
+
+                    </div>
+
+                    <div>
+                        <h2 id="configure_apache">Как да конфигурираме Apache системата , за да започнем да пренаписваме
+                            URL адреси ?</h2>
+
+                        <img class="section-img" src="./img/xampp_control_panel.png" alt="xampp_control_panel">
+                        <p class="section-annotations">Фиг.2 XAMPP контролен панел <a class="section-link"
+                                href="#link6">[6]</a></p>
+
+                        <p>Преди да сме започнали какво и да е
+                            било трябва да инсталираме XAMPP <a class="section-link" href="#link6">[6]</a>
+                            на нашата машина. XAMPP е безплатен и с отворен код
+                            крос-платформен уеб сървър стеков пакет, който е изключително
+                            удобен за ползване за нашите цели. Когато сме влезли в контролния панел на XAMPP трябва да
+                            цъкнем на <kbd>Config</kbd>
+                            и да отидем на <kbd>Apache (httpd.conf)</kbd> конфигурационния файл, откъде ще трябва да
+                            направим мънички промени .
+                        </p>
+
+                        <img class="section-img" src="./img/xampp_httpd_conf.png" alt="xampp_httpd_conf_file">
+                        <p class="section-annotations">Фиг.3 XAMPP (httpd.conf) конфигурационнен файл <a
+                                class="section-link" href="#link7">[7]</a></p>
+
+                        <p>След като сме влезнали в <kbd>httpd.conf</kbd> конфигурационния файл трябва да открием редът
+                            за зареждане на <kbd>rewrite_module</kbd> и да го откоментираме (модулът идва директно с
+                            xampp , но ние трябва да решим дали да го ползваме ). По-долу е показано нагледно, как
+                            трябва да изглежда след промяната: </p>
+
+
+                        <pre>
+                            <code>
+                                ..
+                                #LoadModule reqtimeout_module modules/mod_reqtimeout.so
+                                LoadModule rewrite_module modules/mod_rewrite.so
+                                #LoadModule sed_module modules/mod_sed.so
+                                ..
+                            </code>
+                        </pre>
+                        <p class="section-annotations">Koд.4 Откоментиране на rewrite_module <a class="section-link"
+                                href="#link8">[8]</a></p>
+
+                        <p>След това трябва да открием всички срещания на <kbd>AllowOverride</kbd> и да ги сетнем на
+                            <kbd>All</kbd> :</p>
+
+                        <pre>
+                            <code>
+                                ..
+                                &lt;Dirеctory "C:/xampp/cgi-bin">
+                                    AllowOverride All
+                                    Options None
+                                    Require all granted
+                                &lt;/Dirеctory&gt;
+
+                                ..
+                                AllowOverride All
+                                ..
+                            </code>
+                        </pre>
+                        <p class="section-annotations">Код.5 Сетване на стойност 'All' на всички 'AllowOverride' полета
+                            <a class="section-link" href="#link8">[8]</a></p>
+                        <p>Рестартираме <kbd>XAMPP</kbd> и сме готови <i>засега</i>. <a class="section-link"
+                                href="#link8">[8]</a></p>
+                    </div>
+
+                    <div>
+                        <h2 id=".htaccess_files">Какво са .htaccess файлове в Аpache системата?</h2>
+                        <p> <strong>.htaccess файлове</strong> или <i>"разпределени конфигурационни файлове"</i>
+                            предоставят начин за извършване на промени в конфигурацията на база-директория. Файл,
+                            съдържащ една или повече <kbd>директиви за конфигурация</kbd>, се поставя в определена
+                            <kbd>директория</kbd> за документи и <kbd>директивите</kbd> се прилагат към тази
+                            <kbd>директория</kbd> и всички <kbd>нейни поддиректории</kbd> <a class="section-link"
+                                href="#link9">[9]</a>. </p>
+
+                        <img class="section-img" src="./img/htaccess_files_skelet.PNG" alt=".htaccess_files_skelet">
+                        <p class="section-annotations">Фиг.4 Взаимодействие с '.htaccess' файлове <a
+                                class="section-link" href="#link10">[10]</a></p>
+                        <p>С други думи те са специални файлове , които ви позволяват да променяте определени аспекти от
+                            уеб сървърът , като поставите директиви ( настройки ) в прост текстови файл , който
+                            <kbd>поставяте редом</kbd> до уебсайт файловете ви ( HTML, CSS, JS , ..).
+                            Ако искате да промените някакъв аспект на конфигурацията на уеб сървър , но нямате достъп до
+                            конфигурационните файлове на този уеб сървър , тогава е възможно да го направите през
+                            <kbd>.htaccess </kbd> файлът. <a class="section-link" href="#link10">[10]</a></p>
+                    </div>
+
+
+                    <div>
+                        <h2 id="basic_example">Основно презаписване на URL</h2>
+                        <p>Като начало, нека разгледаме един прост пример. Имаме уебсайт и имаме един <kbd>PHP
+                                скрипт</kbd>, който обслужва една страница. <kbd>URL адресът</kbd> му е:</p>
+                        <pre>
+                            <code>
+                                http://www.pets.com/pet_care_info_07_07_2008.php
+                            </code>
+                        </pre>
+                        <p class="section-annotations">Код.6 Линк към информация за грижа към домашни любимци <a
+                                class="section-link" href="#link4">[4]</a></p>
+
+                        <p>Искаме да изчистим URL адреса и нашият идеален URL адрес би бил:</p>
+                        <pre>
+                            <code>
+                                http://www.pets.com/pet-care/
+                            </code>
+                        </pre>
+                        <p class="section-annotations">Код.7 Изчистен линк към информация за грижа към домашни любимци
+                            <a class="section-link" href="#link4">[4]</a></p>
+
+                        <p>За да работи това, трябва да кажем на сървъра вътрешно да пренасочва всички заявки за URL
+                            адреса <kbd>http://www.pets.com/pet-care/</kbd> към
+                            <kbd>http://www.pets.com/pet_care_info_07_07_2008.php</kbd>. Искаме това да се случи
+                            вътрешно, защото не искаме URL адресът в адресната лента на браузъра да се променя.</p>
+                        <p>За да постигнем това, първо трябва да създадем текстов документ, наречен
+                            <strong>".htaccess"</strong>, който да съдържа нашите правила. Трябва да се наименува
+                            <strong>точно така</strong> (не ".htaccess.txt" или "rules.htaccess"). Трябва да бъде
+                            поставен в основната директория на сървъра (в същата папка в която е и файлът
+                            "pet_care_info_07_07_2008.php" в нашия пример). Там може вече да има файл
+                            <kbd>.htaccess</kbd>, в такъв случай трябва да го редактираме, вместо да го презапишем.</p>
+                        <p>Файлът <strong>.htaccess</strong> е конфигурационен файл за сървъра. Ако във файла има
+                            грешки, сървърът ще покаже съобщение за грешка (обикновено с <kbd>код за грешка 500</kbd>).
+                            Ако прехвърляте файла към сървъра чрез <a class="section-link"
+                                href="https://www.techtarget.com/searchnetworking/definition/File-Transfer-Protocol-FTP"
+                                target="_blank">FTP</a>, трябва да се уверите, че е прехвърлен в <kbd>ASCII</kbd> режим,
+                            а не в <kbd>BINARY</kbd>. Използваме този файл, за да изпълним 2 прости задачи в този случай
+                            - първо, да кажем на Apache да включи машината за пренаписване ( <a class="section-link"
+                                href="https://en.wikipedia.org/wiki/Rewrite_engine#cite_note-4" target="_blank">rewrite
+                                engine</a> ) и второ, да кажем на Apache какво правило за пренаписване искаме да
+                            използва. Трябва да добавим следното към файла:</p>
+
+
+                        <pre>
+                            <code>
+                                RewriteEngine On    # Turn on the rewriting engine
+                                RewriteRule    ^pet-care/?$     pet_care_info_01_02_2008.php    [NC,L]    # Handle requests for "pet-care"
+                            </code>
+                        </pre>
+
+                        <p class="section-annotations">Код.8 Правило за презаписване на Код.7 с Код.6 (пише се вътре в
+                            .htaccess файлът) <a class="section-link" href="#link4">[4]</a></p>
+
+                        <p>Няколко бързи елемента, които трябва да се отбележат - всичко, следващо
+                            <kbd><strong>#</strong></kbd> символът в <kbd>.htaccess</kbd> файл, се игнорира като
+                            коментар и бих ви препоръчал да използвате коментари <kbd>щедро ;)</kbd> и редът започващ с
+                            <strong>RewriteEngine</strong> трябва да се използва само веднъж за <kbd>.htaccess</kbd>
+                            файл (моля, имайте предвид, че не съм включил този ред оттук нататък в примерния код).</p>
+                        <p>Редът <strong>RewriteRule</strong> е мястото, където се случва магията. Редът може да бъде
+                            разделен на 5 части:</p>
+
+                        <ul>
+                            <li>
+                                <p><strong>RewriteRule</strong> - Казва на Apache , че това се отнася за единично
+                                    правило за презаписване</p>
+                            </li>
+                            <li>
+                                <p><strong>^/pet-care/?$</strong> - Шаблонът. Сървърът ще проверява URL адреса на всяка
+                                    заявка към сайта, за да види дали този шаблон съвпада. Ако го направи, тогава Apache
+                                    ще размени URL адреса на заявката с това , което е в секцията <kbd>заместване</kbd>,
+                                    която следва.</p>
+                            </li>
+                            <li>
+                                <p><strong>pet_care_info_01_02_2003.php</strong> - Заместаването. Apache ще използва
+                                    тази секция вместо URL-ът от заявката , която е мачнала шаблонът от горната секция.
+                                </p>
+                            </li>
+
+                            <li>
+                                <p><strong>[NC,L] </strong> - Флагове, които казват на Apache как да приложи правилото.
+                                    В този случай използваме два флага. <kbd>NC</kbd> казва на Apache, че това правило
+                                    трябва да е без значение за малки и големи букви, а <kbd>L</kbd> казва на Apache да
+                                    не обработва повече правила, ако се използва това. </p>
+                            </li>
+
+                            <li>
+                                <p><strong># Handle requests for "pet-care"</strong> - Коментар, обясняващ какво прави
+                                    правилото (незадължително, но препоръчително). </p>
+                            </li>
+                        </ul>
+                        <p>Горното правило е прост метод за пренаписване на единичен URL адрес и е основата за почти
+                            всички правила за пренаписване на URL адреси. <a class="section-link" href="#link4">[4]</a>
+                        </p>
+                    </div>
+
+
+                    <div>
+                        <h2 id="patterns_and_replacements">Шаблони и замествания</h2>
+
+                        <p>Горното правило ви позволява да пренасочвате заявки за един URL адрес, но истинската сила на
+                            <kbd>mod_rewrite</kbd> идва, когато започнете да идентифицирате и пренаписвате групи от URL
+                            адреси въз основа на шаблони, които съдържат. Да приемем, че искате да промените всички URL
+                            адреси на вашия сайт, както беше описано в първата двойка примери в предната точка. Вашите
+                            съществуващи URL адреси изглеждат така:</p>
+
+                        <pre>
+                            <code>
+                                http://www.pets.com/show_a_product.php?product_id=7
+                            </code>
+                        </pre>
+
+                        <p class="section-annotations">Код.9 Показване на продукт с идентификационен номер 7 <a
+                                class="section-link" href="#link4">[4]</a></p>
+
+                        <p>И искате да ги промените така, че да изглеждат така:</p>
+                        <pre>
+                            <code>
+                                http://www.pets.com/products/7/
+                            </code>
+                        </pre>
+
+                        <p class="section-annotations">Код.10 Показване на продукт с идентификационен номер 7 (както
+                            искаме да бъде) <a class="section-link" href="#link4">[4]</a></p>
+
+
+                        <p>Вместо да пишете правило за всеки отделен идентификатор на продукт, вие, разбира се,
+                            предпочитате да напишете едно правило за управление на всички идентификатори на продукти.
+                            Ефективно искате да промените URL адресите в този формат:</p>
+
+                        <pre>
+                            <code>
+                                http://www.pets.com/show_a_product.php?product_id={a number}
+                            </code>
+                        </pre>
+
+                        <p class="section-annotations">Код.11 Показване на продукт с идентификационен номер <a
+                                class="section-link" href="#link4">[4]</a></p>
+
+
+                        <p>И искате да ги промените така, че да изглеждат така:</p>
+                        <pre>
+                            <code>
+                                http://www.pets.com/products/{a number}/
+                            </code>
+                        </pre>
+
+                        <p class="section-annotations">Код.12 Показване на продукт с идентификационен номер (както
+                            искаме да бъде) <a class="section-link" href="#link4">[4]</a></p>
+
+
+                        <p>За да направите това, ще трябва да използвате "регулярни изрази". Това са шаблони, дефинирани
+                            в специфичен формат, който сървърът може да разбере и обработва по подходящ начин. Типичен
+                            модел за идентифициране на число би изглеждал така: <kbd>[0-9]+</kbd></p>
+
+                        <pre>
+                            <code>
+                                RewriteRule    ^products/([0-9]+)/?$    show_a_product.php?product_id=$1    [NC,L]    # Handle product requests
+                            </code>
+                        </pre>
+
+                        <p class="section-annotations">Код.13 Решение на задачата <a class="section-link"
+                                href="#link4">[4]</a></p>
+
+
+                        <p>Първото нещо, което трябва да забележим е , че сме поставили нашия шаблон в скоби
+                            <strong>([0-9]+)</strong>. Това ни позволява да направим <strong>обратна препратка
+                            </strong>(препратка към) този раздел от URL адреса в следващия раздел за
+                            <kbd>заместване</kbd>. <strong>"$1"</strong> в заместването казва на Apache да постави
+                            всичко, което съответства на шаблона в скоби от колонка 2, в URL адреса в този момент.
+                            Можете да имате <strong>много обратни препратки</strong> и те са номерирани в реда, в който
+                            сме ги записали едно след друго в колонка 2.</p>
+
+                        <p>
+                            И така, това правило за презаписване сега ще означава, че Apache пренасочва всички заявки за
+                            <kbd>domain.com/products/{number}/</kbd> към <kbd>show_a_product.php?product_id={same
+                                number}</kbd>. <a class="section-link" href="#link4">[4]</a>
+                        </p>
+                    </div>
+
+                    <div>
+                        <h2 id="my_xp_with_rewrite">Тестваме това , което научихме досега</h2>
+
+                        <p>Въведете накрая на URL-а от , който достъпвате текущия реферат този край
+                            <strong>/surprice</strong> (съответен пример:
+                            <kbd>https://w20ref.w3c.fmi.uni-sofia.bg/referat/85298_1_38/index.php?action=view&back=review/surprice</kbd>)
+                        </p>
+
+                        <p>Ако има <strong>#neshto_si</strong> накрая го изтрийте и тогава добавете
+                            <strong>/surprice</strong>, пример:</p>
+
+                        <pre>
+                            <code>
+                                https://w20ref.w3c.fmi.uni-sofia.bg/referat/85254_4_69/index.php?action=view&back=review#neshto-si
+                                
+                                трябва да стане на :
+
+                                https://w20ref.w3c.fmi.uni-sofia.bg/referat/85254_4_69/index.php?action=view&back=review
+                            
+                            </code>
+                        </pre>
+
+                        <p>Ако не се е счупило и ви е показало картинка на пингвин , значи сте били изненадани хД. </p>
+
+                        <p><strong>Как го направихме обаче? : </strong></p>
+
+                        <pre>
+                            <code>
+                                RewriteEngine On    # Turn on the rewriting engine
+                                RewriteRule    ^referat.html/surprice/?$   img/surprice.png  [NC,L]    # Handle requests for "/surprice"
+                            </code>
+                        </pre>
+                        <p class="section-annotations">Код.14 Обработване на заявките към <strong>/surprice</strong></p>
+
+                        <p>В <strong>.htaccess</strong> файлът в главната директория на нашия реферат записахме горното
+                            правило , което казва на уеб сървърът ни да замества всички заявки към
+                            <strong>/surprice</strong> с <strong>img/surprice.png</strong> , което в конкретния случай е
+                            просто да препрати потребителя към картинка <kbd>surprice.png</kbd> в задължителната
+                            директория от скелета на реферата <kbd>img/</kbd>. </p>
+
+
+                    </div>
+
+                    <div>
+                        <h2 id="regex">Регулярни изрази</h2>
+
+                        <p>Пълното ръководство за регулярните изрази е доста извън обхвата на тoзи реферат. Важни точки
+                            обаче, които трябва да запомните са, че <strong>целият шаблон</strong> от колонка 2 в
+                            <strong>RewriteRule</strong> редът се третира като регулярен израз, така че винаги
+                            внимавайте със знаци, които са <kbd>"специални"</kbd> знаци в регулярните изрази.
+
+                            Най-често това е, когато хората използват <kbd><strong> '.' (точка) </strong></kbd> в своя
+                            модел. В шаблонът това всъщност означава <strong>"който и да е символ"</strong> , а не
+                            буквална точка и така, ако искате да съпоставите точка (и само точка), ще трябва да
+                            <kbd>"избягате"</kbd> от знака - да го предшествате с друг специален знак <strong>'\'
+                                (обратна наклонена черта)</strong>, която казва на Apache да приеме следващия знак за
+                            буквален.</p>
+
+                        <p> Например, това правило за пренаписване не само ще съответства на URL адреса
+                            <kbd>rss.xml</kbd>, както е предвидено - то ще съответства и на <kbd>rss1xml</kbd>,
+                            <kbd>rss-xml</kbd> и т.н. :</p>
+                        <pre>
+                            <code>
+                                RewriteRule    ^rss.xml$    rss.php    [NC,L]    # Change feed URL
+                            </code>
+                        </pre>
+                        <p class="section-annotations">Код.15 Регулярен израз с '.' (точка) <a class="section-link"
+                                href="#link4">[4]</a></p>
+
+                        <p>Използвайки регулярни изрази, е възможно да търсите всякакви шаблони в URL адресите и да ги
+                            пренаписвате, когато съвпадат. Таблица с основните специални символи и примери към тях може
+                            да открието по-долу: </p>
+
+                        <table id="regex_table">
+                            <tbody class="table-body">
+                                <tr class="head">
+                                    <th>Знак</th>
+                                    <th>Значение</th>
+                                    <th>Пример</th>
+                                </tr>
+                                <tr>
+                                    <td>.</td>
+                                    <td>Който и да е символ</td>
+                                    <td>c.t ще съвпадне с cat,cot,cut, .. </td>
+                                </tr>
+                                <tr>
+                                    <td>+</td>
+                                    <td>един или повече от предния символ/шаблон</td>
+                                    <td>а+ ще съвпадне с а,аа,ааа, ..</td>
+                                </tr>
+                                <tr>
+                                    <td>*</td>
+                                    <td>нула или повече от предния символ/шаблон</td>
+                                    <td>а* съвпада с всички примери като с + , но и съвпада с празния стринг ''</td>
+                                </tr>
+                                <tr>
+                                    <td>?</td>
+                                    <td>нула или веднъж от предния символ/шаблон</td>
+                                    <td>colou?r ще съвпадне с color, colour</td>
+                                </tr>
+                                <tr>
+                                    <td>\</td>
+                                    <td>еспейпни следващия символ</td>
+                                    <td>\. ще съвпадне с . (точка) , а не със \(който и да е символ)</td>
+                                </tr>
+                                <tr>
+                                    <td>^</td>
+                                    <td>начало на низ или "отрицателно", ако e в началото на диапазон</td>
+                                    <td>^a ще съвпадне с низ, който започва с a</td>
+                                </tr>
+                                <tr>
+                                    <td>$</td>
+                                    <td>край на низ</td>
+                                    <td>а$ ще съвпадне с низ , който завършва на а</td>
+                                </tr>
+                                <tr>
+                                    <td>( )</td>
+                                    <td>улавя група от символи в този ред в скобите</td>
+                                    <td>(ab)+ ще съвпадне с ababab , като използвахме и + , за едно или повече срещания
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>[ ]</td>
+                                    <td>клас от символи - съвпада с един от символите вътре</td>
+                                    <td>c[aou]t ще съвпадне с cat, cot, cut</td>
+                                </tr>
+                                <tr>
+                                    <td>[^ ]</td>
+                                    <td>отрицателен клас от символи - съвпада с , който да е символ различен от тези в
+                                        класа</td>
+                                    <td>c[^/]t ще съвпадне с cat , c=t , но не и c/t</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p class="section-annotations">Таблица.1 Основни специални символи в регулярни изрази <a
+                                class="section-link" href="#link11">[11]</a></p>
+                    </div>
+
+
+                    <div>
+                        <h2 id="flags">Флагове</h2>
+                        <p>Флаговете се добавят в края на правило за пренаписване, за да кажат на Apache как да
+                            интерпретира и обработва правилото. Те могат да се използват, за да се каже на Apache да
+                            третира правилото като нечувствително към главни и малки букви, да спре обработката на
+                            правила, ако текущото съвпада, или различни други опции. Те са разделени със запетая и се
+                            съдържат в квадратни скоби <kbd>[ . , . , ]</kbd>. Ето списък на флаговете с техните
+                            значения (тази информация е включена в <a class="section-link"
+                                href="https://cheatography.com/davechild/cheat-sheets/mod-rewrite/"
+                                target="_blank">cheatsheet</a> , така че няма нужда да се опитвате да ги научите всички
+                            ).</p>
+
+                        <ul>
+                            <li>
+                                <p><strong>C</strong> (свързан със следващото правило )</p>
+                            </li>
+                            <li>
+                                <p><strong>CO=cookie</strong> (задаване на специфична бисквитка)</p>
+                            </li>
+                            <li>
+                                <p><strong>E=var:value</strong> (задаване на стойност на променлива на средата)</p>
+                            </li>
+                            <li>
+                                <p><strong>F</strong> (забранен - изпраща 403 заглавка до потребителя)</p>
+                            </li>
+                            <li>
+                                <p><strong>G</strong> (изчезнал - вече не съществува)</p>
+                            </li>
+                            <li>
+                                <p><strong>H=handler</strong> (задава обработчик)</p>
+                            </li>
+                            <li>
+                                <p><strong>L</strong> (последен - спира обработката на правилата)</p>
+                            </li>
+                            <li>
+                                <p><strong>N</strong> (следващ - продължава обработката на правилата)</p>
+                            </li>
+                            <li>
+                                <p><strong>NC</strong> (без значение на големината на буквите )</p>
+                            </li>
+                            <li>
+                                <p><strong>NE</strong> (без ескейпване на специалните символи в URL )</p>
+                            </li>
+                            <li>
+                                <p><strong>NS</strong> (игнорира това правило, ако заявката е подзаявка )</p>
+                            </li>
+                            <li>
+                                <p><strong>P</strong> (прокси - т.е. Apache да вземе съдържанието на отдалеченото място,
+                                    зададено в секцията за заместване и да го върне)</p>
+                            </li>
+                            <li>
+                                <p><strong>PT</strong> (пропуска - използва се при обработка на URL-и с допълнителни
+                                    обработчици, например mod_alias)</p>
+                            </li>
+                            <li>
+                                <p><strong>R</strong> (временно пренасочване към нов URL )</p>
+                            </li>
+                            <li>
+                                <p><strong>R=301</strong> (постоянно пренасочване към нов URL )</p>
+                            </li>
+                            <li>
+                                <p><strong>QSA</strong> (добавя заявката на заявката към заместения URL)</p>
+                            </li>
+                            <li>
+                                <p><strong>S=x</strong> (пропуска следващите x правила)</p>
+                            </li>
+                            <li>
+                                <p><strong>T=mime-type</strong> (задава зададения mime тип) <a class="section-link"
+                                        href="#link4">[4]</a></p>
+                            </li>
+
+                        </ul>
+                    </div>
+                    <div>
+                        <h2 id="conditions">Състояния</h2>
+
+                        <p>Правилата за пренаписване могат да бъдат предшествани от едно или повече условия за
+                            пренаписване и те могат да бъдат нанизани заедно. Това може да ви позволи да прилагате само
+                            определени правила към подмножество от заявки. Лично аз използвам това най-често, когато
+                            прилагам правила към поддомейн или алтернативен домейн, тъй като условията за пренаписване
+                            могат да се изпълняват спрямо различни критерии, не само спрямо URL адреса. Ето един пример:
+                        </p>
+
+                        <pre>
+                            <code>
+                                RewriteCond %{HTTP_HOST} ^addedbytes.com [NC]
+                                RewriteRule ^(.*)$ http://www.addedbytes.com/$1 [L,R=301]
+                            </code>
+                        </pre>
+                        <p class="section-annotations">Код.16 Пренаписване на URL с състояние <a class="section-link"
+                                href="#link4">[4]</a></p>
+                        <p>
+                            Правилото за пренаписване по-горе пренасочва всички заявки, независимо за какво, към един и
+                            същ URL адрес на <kbd>www.addedbytes.com</kbd> . Без условието това правило би създало
+                            цикъл, като всяка заявка съответства на това правило и се изпраща обратно към себе си.
+                            Правилото обаче е предназначено да пренасочва само заявки, в които липсва URL частта
+                            <kbd>www</kbd> , а условието, предхождащо правилото, гарантира, че това ще се случи.</p>
+
+                        <p>Условието действа по подобен начин на правилото. Започва с <kbd>"RewriteCond"</kbd>, за да
+                            каже на <kbd>mod_rewrite</kbd>, че този ред се отнася за условие. След това е това, което
+                            всъщност трябва да се тества, а след това шаблонът за тестване. И накрая, флаговете в
+                            квадратни скоби, същите като при <kbd>RewriteRule</kbd>.</p>
+
+                        <p>Низът за тестване (втората част от условието) може да бъде множество различни неща. Можете да
+                            тествате заявения домейн, както в примера по-горе, или можете да тествате използвания
+                            браузър, препращащия URL (обикновено използван за предотвратяване на hotlinks), IP адреса на
+                            потребителя или различни други неща</p>
+                        <p>Шаблонът е почти абсолютно същият като този, използван в <kbd>RewriteRule</kbd>, с няколко
+                            малки изключения. Шаблонът може да не се тълкува като шаблон, ако започва с конкретни знаци.
+                            Това означава, че ако искате да използвате шаблон на регулярен израз, започващ с &lt;, &gt;
+                            или тире, трябва да ги <kbd>ескейпнете</kbd> с обратната наклонена черта.
+                        </p>
+
+                        <p>Условията за пренаписване могат, подобно на правилата за пренаписване, да бъдат последвани от
+                            флагове и има само две. <kbd>"NC"</kbd> , както при правилата, казва на Apache да третира
+                            условието като нечувствително към главни и малки букви. Другият наличен флаг е
+                            <kbd>"OR"</kbd>. Ако искате да приложите правило само ако едно от двете условия съвпада,
+                            вместо да повтаряте правилото, добавете флага <kbd>„ИЛИ“</kbd> към първото условие и ако
+                            някое от двете условия съвпада, ще се приложи следното правило. Поведението по подразбиране,
+                            ако дадено правило е предшествано от множество условия, е, че то се прилага само ако всички
+                            правила съвпадат. <a class="section-link" href="#link4">[4]</a></p>
+                    </div>
+
+
+
+                    <div>
+                        <h2 id="resources">Източници</h2>
+                        <p id="link1"><i>[1]</i> Paul Tero, "Introduction To URL Rewriting" [<a class="resource-link"
+                                href="https://www.smashingmagazine.com/2011/11/introduction-to-url-rewriting/"
+                                target="_blank">
+                                https://www.smashingmagazine.com/2011/11/introduction-to-url-rewriting/</a> ], последно
+                            посетено на 15.04.2023.
+                        </p>
+                        <p id="link2"><i>[2]</i> Computer Hope , "URL" (definition) [ <a
+                                href="https://www.computerhope.com/jargon/u/url.htm#url" target="_blank"
+                                class="resource-link">https://www.computerhope.com/jargon/u/url.htm#url</a> ], последно
+                            посетено на
+                            15.04.2023.</p>
+                        <p id="link3"><i>[3]</i> URL Wikipedia page (in English) [<a
+                                href="https://en.wikipedia.org/wiki/URL" target="_blank"
+                                class="text-item">https://en.wikipedia.org/wiki/URL</a>],
+                            последно посетено на 15.04.2020.
+                        </p>
+                        <p id="link4"><i>[4]</i> Dave Child , 'URL Rewriting for Beginners', публикуван 04.08.2008
+                            [<a href="https://aloneonahill.com/blog/url-rewriting-for-beginners/" target="_blank"
+                                class="text-item">https://aloneonahill.com/blog/url-rewriting-for-beginners/</a> ],
+                            последно посетено на 15.04.2023.
+                        </p>
+                        <p id="link5"><i>[5]</i> Apache HTTP Server Wikipedia page (in English) [ <a
+                                href="https://en.wikipedia.org/wiki/Apache_HTTP_Server" target="_blank"
+                                class="text-item">https://en.wikipedia.org/wiki/Apache_HTTP_Server</a> ], последно
+                            посетено на 16.04.2020.</p>
+                        <p id="link6"><i>[6]</i> Страница за изтегляне на XAMPP от уебсайта "SourceForge" [ <a
+                                href="https://sourceforge.net/projects/xampp/" target="_blank"
+                                class="text-item">https://sourceforge.net/projects/xampp/</a> ], последно
+                            посетено на 16.04.2023.</p>
+                        <p id="link7"><i>[7]</i> Екранна снимка от въпрос със заглавие 'how to configuring a xampp web
+                            server for different root directory' в "StackOverflow" , публикуван 19.09.2013 [ <a
+                                href="https://stackoverflow.com/questions/18902887/how-to-configuring-a-xampp-web-server-for-different-root-directory"
+                                target="_blank"
+                                class="text-item">https://stackoverflow.com/questions/18902887/how-to-configuring-a-xampp-web-server-for-different-root-directory</a>
+                            ],
+                            последно посетено на 16.04.2020.
+                        </p>
+                        <p id="link8"><i>[8]</i> Видео наръчник със заглавие 'how to enabling mod rewrite in xampp',
+                            публикуван 01.08.2019,
+                            с потребителско име: 'Cairocoders' [ <a href="https://www.youtube.com/watch?v=kumXPmWTXpY"
+                                target="_blank" class="text-item">https://www.youtube.com/watch?v=kumXPmWTXpY</a> ],
+                            последно посетено на 16.04.2023.
+                        </p>
+                        <p id="link9"><i>[9]</i> Официална документация на Apache HTTP server '.htaccess files' [ <a
+                                href="https://httpd.apache.org/docs/current/howto/htaccess.html" target="_blank"
+                                class="text-item">https://httpd.apache.org/docs/current/howto/htaccess.html</a> ],
+                            последно посетено
+                            на 16.04.2023.</p>
+                        <p id="link10"><i>[10]</i> Видео наръчник със заглавие 'Configure Apache using .htaccess files',
+                            публикуван 16.07.2017,
+                            с потребителско име: 'Dave Hollingworth' [ <a
+                                href="https://www.youtube.com/watch?v=0Vz2cUHBDPA" target="_blank"
+                                class="text-item">https://www.youtube.com/watch?v=0Vz2cUHBDPA</a> ],
+                            последно посетено на 16.04.2023.</p>
+                        <p id="link11"><i>[11]</i> Официална документация на Apache HTTP server 'Apache mod_rewrite
+                            Introduction' , 'Regular Expressions' [ <a
+                                href="https://httpd.apache.org/docs/2.4/rewrite/intro.html" target="_blank"
+                                class="text-item">https://httpd.apache.org/docs/2.4/rewrite/intro.html</a> ],
+                            последно посетено на 17.04.2023.
+                        </p>
+                    </div>
+                    <footer>
+                        <author>Изготвил: Lorem, ipsum dolor sit amet , фн.: 00000</author>
+
+                        <a class="back_btn" href="#header">НАЧАЛО</a>
+                    </footer>
+</body>
+
+</html>

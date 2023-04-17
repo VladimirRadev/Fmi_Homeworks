@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Позициониране</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/styles.css">	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="scripts.js"></script>
+</head>
+<body>
+	<div id="wrapper">
+
+        <!-- Sidebar -->
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+			<div class="navbar-header">
+				<a id="menu-toggle" href="#" class="navbar-toggle">
+					<span class="sr-only">Toggle navigation</span>
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+				</a>
+				<a class="navbar-brand">Позициониране</a>
+			</div>
+			<div id="sidebar-wrapper" class="sidebar-toggle">
+				<ul class="sidebar-nav">
+					<li>
+			      		<h3>Съдържание</h3>
+			    	</li>
+			    	<li>
+			      		<a href="#anch1">Въведение</a>
+			    	</li>
+			    	<li class="panel-group">
+			      		<a href="#submenus" data-toggle="collapse">Свойството position</a>
+			      		<div id="submenus" class="panel-collapse collapse">
+			      			<ul>
+			      				<li><a href="#static">Static</a></li>
+			      				<li><a href="#relative">Relative</a></li>
+			      				<li><a href="#absolute">Absolute</a></li>
+			      				<li><a href="#fixed">Fixed</a></li>
+			      			</ul>
+			      		</div>
+			    	</li>
+			    	<li>
+			      		<a href="#anch3">Други практики</a>
+			    	</li>
+			    	<li>
+			      		<a href="#anch4">Източници</a>
+			    	</li>
+			  	</ul>
+			</div>
+		</nav>
+
+
+        <!-- Page content -->
+        <div id="page-content-wrapper">
+            <div class="page-content inset" data-spy="scroll" data-target="#spy">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2 id="anch1" class="anchor">Въведение</h2>
+                        <p>Когато изграждаме интерфейса на един софтуерен продукт, от изключителна важност е всеки елемент да заема точно определно място. Понякога това е задача, която изисква познания как би се държал дадения елемент в различни ситуации. Спрямо конкретната му функция, можем да изпълним тази задача по различни начини. Сега ще се запознаете с някои от основните методи.</p>
+                    </div>
+                    <div class="col-md-12">
+                        <h2 id="anch2">Свойството position и различните му стойности</h2>
+                        <p>По подразбиране, елементите в един <code>html</code> документ се разполагат в реда на тяхното деклариране. Поради различните нужди и желани крайни резултати, това последователно подреждане може да бъде манипулирано. Сега ще разгледаме четирите най-използвани стойности на css свойството <code>position</code>:</p>
+                    	<ul>
+                    		<li id="static" class="mt20">
+                    			<h3  class="anchor"><code>static</code> - Статично позициониране на елемент</h3>
+                    			<p>Първата стойност, която ще разгледаме е тази, която е “default”-ната за всеки елемент. Ето и пример, за това как се декларира тя:</p>
+                    			<pre><code>
+.example-selector {
+    position: static;
+}
+                    			</code></pre>
+                    			<p>В повечето случаи, употребата на стойността <code>static</code> е напълно излишна, защото тя се задава по подразбиране, ако няма друга декларирана стойност. По този начин, елементите в <code>html</code>документа ще се подредят в последователен ред, в зависимост от това дали те са блокови (пр. <code>div</code>) или вградени/inline (пр. <code>span</code>).</p>
+                    		</li>
+                    		<li id="relative" class="mt20">
+                    			<h3 class="anchor"><code>relative</code> - Релативно позициониране на елемент</h3>
+                    			<p>Другата стойност, която е изключително честа и удобна в прилагането на различни техники, е <code>relative</code>.</p>
+                    			<pre><code>
+.example-selector {
+    position: relative;
+}
+                    			</code></pre>
+                    			<p>Сигурно се питате каква е разликата между тези две стойности? Ако имаме два елемента, единия дефиниран с <code>{ position: static; }</code>, а другия с <code>{ position: relative; }</code>, то те биха се държали напълно еднакво. Разликата обаче е, че когато има релативно разположен обект, то на него могат да му се декларират други четири CSS свойства - <code>top</code>, <code>right</code>, <code>bottom</code>, <code>left</code>. По този начин можем да манимулираме първоначално зададената му позиция. За целта нека разгледаме примерния код <a href="#link1">[1]</a> по-долу и след това да го анализираме.</p>
+                    			<div class="examples row">
+                        			<div class="col-md-6">
+                        				<img src="images/example1.png">
+                        				<p><small>фигура 1: Дефиниране на четири блокови елемента и стилове към тях <a href="#link1">[1]</a></small></p>
+                        			</div>
+                        			<div class="col-md-6">
+                        				<img src="images/example_1_result.png" style="width: inherit;">
+                        				<p><small>фигура 2: Резултат от изпълнението на кода от фигура 1. <a href="#link2">[2]</a></small></p>
+                        			</div>
+                        		</div>
+                        		<p>Първо, тези кутии ще се покажат в реда, в който сме ги декларирали, като всяко ще бъде на нов ред, заради блоковия елемент <code>div</code>. Но както се вижда на изображението от крайния резултат, втората кутия е изместена от очакваното място. Това се дължи на дефинираните й две свойства <code>{ top: 20px; left: 20px; }</code>. По този начин, тази кутия е изместена отгоре и отляво с по 20px от първоначалното си място. Тук е важно да припомним, че координатната система, която се използва и спрямо която се разполагат и изчисляват позициите на елементите, е с център горе вляво (както още се нарича, Картезийска координатна система в 4-ти квадрант или още Декартова). Подобен ефект ще се получи, ако използваме и други две свойства <code>margin-top</code>, <code>margin-left</code>, но тяхната употреба ще повлияе на останалите елементи. Когато задаваме позицията на някой елемент със стойности на <code>top</code>, <code>right</code>, <code>bottom</code> и <code>left</code>, не влияем по никакъв начин на разположението на околните елементи.</p>
+                    		</li>
+                    		<li id="absolute" class="mt20">
+                    			<h3 class="anchor"><code>absolute</code> - Абсолютно позициониране на елемент</h4
+                    			<p>Идва ред и на третата възможна стойност и примера за нейната декларация:</p>
+                    			<pre><code>
+.example-selector {
+    position: absolute;
+}
+                    			</code></pre>
+                    			<p>При позициониране на някой елемент със стойност <code>absolute</code>, то той е напълно отделен от нормалния поток на елементите и подобно на релативното разполагане на обекти, може да му се прилагат вертикални и хоризонтални отклонения с помощта на вече познатите <code>top</code>, <code>right</code>, <code>bottom</code> и <code>left</code>. Но разбира се, съществува някаква разлика между тези стойности. Както казахме, абсолютно позиционираният елемент е напълно отделен от нормалния поток на елементите. Това означава, че околните елементи ще се държат така, сякаш той дори не е там. Когато прилагаме методи да отместим обект, с деклариран <code>{ position: relative; }</code>, ние приемаме за изходна точка мястото, където е неговото първоначално подреждане в потока на елементи. Ето тук идва и съществената разлика на тези две стойности (<code>relative</code>, <code>absolute</code>), защото при отместване на обект с абсолютна стойност, неговото отместване ще бъде спрямо прозореца на браузъра (т.е. <code>html</code> тага). Но това може да се промени като декларираме <code>{ position: relative; }</code> на елемента-контейнер, спрямо който искаме да отместим елемента. По този начин се създава нов контекст на позициониране. За да стане по-ясно това, нека разгледаме следния код и прилежащия резултат от него <a href="#link2">[2]</a>:</p>
+                    			<div class="examples row">
+                        			<div class="col-md-6">
+                        				<img src="images/example2.png">
+                        				<p><small>фигура 3: Дефиниране на четири блокови елемента, разположени в общ блоков контейнер и стилове към тях <a href="#link3">[3]</a></small></p>
+                        			</div>
+                        			<div class="col-md-6">
+                        				<img src="images/example_2_result.png">
+                        				<p><small>фигура 4: Резултат от изпълнението на кода от фигура 3. <a href="#link4">[4]</a></small></p>
+                        			</div>
+                        		</div>
+                        		<p>В този пример, оранжевия контейнер, в който са разположени четирите кутии, е дефиниран с <code>{ position: relative; }</code> като по този начин създава новото контекстово пространство. Със сега зададените стойности за отместване на зелената кутия <code>{ top: 40px; left: 40px; }</code>, тя се отмества спрямо този контейнер. Ако на този контейнер не му беше зададена релативна стойност или изобщо го нямаше, то зелената кутия щеше да се отмести със същите стойности, но спрямо прозореца на браузъра и би изглеждало така:</p>
+                        		<div class="examples row">
+                        			<div class="col-md-6">
+                        				<img src="images/example_2_result_2.png">
+                        				<p><small>фигура 5: Резултат от изпълнението на кода от фигура 3, но без промяна на контекството пространство. <a href="#link5">[5]</a></small></p>
+                        			</div>
+                        		</div>
+                        		<p>Важно е отново да се отбележи, че с този начин на отместване на елементите, не сме засегнали никой от останалите в документа.</p>
+                    		</li>
+                    		<li id="fixed" class="mt20">
+                    			<h3 class="anchor"><code>fixed</code> - Фиксирано позициониране на елемент</h3>
+                    			<p>Ето и последната стойнот на свойството <code>relative</code>.</p>
+                    			<pre><code>
+.example-selector {
+    position: fixed;
+}
+                    			</code></pre>
+                    			<p>Спрямо спецификацията си, фиксирано разположените елементи попадат така да се каже в категорията на абсолютно позициониране. Тези два типа са много подобни, но с две ключови разлики:
+                    			<ul>
+                    				<li>при фиксираните елементи контекстовото пространство е винаги началото на документаи и не се влияе от предшествани релативно дефинирани контейнери, както при абсолютно зададени елементи.</li>
+                    				<li>точно заради това фиксирано място, когато се scroll-ва страницата, този елемент няма да се мести заедно с останалото съдържание на документа.</li>
+                    			</ul>
+                    			</p>
+                    			<p>Нека разгледаме следния примерен код и резултат, за да се онагледи дефиницията:</p>
+                    			<div class="examples row">
+                    				<div class="col-md-8">
+                    					<img src="images/example3.png">
+                    					<p><small>фигура 6: Деклариране на документ с фиксиран елемент в него и стилове</small></p>
+                    				</div>
+                    				<div class="col-md-4">
+                    					<img src="images/example_3_fixed_element.png">
+                    					<p><small>фигура 7: Резултат от изпълнението на кода от фигура 6.</small></p>
+                    				</div>
+                    			</div>
+                    			<p>В горната част на страницата се показва полупрозрачна лента с текст в нея и тя ще остане там дори и при scroll-ване на страницата. Това е постигнато като на този контейнер е деклариран с  <code>{ position: fixed; }</code>. Друг пример за фиксирано позициониране е този документ и страничното навигационно меню към него. То е декларирано с <code>{ position: fixed; }</code> и по този начин независимо от скролването на страницата, винаги се намира на едно и също удобно за употреба място.</p>
+                    		</li>
+                    	</ul>
+                    </div>
+                    <div class="col-md-12">
+                    	<h2 id="anch3"  class="anchor">Други практики</h2>
+                    	<p>Възможностите да позиционираме един елемент в <code>html</code> пространството са доста и не толкова лесни за реализация. Вече споменахме основните стойности за CSS свойството <code>position</code>, нова далеч не са единствените начини. Съществуват още три стойности, които могат да се използват, но за тях все още няма добра поддръжка от браузърите. Това са стойностите <code>center</code>, <code>page</code> и <code>sticky</code>. За тях само ще споменеми, но ако желаете да се запознаете с тях по-подробно, повече информация има на следните линкове <a href="#link6">[6]</a>, <a href="#link7">[7]</a>, <a href="#link8">[8]</a></p>
+                    	<p>Друг начин да подредим елементите е с помощта на други основни CSS свойства - <code>margin</code>, <code>padding</code>. Употребата на тези две свойства понякога е доста объркваща. В общи линии, елементите в CSS са представени като правоъгълна кутия, чийто размер се определя от елементите <code>content</code>, <code>padding</code>, <code>border</code> и <code>margin</code>.</p>
+                    	<div class="examples row">
+                    		<div class="col-md-4">
+                    			<img src="images/content.png">
+                    			<p><small>фигура 8: Диаграма на отделните слоеве на един елемент</small></p>
+                    		</div>
+                    	</div>
+                    	<p>Както се вижда от диаграмата на фигура 8, <code>padding</code> е слой, който се простира от границата на елемента до неговото съдържание и се използва, за да се контролира това разстояние. Стойността, която му се приложи ще влияе само на този елемент. Ако желаем да постигнем някво разграничаване между отделните елементи, то за тази цел трябва да изпозлваме свойството <code>margin</code>. <a href="#link9">[9]</a> Но това понеже е тема на друг реферат, няма да влизам в големи подробности за тънкостите при изпозлването на тези свойства. </p>
+                    	<p>Друг метод, който в последно време започва да се изпозлва масово е <code>{ display: flex; }</code> <a href="#link10">[10]</a></p>
+                    </div>
+                    <div class="col-md-12">
+                        <h2 id="anch4"  class="anchor">Източници</h2>
+                        <p id="link1">[1] Louis Lazaris, "CSS Positioning: A Comprehensive Look", линк: [ <a href="http://blog.teamtreehouse.com/css-positioning" target="_blank">http://blog.teamtreehouse.com/css-positioning</a> ], последно посетен на 26.04.2017г.</p>
+                        <p id="link2">[2] Louis Lazaris, "CSS Positioning: A Comprehensive Look", линк: [ <a href="http://blog.teamtreehouse.com/css-positioning" target="_blank">http://blog.teamtreehouse.com/css-positioning</a> ], последно посетен на 26.04.2017г.</p>
+                        <p id="link3">[3] Louis Lazaris, "CSS Positioning: A Comprehensive Look", линк: [ <a href="http://blog.teamtreehouse.com/css-positioning" target="_blank">http://blog.teamtreehouse.com/css-positioning</a> ], последно посетен на 26.04.2017г.</p>
+                        <p id="link4">[4] Louis Lazaris, "CSS Positioning: A Comprehensive Look", линк: [ <a href="http://blog.teamtreehouse.com/css-positioning" target="_blank">http://blog.teamtreehouse.com/css-positioning</a> ], последно посетен на 26.04.2017г.</p>
+                        <p id="link5">[5] Louis Lazaris, "CSS Positioning: A Comprehensive Look", линк: [ <a href="http://blog.teamtreehouse.com/css-positioning" target="_blank">http://blog.teamtreehouse.com/css-positioning</a> ], последно посетен на 26.04.2017г.</p>
+                        <p id="link6">[6] Статия в W3C, линк: [ <a href="https://www.w3.org/TR/css-position-3/#center-positioning" target="_blank">https://www.w3.org/TR/css-position-3/#center-positioning</a> ], последно посетен на 27.04.2017г.</p>
+                        <p id="link7">[7] Статия в W3C, линк: [ <a href="https://www.w3.org/TR/css-position-3/#page-positioning" target="_blank">https://www.w3.org/TR/css-position-3/#page-positioning</a> ], последно посетен на 27.04.2017г.</p>
+                        <p id="link8">[8] Статия в CSS-TRICKS, линк: [ <a href="https://css-tricks.com/almanac/properties/p/position/#article-header-id-5" target="_blank">https://css-tricks.com/almanac/properties/p/position/#article-header-id-5</a> ]</p>
+                        <p id="link9">[9] Статия в Sitepoint, линк: [ <a href="https://www.sitepoint.com/set-css-margins-padding-cool-layout-tricks/" target="_blank">https://www.sitepoint.com/set-css-margins-padding-cool-layout-tricks/</a> ], последно посетен на 27.04.2017г.</p>
+                        <p id="link10">[10] линк: [ <a href="https://scotch.io/tutorials/a-visual-guide-to-css3-flexbox-properties" target="_blank">https://scotch.io/tutorials/a-visual-guide-to-css3-flexbox-properties</a> ], последно посетен на 27.04.2017г.</p>
+                        <p>[обща информация] линк: [<a href"https://www.w3schools.com/css/css_positioning.asp" target="_blank">https://www.w3schools.com/css/css_positioning.asp</a> ], последно посетен на 27.04.2017г.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,47 @@
+[1] https://www.w3schools.com/css/css_boxmodel.asp
+[2] https://www.w3schools.com/cssref/css3_pr_box-sizing.asp
+[3] https://learn.shayhowe.com/html-css/opening-the-box-model/
+
+Кратко нагледно представяне на основните свойства, 
+свързани с кутийния модел в CSS, 
+и предимно устно разяснение на тяхната употреба и синтаксис.
+
+Display
+ -block
+ -inline
+ -inline-block
+ -none
+Box Model
+Content
+Padding
+ -top
+ -bottom
+ -right
+ -left
+Border
+ -style
+ -color
+ -radius
+Margin
+Box sizing
+ -content-box
+ -padding-box
+ -border-box
+
+Визуално представяне на свойствата:
+ -display:block
+ -display:inline
+ -display:inline-block
+ -display:none
+ -всички свойства на box model
+ -width
+ -height
+ -padding - с 1, 2, 3 или 4 параметъра
+ -border
+ -border-bottom
+ -border-bottom-width
+ -border-radius
+ -border-top-right-radius
+ -margin
+ -box-sizing:content-box
+ -box-sizing:border-box

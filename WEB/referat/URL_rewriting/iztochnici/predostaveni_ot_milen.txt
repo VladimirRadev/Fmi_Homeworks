@@ -1,0 +1,10 @@
+[1.] http://coding.smashingmagazine.com/2011/11/02/introduction-to-url-rewriting/
+[2.] http://www.computerhope.com/jargon/u/url.htm
+[3.] https://www.addedbytes.com/articles/for-beginners/url-rewriting-for-beginners/
+[4.] https://www.huify.com/blog/what-is-a-url-and-how-does-it-work
+[5.] http://en.wikipedia.org/wiki/Rewrite_engine
+[6] https://docs.oracle.com/javase/tutorial/networking/urls/definition.html
+[7] http://httpd.apache.org/docs/2.0/misc/rewriteguide.html
+[8] https://aloneonahill.com/blog/url-rewriting-for-beginners/
+[9] http://httpd.apache.org/docs/current/rewrite/intro.html 
+[10] https://en.wikipedia.org/wiki/URL

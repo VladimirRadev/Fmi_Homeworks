@@ -1,0 +1,9 @@
+1. apache cordova?
+
+2. config.xml
+
+3. plugins
+
+4. osnovnoto predimstvo na cordova (multi platform)
+
+5. Посочете грешното: (Cordova НЕ е open source - грешно)

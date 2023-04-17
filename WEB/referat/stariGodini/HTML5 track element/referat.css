@@ -1,0 +1,22 @@
+.article-meta {
+	width: 25%;
+	margin: 0px 10px 0px 0px;
+	float: left;
+}
+
+.content {
+	width: 70%;
+	margin: 0;
+	float: left;
+}
+
+.navButton {
+	border: 2px solid #1f6ae2;
+	padding: 5px;
+	margin: 5px;
+	text-decoration: none;
+	display: block;
+	border-radius: 10px;
+	font-weight: bold;
+	color: blue;
+}

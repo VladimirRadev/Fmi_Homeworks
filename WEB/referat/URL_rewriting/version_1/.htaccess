@@ -1,0 +1,2 @@
+RewriteEngine On    # Turn on the rewriting engine
+RewriteRule    ^referat.html/surprice/?$   img/surprice.png  [NC,L]    # Handle requests for "pet-care"

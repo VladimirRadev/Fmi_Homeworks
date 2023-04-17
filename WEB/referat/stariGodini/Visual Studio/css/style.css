@@ -1,0 +1,80 @@
+/* navigation */
+div.menu {
+    display: inline-block;
+    font-size: 16px;
+    font-family: Arial;
+    top: 20px;
+    position: fixed;
+    font-weight:700;
+    float:left;
+}
+
+div.menu a {
+    font-weight: bold;
+    display:block;
+    border:1px solid rgb(253, 236, 236);
+    margin: 0 0 -1px;
+    padding: 8px 14px;
+    color: indigo;
+    cursor: pointer;
+}
+
+div.menu a:first-child {
+    border-radius: 6px 6px 0 0;
+}
+
+div.menu a:last-child {
+    border-radius: 0 0 6px 6px;
+}
+
+div.menu a:link {
+    text-decoration: none;
+    color: indigo;
+}
+
+div.menu a:visited {
+    text-decoration: none;
+    color: indigo;
+}
+
+div.menu a.selected {
+    text-decoration: none;
+    color: white;
+    background-color: indigo;
+}
+
+div.menu a:hover:not(.selected), a:focus:not(.selected) {
+    text-decoration: none;
+    background-color: rgba(214, 174, 174, 0.1);
+    color: indigo;
+}
+
+/* document */
+header{
+    font-size:32px;
+    font-weight:700;
+    color: rgb(111, 103, 102);
+}
+h2 {
+    margin-bottom: 0px;
+    color: rgb(111, 103, 102);
+}
+
+p {
+    text-align: justify;
+}
+
+li {
+    text-align: justify;
+}
+
+ol >li, ul>li {
+    margin-bottom: 5px;
+}
+
+br {
+   display: block;
+   margin: 3px 0;
+   content: " ";
+}
+
