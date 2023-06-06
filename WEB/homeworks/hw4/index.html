@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HW4</title>
+    <script src="./script.js" defer></script>
+</head>
+<body>
+    <header>
+        <div>
+            <h1>Регистрация</h1>
+        </div>
+    </header>
+    <main>
+        <form id="registration-form">
+            <div>
+                <label for="username">Потребителско име</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div>
+                <label for="name">Име и фамилия</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div>
+                <label for="email">Имейл</label>
+                <!-- i putted this with type="text" because i wanted to validate this field through js , not through html (as it was mentioned in the problem description) -->
+                <input type="text" id="email" name="email" required>
+            </div>
+            <div>
+                <label for="password">Парола</label>
+                <input type="text" id="password" name="password" required>
+            </div>
+            <div>
+                <p>Адрес:</p>
+                <section>
+                    <div>
+                        <label for="street">Улица</label>
+                        <input type="text" id="street" name="street">
+                    </div>
+                    <div>
+                        <label for="city">Град</label>
+                        <input type="text" id="city" name="city">
+                    </div>
+                    <div>
+                        <label for="postal-code">Пощенски код</label>
+                        <input type="text" id="postal-code" name="postal-code">
+                    </div>
+
+                </section>
+            </div>
+            <div>
+                <button id="register-btn">Регистрирай ме</button>
+            </div>
+        </form>
+
+    </main>
+    <footer id="validation-messages">
+        <p id="invalid-data" class="error"></p>
+        <p id="existing-user" class="error"></p>
+        <p id="success"></p> 
+
+    </footer>
+</body>
+</html>
