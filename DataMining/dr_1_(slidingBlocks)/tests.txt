@@ -1,0 +1,110 @@
+8
+-1
+1 2 3
+4 5 6
+0 7 8
+
+Output: 
+2
+left
+left
+
+Input: 
+8
+8
+1 2 3
+4 5 6
+0 7 8
+
+Output: 
+2
+left
+left
+
+
+Input: 
+8
+4
+1 2 3
+4 5 0
+6 7 8
+Output: 
+1
+right
+
+
+Input: 
+8
+0
+1 2 0
+3 4 5
+6 7 8
+
+Output: 
+2
+right
+right
+
+
+Input: 
+8
+-1
+1 2 3
+4 5 6
+7 8 0
+Output: 
+0
+
+
+
+Input: 
+8
+-1
+1 2 3
+4 5 6
+8 7 0
+Output: 
+-1
+
+Input:
+15
+-1
+1 2 3 4
+5 6 7 8
+9 10 11 12
+13 14 0 15
+Output: 
+1
+left
+
+
+Input: 
+8
+-1
+6 5 3
+2 4 8
+7 0 1
+Output:
+21
+left
+down
+down
+right
+right
+up
+left
+up
+right
+down
+left
+down
+left
+up
+right
+down
+right
+up
+up
+left
+left
+
