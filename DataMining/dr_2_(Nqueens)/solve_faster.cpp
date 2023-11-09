@@ -213,6 +213,59 @@ void print()
         std::cout << '\n';
     }
 }
+void nonAutomatedTestingPrinting()
+{
+    if (n == 1)
+    {
+        std::cout << "*\n";
+    }
+    else if (n == 2 || n == 3)
+    {
+        std::cout << "-1\n";
+    }
+    else if(n<=100)
+    {
+        solve();
+        time(&end);
+        print();
+    }
+    else
+    {
+       solve();
+       time(&end);
+       double time_taken = double(end - start);
+       std::cout << std::fixed << std::setprecision(2) << time_taken << std::endl;
+    }
+
+}
+void automatedTestingPrinting()
+{
+    if (n == 1)
+    {
+        std::cout << "0\n";
+    }
+    else if (n == 2 || n == 3)
+    {
+        std::cout << "-1\n";
+    }
+    else if(n<=100)
+    {
+        solve();
+        time(&end);
+        for (size_t i = 0; i < n; i++)
+        {
+            std::cout<<nQueens[i]<<' ';
+        }
+        std::cout<<'\n';
+    }
+    else
+    {
+       solve();
+       time(&end);
+       double time_taken = double(end - start);
+       std::cout << std::fixed << std::setprecision(2) << time_taken << std::endl;
+    }
+}
 int main()
 {
     std::ios_base::sync_with_stdio(false);
@@ -220,25 +273,7 @@ int main()
     srand(time(0));
     std::cin >> n;
     time(&start);
-    if (n == 1)
-    {
-        std::cout << "*\n";
-        return 0;
-    }
-    else if (n == 2 || n == 3)
-    {
-        std::cout << "\n";
-        return 0;
-    }
-    else
-    {
-        solve();
-        time(&end);
-    }
-
-    double time_taken = double(end - start);
-    std::cout << "Time taken by program is : " << std::fixed << std::setprecision(2) << time_taken << " sec " << std::endl;
-
-    //print();
+    //nonAutomatedTestingPrinting();
+    automatedTestingPrinting();
     delete nQueens, queensPerRow, queensPerD1, queensPerD2;
 }
