@@ -234,7 +234,7 @@ void nonAutomatedTestingPrinting()
        solve();
        time(&end);
        double time_taken = double(end - start);
-       std::cout << std::fixed << std::setprecision(2) << time_taken << std::endl;
+       std::cout << std::fixed << std::setprecision(2) << time_taken << '\n';
     }
 
 }

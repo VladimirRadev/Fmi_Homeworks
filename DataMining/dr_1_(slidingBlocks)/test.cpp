@@ -84,10 +84,8 @@ public:
     }
     void preComputeH(const std::pair<int, int> &old_, const std::pair<int, int> &new_, const int &val)
     {
-        int oldManhh = (abs(gsIndexes[val].first - old_.first) + abs(gsIndexes[val].second - old_.second)) + 
-                        (abs(gsIndexes[0].first - new_.first) + abs(gsIndexes[0].second - new_.second));
-        int newManhh = (abs(gsIndexes[val].first - new_.first) + abs(gsIndexes[val].second - new_.second)) +
-                        (abs(gsIndexes[0].first - old_.first) + abs(gsIndexes[0].second - old_.second));
+        int oldManhh = (abs(gsIndexes[val].first - old_.first) + abs(gsIndexes[val].second - old_.second));
+        int newManhh = (abs(gsIndexes[val].first - new_.first) + abs(gsIndexes[val].second - new_.second));
 
         newManhh <= oldManhh ? this->h -= abs(oldManhh - newManhh) : this->h += abs(oldManhh - newManhh);
     }
@@ -101,6 +99,10 @@ int h(int **matrix)
     {
         for (int j = 0; j < n; j++)
         {
+            if(matrix[i][j]==0)
+            {
+                continue;
+            }
             //|x-x'| + |y - y'|
             sum += abs(gsIndexes[matrix[i][j]].first - i) + abs(gsIndexes[matrix[i][j]].second - j);
         }

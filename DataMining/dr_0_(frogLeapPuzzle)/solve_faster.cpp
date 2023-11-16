@@ -127,15 +127,15 @@ int main()
     time(&start); 
     dfs(board,size/2);
     // print stack
-    while (!printRes.empty())
-    {
-        std::cout<<printRes.top()<<"\n";
-        printRes.pop();
-    }
+    // while (!printRes.empty())
+    // {
+    //     std::cout<<printRes.top()<<"\n";
+    //     printRes.pop();
+    // }
     time(&end);
 
     double time_taken = double(end - start); 
-    //std::cout << "Time taken by program is : " << std::fixed << std::setprecision(2) << time_taken << " sec " << std::endl;
+    std::cout << "Time taken by program is : " << std::fixed << std::setprecision(2) << time_taken << " sec " << std::endl;
     return 0;
     
 }
