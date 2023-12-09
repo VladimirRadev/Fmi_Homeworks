@@ -14,8 +14,8 @@ clock_t start,end;
 // global vars for the n random points
 int n;
 // should be even
-const int POPULATION_SIZE = 10;
-const int GENERETIONS_COUNT = 20000;
+const int POPULATION_SIZE = 50;
+const int GENERETIONS_COUNT = 10000;
 std::pair<double, double> *coordinates;
 double **distances;
 double lower_bound = -10000;
@@ -578,8 +578,8 @@ int main()
     srand(time(NULL));
 
     
-    n_random_points_run();
-    //uk_run();
+    //n_random_points_run();
+    uk_run();
 
     end=clock();
     double time_taken = ((double)end-start)/CLOCKS_PER_SEC; 
