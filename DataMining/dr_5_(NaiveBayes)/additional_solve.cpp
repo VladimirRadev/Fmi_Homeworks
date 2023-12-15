@@ -4,7 +4,9 @@
 #include <vector>
 #include <cmath>
 #include <utility>
-
+#include <cstdlib>
+#include <algorithm>
+#include <ctime> 
 const int CVk=10;
 std::vector<std::string>data;
 
@@ -90,9 +92,12 @@ int countPredictedCorrect(const int& testSetStartInd)
     return result;
 
 }
+// random generator function:
+int myrandom (int i) { return std::rand()%i;}
 
 int main()
 {
+    std::srand ( unsigned ( std::time(0) ) );
     std::ifstream data_in("congressional+voting+records/house-votes-84.data",std::ios::in);
     std::string row;
     while (std::getline(data_in,row,'\n'))
@@ -190,6 +195,8 @@ int main()
     double sumAccuracy=0.0;
     double curAccuracy=0.0;
     
+    std::random_shuffle ( data.begin(), data.end(), myrandom);
+
     for (size_t i = 0; i < CVk; i++)
     {
         testSetStartIndex=i*testSetSize;
