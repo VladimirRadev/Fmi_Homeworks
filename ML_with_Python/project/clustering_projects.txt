@@ -1,0 +1,36 @@
+    -5. https://www.kaggle.com/datasets/arjunbhasin2013/ccdata/data ( Credit Card Dataset for Clustering
+    -4. https://www.kaggle.com/datasets/harrywang/wine-dataset-for-clustering/data ( Wine Dataset for Clustering)
+    -3. https://www.kaggle.com/datasets/uom190346a/e-commerce-customer-behavior-dataset/data (E-commerce Customer Behavior Dataset)
+    -2. https://www.kaggle.com/datasets/mansithummar67/flipkart-product-review-dataset/data (Flipkart Products Review Dataset)
+    -1. https://www.kaggle.com/datasets/imnikhilanand/heart-attack-prediction/data?select=data.csv ( Heart Attack Prediction) 
+     0. https://www.kaggle.com/datasets/imakash3011/customer-personality-analysis  (Customer Personality Analysis)
+
+
+    1.Customer Segmentation with E-commerce Data: This dataset encompasses transaction history, customer demographics, and purchase behavior from an e-commerce platform, enabling clustering based on customer purchasing patterns and preferences.
+
+    2.Customer Segmentation with Social Media Data: This dataset integrates customer social media activities with their purchase history, permitting clustering based on customer social interactions and purchasing behaviors.
+
+    3.Customer Segmentation with Product Reviews: This dataset incorporates product reviews alongside customer attributes, allowing for clustering based on customer sentiment and product preferences.
+
+    4.Customer Segmentation with Web Analytics Data: This dataset incorporates web analytics data, such as browsing history and website interactions, with customer information, enabling clustering based on customer online behavior and preferences.
+
+    5.Telecom Customer Churn Prediction with Call Detail Records: This dataset combines call detail records with customer information, enabling clustering to identify customer segments with high churn risk and develop targeted retention strategies.
+
+    6.Hospital Patient Clustering with Health Data: This dataset includes patient health records, such as demographics, diagnoses, and treatment history, allowing for clustering to identify patient groups with similar health profiles and clinical needs.
+
+    7.Bank Customer Segmentation with Financial Data: This dataset incorporates customer financial data, such as account balances, transactions, and investments, with customer attributes, enabling clustering based on customer financial behavior and risk profiles.
+
+    8.Educational Data for Student Clustering: This dataset contains information about students' academic performance, extracurricular activities, and demographic data, allowing for clustering to identify student groups with similar academic profiles and learning needs.
+
+    9.Retail Customer Segmentation with Market Basket Analysis: This dataset combines customer purchase history with product information, enabling clustering based on co-purchased items and customer preferences.
+
+    10.Social Media Data for Community Detection: This dataset involves social media interactions and user information, allowing for clustering to identify groups of users with common interests and communication patterns.
+
+
+    Правим -5:
+	Хубави тетрадки: 
+	- https://www.kaggle.com/code/rakshithanil/advancedclustering-k-means-dbscan-som-eda/notebook
+	- https://www.kaggle.com/code/abduulrahmankhalid/customer-segmentation-with-pca-k-means-interpreted/notebook
+	- https://www.kaggle.com/code/atom1991/credit-card-customer-segmentation
+	- https://www.kaggle.com/code/nezukokamaado/marketing-department-case-study
+	-
