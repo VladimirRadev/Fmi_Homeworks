@@ -296,14 +296,17 @@ def main():
 
 def draw_best_solution(title, assignments, subplot_number):
     plt.subplot(1, 2, subplot_number)
-    plt.subplots_adjust(wspace=0.3) 
-
+    plt.subplots_adjust(wspace=0.3)
+    x_ = []
+    y_ = []
+    color_ = []
     for i, point in enumerate(points):
-        x = from_cartesian_to_comp(point.x, True)
-        y = from_cartesian_to_comp(point.y, False)
-        index = assignments[i]
-        
-        plt.scatter(x, y, c=get_color(index), marker='o')
+        x_.append(from_cartesian_to_comp(point.x, True))
+        y_.append(from_cartesian_to_comp(point.y, False))
+        color_.append(get_color(assignments[i]))
+        #color_.append(assignments[i])
+
+    plt.scatter(x_, y_, c=color_, marker="o")
 
     # for i, centroid in enumerate(centroids):
     #     x = from_cartesian_to_comp(centroid.x, True)

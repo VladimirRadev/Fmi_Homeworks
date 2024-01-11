@@ -2,7 +2,7 @@ import random
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-
+import time as t
 magic_num = 1000
 
 scaled_max_x = 0
@@ -10,11 +10,13 @@ scaled_min_x = 0
 scaled_max_y = 0
 scaled_min_y = 0
 
+
 class Point:
     def __init__(self, x, y):
         self.x = x
         self.y = y
         self.centroid_index = -1
+
 
 points = []
 centroids = []
@@ -24,9 +26,12 @@ point_distances = []
 width = 1820
 height = 980
 
+start_time=0
+end_time=0
+
 def init_x():
     global scaled_max_x, scaled_min_x, max_x, min_x
-    
+
     max_point = max(points, key=lambda p: p.x)
     min_point = min(points, key=lambda p: p.x)
 
@@ -35,9 +40,10 @@ def init_x():
     min_x = min_point.x
     scaled_min_x = min_point.x * magic_num
 
+
 def init_y():
     global scaled_max_y, scaled_min_y, max_y, min_y
-    
+
     max_point = max(points, key=lambda p: p.y)
     min_point = min(points, key=lambda p: p.y)
 
@@ -46,22 +52,32 @@ def init_y():
     min_y = min_point.y
     scaled_min_y = min_point.y * magic_num
 
+
 def init_min_max():
     init_x()
     init_y()
 
+
 def compute_squared_distance(a, b):
     return (a.x - b.x) ** 2 + (a.y - b.y) ** 2
+
 
 def calculate_intra_cluster_distance():
     total_distance = 0
 
     for centroid in centroids:
-        cluster_points = [point for point in points if point.centroid_index == centroids.index(centroid)]
-        cluster_distance = sum(compute_squared_distance(point, centroid) for point in cluster_points)
+        cluster_points = [
+            point
+            for point in points
+            if point.centroid_index == centroids.index(centroid)
+        ]
+        cluster_distance = sum(
+            compute_squared_distance(point, centroid) for point in cluster_points
+        )
         total_distance += cluster_distance
 
     return total_distance
+
 
 def calculate_inter_cluster_distance():
     total_distance = 0
@@ -73,28 +89,37 @@ def calculate_inter_cluster_distance():
 
     return total_distance
 
+
 def init_random_centroids(K):
     global centroids, scaled_max_x, scaled_min_x, scaled_max_y, scaled_min_y
-    
+
     random.seed()
-    
+
     for _ in range(K):
-        x = (random.random() * magic_num / magic_num) * (scaled_max_x - scaled_min_x) + scaled_min_x
-        y = (random.random() * magic_num / magic_num) * (scaled_max_y - scaled_min_y) + scaled_min_y
+        x = (random.random() * magic_num / magic_num) * (
+            scaled_max_x - scaled_min_x
+        ) + scaled_min_x
+        y = (random.random() * magic_num / magic_num) * (
+            scaled_max_y - scaled_min_y
+        ) + scaled_min_y
 
         centroid = Point(x / magic_num, y / magic_num)
         centroids.append(centroid)
 
+
 def find_minimal_distance_from_point_to_centroid(point_index):
     min_distance = compute_squared_distance(points[point_index], points[0])
-    
+
     for centroid_index in indexes_of_points_centroids:
-        cur_distance = compute_squared_distance(points[point_index], points[centroid_index])
+        cur_distance = compute_squared_distance(
+            points[point_index], points[centroid_index]
+        )
 
         if cur_distance < min_distance:
             min_distance = cur_distance
 
     return min_distance
+
 
 def choose_new_centroid():
     sum_all_point_distances = sum(point_distances)
@@ -106,11 +131,12 @@ def choose_new_centroid():
         if val < cur_sum / sum_all_point_distances:
             return i
 
+
 def init_centroids_plus_plus(K):
     global centroids, indexes_of_points_centroids
-    
+
     indexes_of_points_centroids.clear()
-    
+
     # Pick the first centroid randomly
     point_index = random.randint(0, len(points) - 1)
     indexes_of_points_centroids.add(point_index)
@@ -121,16 +147,20 @@ def init_centroids_plus_plus(K):
         # Compute distances from each point to all centroids
         distances = []
         for i in range(len(points)):
-            min_distance_to_centroids = min(compute_squared_distance(points[i], points[j]) for j in indexes_of_points_centroids)
+            min_distance_to_centroids = min(
+                compute_squared_distance(points[i], points[j])
+                for j in indexes_of_points_centroids
+            )
             distances.append(min_distance_to_centroids)
-        
+
         # Select the point with the farthest distance as the new centroid
         point_index = np.argmax(distances)
-        
+
         indexes_of_points_centroids.add(point_index)
         counter += 1
 
     centroids = [Point(points[i].x, points[i].y) for i in indexes_of_points_centroids]
+
 
 def find_nearest_centroid(p):
     min_distance = compute_squared_distance(p, centroids[0])
@@ -145,6 +175,7 @@ def find_nearest_centroid(p):
             nearest_centroid_index = i
 
     return nearest_centroid_index
+
 
 def change_centroid(centroid_index):
     sum_x, sum_y = 0, 0
@@ -170,9 +201,10 @@ def change_centroid(centroid_index):
 
     return True
 
+
 def clusterize_and_track_best(solution_type):
     global centroids, best_kmeans_assignments, best_kmeans_pp_assignments, best_kmeans_intra, best_kmeans_inter, best_kmeans_pp_intra, best_kmeans_pp_inter
-    
+
     to_continue = True
     is_changed = False
 
@@ -201,75 +233,96 @@ def clusterize_and_track_best(solution_type):
         best_kmeans_pp_inter = inter_cluster_distance
         best_kmeans_pp_assignments = assignments.copy()
 
+
 def from_cartesian_to_comp(coord, is_x):
-    return (coord - min_x) * width / (max_x - min_x) if is_x else (max_y - coord) * height / (max_y - min_y)
+    return (
+        (coord - min_x) * width / (max_x - min_x)
+        if is_x
+        else (max_y - coord) * height / (max_y - min_y)
+    )
+
 
 def get_color(index):
     colors = [
-        'red',
-        'blue',
-        'green',
-        'magenta',
-        'yellow',
-        'black',
-        'cyan',
-        'gray',
-        'turquoise',
-        'purple',
+        "red",
+        "blue",
+        "green",
+        "magenta",
+        "yellow",
+        "black",
+        "cyan",
+        "gray",
+        "turquoise",
+        "purple",
+        "#FF003E",  # Indian Red
+        "#FF6347",  # Coral
+        "#F08080",  # Light Coral
+        "#FA8072",  # Salmon
+        "#D95B43",  # Light Salmon
+        "#C02942",  # Carmine
+        "#D2691E",  # Indian Pink
+        "#8B4513",  # Dark Salmon
+        "#E9967A",  # Light Coral
+        "#F4A460",  # Coral
     ]
-    
+
     return colors[index % len(colors)]
+
 
 def draw_k_means(title, subplot_number):
     plt.subplot(1, 2, subplot_number)
-    plt.subplots_adjust(wspace=0.3) 
+    plt.subplots_adjust(wspace=0.3)
 
     for i, point in enumerate(points):
         x = from_cartesian_to_comp(point.x, True)
         y = from_cartesian_to_comp(point.y, False)
         index = point.centroid_index
-        
-        plt.scatter(x, y, c=get_color(index), marker='o')
+
+        plt.scatter(x, y, c=get_color(index), marker="o")
 
     for i, centroid in enumerate(centroids):
         x = from_cartesian_to_comp(centroid.x, True)
         y = from_cartesian_to_comp(centroid.y, False)
-        
-        plt.scatter(x, y, c=get_color(i), marker='^', s=100)
+
+        plt.scatter(x, y, c=get_color(i), marker="^", s=100)
 
     plt.title(title)
 
+
 def k_means(K):
     global centroids, best_kmeans_intra, best_kmeans_inter
-    
+
     init_random_centroids(K)
     clusterize_and_track_best("kmeans")
 
+
 def k_means_plus_plus(K):
     global centroids, indexes_of_points_centroids, point_distances, best_kmeans_pp_intra, best_kmeans_pp_inter
-    
+
     init_centroids_plus_plus(K)
     clusterize_and_track_best("kmeans++")
 
+
 def main():
-    global points, max_x, max_y, min_x, min_y, best_kmeans_assignments, best_kmeans_pp_assignments, best_kmeans_intra, best_kmeans_inter, best_kmeans_pp_intra, best_kmeans_pp_inter
+    global points, max_x, max_y, min_x, min_y, best_kmeans_assignments, best_kmeans_pp_assignments, best_kmeans_intra, best_kmeans_inter, best_kmeans_pp_intra, best_kmeans_pp_inter , start_time,end_time
 
     K = int(input("Enter K: "))
     num_restarts = int(input("Enter the number of restarts: "))
     fname = input("\nEnter file name: ")
-      # Read the file and populate the points list
-    with open(fname, 'r') as file:
+    start_time=t.time()
+    # Read the file and populate the points list
+    with open(fname, "r") as file:
         for line in file:
             x, y = map(float, line.split())
             points.append(Point(x, y))
-    
+
     # Initialize min_x and min_y here
     init_min_max()
 
-    best_kmeans_intra = float('inf')
-    best_kmeans_inter = float('-inf')
-    best_kmeans_pp_intra = float('inf')
-    best_kmeans_pp_inter = float('-inf')
+    best_kmeans_intra = float("inf")
+    best_kmeans_inter = float("-inf")
+    best_kmeans_pp_intra = float("inf")
+    best_kmeans_pp_inter = float("-inf")
 
     for restart in range(num_restarts):
         centroids.clear()
@@ -280,7 +333,7 @@ def main():
 
     results = [
         ["K-means", best_kmeans_intra, best_kmeans_inter],
-        ["K-means++", best_kmeans_pp_intra, best_kmeans_pp_inter]
+        ["K-means++", best_kmeans_pp_intra, best_kmeans_pp_inter],
     ]
     columns = ["Algorithm", "Intra-cluster Distance", "Inter-cluster Distance"]
 
@@ -292,26 +345,41 @@ def main():
     centroids.clear()
     draw_best_solution("K-means++", best_kmeans_pp_assignments, 2)
 
+    end_time=t.time()
+    print("\nElapsed time: {} seconds".format(end_time-start_time))
     plt.show()
+
 
 def draw_best_solution(title, assignments, subplot_number):
     plt.subplot(1, 2, subplot_number)
-    plt.subplots_adjust(wspace=0.3) 
+    plt.subplots_adjust(wspace=0.3)
 
+    x_ = []
+    y_ = []
+    color_ = []
     for i, point in enumerate(points):
-        x = from_cartesian_to_comp(point.x, True)
-        y = from_cartesian_to_comp(point.y, False)
-        index = assignments[i]
-        
-        plt.scatter(x, y, c=get_color(index), marker='o')
+        x_.append(from_cartesian_to_comp(point.x, True))
+        y_.append(from_cartesian_to_comp(point.y, False))
+        color_.append(get_color(assignments[i]))
+        #color_.append(assignments[i])
+
+    plt.scatter(x_, y_, c=color_, marker="o")
+
+    # for i, point in enumerate(points):
+    #     x = from_cartesian_to_comp(point.x, True)
+    #     y = from_cartesian_to_comp(point.y, False)
+    #     index = assignments[i]
+
+    #     plt.scatter(x, y, c=get_color(index), marker='o')
 
     # for i, centroid in enumerate(centroids):
     #     x = from_cartesian_to_comp(centroid.x, True)
     #     y = from_cartesian_to_comp(centroid.y, False)
-        
+
     #     plt.scatter(x, y, c=get_color(i), marker='^', s=100)
 
     plt.title(title)
+
 
 if __name__ == "__main__":
     main()
