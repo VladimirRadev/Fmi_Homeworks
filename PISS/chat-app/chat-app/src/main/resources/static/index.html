@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <title>Spring Boot WebSocket Chat Application</title>
+    <link rel="stylesheet" href="/css/main.css" />
+</head>
+<body>
+<noscript>
+    <h2>Sorry! Your browser doesn't support Javascript</h2>
+</noscript>
+<div id="username-page">
+    <div class="username-page-container">
+        <form id="registerForm">
+            <div class="form-group">
+                <h1 class="title">Registration for Chatroom</h1>
+                <label for="username">Username:</label>
+                <input type="text" id="username" name=username" required class="form-control">
+
+                <label for="fullname">Full Name:</label>
+                <input type="text" id="fullname" name="fullname" required class="form-control">
+
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required class="form-control">
+
+                <label for="repeat-password">Repeat Password:</label>
+                <input type="password" id="repeat-password" name="password-again" required class="form-control">
+
+                <a href="javascript:void(0);" onclick="loadLogin()">
+                    Already have an account?</a>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="accent username-submit">Enter Chatroom</button>
+            </div>
+        </form>
+        <!--<form id="usernameForm" name="usernameForm">
+            <div class="form-group">
+                <input type="text" id="name" placeholder="Username" autocomplete="off" class="form-control" />
+            </div>
+            <div class="form-group">
+                <button type="submit" class="accent username-submit">Start Chatting</button>
+            </div>
+        </form>-->
+    </div>
+</div>
+
+<div id="login-page" class="hidden">
+    <div class="username-page-container">
+        <form id="loginForm">
+            <h1 class="title">Login to Chatroom</h1>
+            <div class="form-group">
+                <label for="usernameLogin">Username:</label>
+                <input type="text" id="usernameLogin" name=usernameLogin" required class="form-control">
+
+                <label for="passwordLogin">Password:</label>
+                <input type="password" id="passwordLogin" name="passwordLogin" required class="form-control">
+            </div>
+            <div class="form-group">
+                <button type="submit" class="accent username-submit">Enter Chatroom</button>
+            </div>
+            <a href="javascript:void(0);" onclick="loadRegister()">
+                Don't have an account? Join us now!</a>
+        </form>
+    </div>
+</div>
+
+<div id="chat-page" class="hidden">
+    <div class="chat-container">
+        <div class="chat-header">
+            <h2>ChatRoom</h2>
+        </div>
+        <div class="connecting">
+            Connecting...
+        </div>
+        <ul id="messageArea">
+
+        </ul>
+        <form id="messageForm" name="messageForm">
+            <div class="form-group">
+                <div class="input-group clearfix">
+                    <input type="text" id="message" placeholder="Type a message..." autocomplete="off" class="form-control"/>
+                    <button type="submit" class="primary">Send</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+<script src="/js/main.js"></script>
+</body>
+</html>
