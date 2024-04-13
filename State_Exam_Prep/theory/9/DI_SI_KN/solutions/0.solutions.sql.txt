@@ -1,0 +1,495 @@
+﻿-- 09.2018
+
+-- Примерно решение за Зад. 1 (Септември)
+
+SELECT S.CLASS, MIN(YEAR(DATE)) AS MIN_YEAR, MAX(YEAR(B.DATE)) AS MAX_YEAR, COUNT(DISTINCT B.NAME) AS CNT_BATTLES 
+FROM SHIPS S LEFT JOIN OUTCOMES O ON S.NAME = O.SHIP 
+LEFT JOIN BATTLES B ON B.NAME = O.BATTLE
+WHERE S.CLASS LIKE 'N%'
+GROUP BY S.CLASS;
+
+-- Примерно решение за Зад. 2 (Септември)
+
+SELECT *
+FROM 
+(SELECT O.BATTLE, COUNT(S.NAME) CNT_BB
+FROM CLASSES C JOIN SHIPS S ON C.CLASS=S.CLASS 
+JOIN OUTCOMES O ON S.NAME = O.SHIP
+WHERE C.TYPE = 'bb'
+GROUP BY O.BATTLE) T1
+JOIN
+(SELECT O.BATTLE, COUNT(S.NAME) CNT_BC
+FROM CLASSES C JOIN SHIPS S ON C.CLASS=S.CLASS 
+JOIN OUTCOMES O ON S.NAME = O.SHIP
+WHERE C.TYPE = 'bc'
+GROUP BY O.BATTLE) T2
+ON T1.BATTLE = T2.BATTLE
+AND T1.CNT_BB > T2.CNT_BC;
+
+-- 07.2018
+-- Примерно решение за Зад. 1 (Юли)
+
+SELECT STUDIONAME, MIN(YEAR) AS MIN_YEAR, MAX(YEAR) AS MAX_YEAR, COUNT(*) AS CNT
+FROM MOVIE
+WHERE STUDIONAME LIKE 'M%'  
+GROUP BY STUDIONAME;  
+
+-- Примерно решение за Зад. 2 (Юли)
+
+SELECT NAME, COUNT(*)
+FROM STARSIN, MOVIESTAR
+WHERE NAME = STARNAME 
+AND GENDER = 'F' 
+GROUP BY NAME 
+HAVING COUNT(*) >= ALL (SELECT COUNT(*)  
+                        FROM STARSIN, MOVIESTAR 
+                        WHERE NAME = STARNAME AND GENDER = 'F' 
+                        GROUP BY NAME);
+
+-- 09.2017
+SET SCHEMA DB2SHIPS;
+
+-- 1.
+SELECT NAME, COUNTRY, RESULT
+FROM SHIPS LEFT JOIN OUTCOMES ON NAME=SHIP
+                JOIN CLASSES ON SHIPS.CLASS=CLASSES.CLASS
+WHERE RESULT <> 'sunk' OR RESULT IS NULL;
+
+-- 2.
+SELECT NAME, DISPLACEMENT, NUMGUNS
+FROM CLASSES C JOIN SHIPS S ON S.CLASS=C.CLASS
+WHERE DISPLACEMENT = (SELECT MIN(DISPLACEMENT)
+                      FROM CLASSES)
+AND NUMGUNS = (SELECT MAX(NUMGUNS)
+               FROM CLASSES C1
+               WHERE C1.CLASS=C.CLASS);             
+ -- 3.              
+ SELECT BATTLE, SHIP
+ FROM OUTCOMES O1
+ WHERE NOT EXISTS (SELECT *
+                     FROM OUTCOMES O2
+                     WHERE O1.BATTLE = O2.BATTLE
+                     AND   O1.SHIP <> O2.SHIP);
+ 
+ -- 4. Отговор Б)
+  
+ -- 07.2017             
+ SET SCHEMA DB2MOVIES;  
+                 
+ -- 1.
+ SELECT STUDIONAME, TITLE, YEAR
+ FROM MOVIE M
+ WHERE YEAR = (SELECT  MAX(YEAR)
+               FROM MOVIE
+               WHERE STUDIONAME = M.STUDIONAME); 
+ -- 2.
+ -- Вариант 1
+ SELECT NAME, SUM(LENGTH) AS SUM_LEN
+ FROM MOVIEEXEC JOIN MOVIE ON PRODUCERC#=CERT#
+ WHERE NAME IN ( SELECT NAME
+                 FROM MOVIEEXEC JOIN MOVIE ON PRODUCERC#=CERT#
+                 WHERE YEAR < 1980)
+ GROUP BY NAME;        
+ 
+ -- Вариант 2
+ SELECT NAME, SUM(LENGTH) AS SUM_LEN
+ FROM MOVIEEXEC JOIN MOVIE ON PRODUCERC#=CERT#
+ GROUP BY NAME
+ HAVING MIN(YEAR) < 1980;
+ 
+ -- 3.
+ SELECT STARNAME, TITLE, NAME, NETWORTH
+ FROM STARSIN JOIN MOVIE ON MOVIETITLE = TITLE
+ AND MOVIEYEAR = YEAR
+ JOIN (SELECT CERT#, NETWORTH, NAME
+       FROM MOVIEEXEC
+       WHERE NETWORTH = (SELECT MAX(NETWORTH) FROM MOVIEEXEC)) T
+ ON  T.CERT# = PRODUCERC#;
+ 
+ -- 4. Отговор В)
+ -- Тест
+ SELECT ME.NAME, M.TITLE, M.YEAR
+ FROM MOVIE M, MOVIEEXEC ME, STARSIN S
+ WHERE M.PRODUCERC# = ME.CERT#
+ AND M.TITLE = S.MOVIETITLE
+ AND M.YEAR = S.MOVIEYEAR;
+ 
+ -- Б)
+ SELECT T.NAME, TITLE, YEAR
+ FROM MOVIE M JOIN (SELECT NAME, CERT#
+                    FROM MOVIEEXEC
+                    WHERE EXISTS ( SELECT PRODUCERC#
+                                   FROM MOVIE
+                                   WHERE TITLE = 'Star Wars' )) T
+ ON M.PRODUCERC# = T.CERT#;
+                                   
+ -- В) 
+ SELECT NAME, TITLE, YEAR
+ FROM MOVIE JOIN MOVIEEXEC ON PRODUCERC#=CERT#
+ WHERE CERT# = ANY(SELECT PRODUCERC#
+                   FROM MOVIE
+                   WHERE TITLE = 'Star Wars');
+                   
+                   
+ -- Г)    
+ SELECT DISTINCT NAME, MOVIETITLE, MOVIEYEAR
+ FROM MOVIE JOIN MOVIEEXEC ON PRODUCERC# = CERT#
+ JOIN STARSIN ON YEAR=MOVIEYEAR AND TITLE = MOVIETITLE
+ WHERE CERT# IN (SELECT PRODUCERC#
+                   FROM MOVIE
+                   WHERE TITLE = 'Star Wars');     
+                   
+                            
+ -- 09.2016
+ SET SCHEMA DB2SHIPS;
+ 
+ --1. Отговор Б)
+ -- Тест
+ SELECT C.COUNTRY, S.NAME, O.RESULT
+ FROM CLASSES C, SHIPS S, OUTCOMES O
+ WHERE C.CLASS = S.CLASS
+ AND S.NAME = O.SHIP
+ ORDER BY C.COUNTRY, O.RESULT;
+ 
+ -- Б)
+ SELECT C.COUNTRY, COUNT (O.RESULT)
+ FROM CLASSES C JOIN SHIPS S
+ ON C.CLASS = S.CLASS
+ JOIN OUTCOMES O ON  S.NAME = O.SHIP
+ WHERE RESULT = 'sunk'
+ GROUP BY C.COUNTRY;
+ 
+ -- Г) Не е вярно!
+ SELECT DISTINCT C.COUNTRY, (SELECT COUNT(O.RESULT)
+                             FROM CLASSES C1 JOIN SHIPS S
+                             ON C1.CLASS=S.CLASS
+                             JOIN OUTCOMES O ON S.NAME=O.SHIP
+                             WHERE RESULT='sunk'
+                             AND C1.COUNTRY=C.COUNTRY)
+FROM CLASSES C;      
+
+-- 2. Отговор А)
+
+/*
+
+1)SELECT
+2)FROM
+3)WHERE
+4)GROUP BY
+5)HAVING
+6)ORDER BY
+
+*/
+          
+ -- 07.2016
+ 
+  SET SCHEMA DB2MOVIES;
+  
+  -- 1. Отговор А)
+  
+  -- 2. Отговор Г)
+  
+  
+  -- 09.2015
+  
+  -- 1. Отговор Б)
+  
+  -- 2. Отговор Г)
+    
+  -- 07.2015    
+  
+  -- 1. Отговор Г)
+  
+  -- 2. Отговор Б)
+  -- !
+  SELECT NAME, YEAR(BIRTHDATE), COUNT(DISTINCT STUDIONAME)
+  FROM MOVIESTAR LEFT JOIN STARSIN ON NAME=STARNAME
+  LEFT JOIN MOVIE ON MOVIETITLE = TITLE AND MOVIEYEAR = YEAR
+  GROUP BY NAME, BIRTHDATE -- !
+  HAVING COUNT(TITLE) <= 5;     
+    
+  -- 09.2014  
+  
+  -- 1. Отговор Б)
+  
+  -- 2. Отговор Д)
+  
+  -- 3. 
+  
+ SET SCHEMA FN71100;  
+   
+   
+ CREATE TABLE TEAMS(
+    TNAME VARCHAR(20) NOT NULL PRIMARY KEY,
+    TCOUNTRY CHAR(3),
+    NUM_TF INT CHECK (NUM_TF > 0),
+    NUM_STF INT CHECK (NUM_STF > 0),
+    NUM_YJ INT CHECK (NUM_YJ > 0)
+   ); 
+   
+  INSERT INTO TEAMS (TNAME, NUM_TF, NUM_STF, NUM_YJ)
+  VALUES ('0111', NULL, 1,1); 
+      
+  
+  CREATE TABLE RIDERS (
+   RNAME VARCHAR(50) NOT NULL PRIMARY KEY,
+   RNUM INT CHECK(RNUM > 0),
+   BIRTHDATE DATE,
+   HEIGHT INT CHECK(HEIGHT > 0),
+   WEIGHT DOUBLE CHECK(WEIGHT > 0),
+   RCOUNTRY CHAR(3),
+   RCITY VARCHAR(20),
+   TNAME VARCHAR(20) REFERENCES TEAMS(TNAME)
+   );
+   
+ CREATE TABLE STAGES(
+  SNUMBER INT NOT NULL PRIMARY KEY CHECK( SNUMBER > 0),
+  SDATE DATE,
+  KM DOUBLE CHECK(KM > 0),
+  SCITY VARCHAR(30),
+  ECITY VARCHAR(30));
+  
+ CREATE TABLE TOUR(
+    ID INT NOT NULL PRIMARY KEY CHECK (ID > 0),
+    SNUMBER INT REFERENCES STAGES(SNUMBER),
+    RNAME VARCHAR(50) REFERENCES RIDERS(RNAME),
+    PLACE INT CHECK(PLACE > 0),
+    POINTS INT,
+    TTIME TIME,
+    WHITE INT CHECK(WHITE IN (0,1)),
+    YELLOW INT CHECK(YELLOW IN (0,1)),
+    GREEN INT CHECK (GREEN IN (0,1))
+  ); 
+    
+  -- 07.2014
+  
+  -- 1. Отговор А)
+  
+  -- 2. Отговор B)     
+  
+ SET SCHEMA DB2PC;   
+ 
+ -- В)
+ 
+ SELECT CODE, L.MODEL, SCREEN, P.MAKER
+ FROM LAPTOP L JOIN PRODUCT P
+ ON L.MODEL = P.MODEL
+ WHERE MAKER NOT IN (SELECT MAKER
+                     FROM PRODUCT
+                     WHERE TYPE = 'Printer'
+                     GROUP BY MAKER
+                     HAVING COUNT(*) > 3);
+ -- Г)
+ 
+ SELECT L.CODE, L.MODEL, L.SCREEN, P.MAKER
+ FROM LAPTOP L JOIN PRODUCT P
+ ON L.MODEL = P.MODEL
+ WHERE MAKER IN (SELECT MAKER
+                 FROM PRODUCT
+                 WHERE TYPE = 'Printer'
+                 GROUP BY MAKER
+                 HAVING COUNT(*) <=3);     
+                                
+                     
+ -- 3. 
+ 
+ SET SCHEMA FN71000;      
+ 
+ 
+ CREATE TABLE GROUPS(
+   GNAME CHAR(1) NOT NULL PRIMARY KEY,
+   FPLACE VARCHAR(20), -- FK TEAMS(COUNTRY)
+   SPLACE VARCHAR(20)  -- FK TEAMS(COUNTRY)             
+ );                                      
+ 
+ CREATE TABLE TEAMS(
+    COUNTRY VARCHAR(20) NOT NULL PRIMARY KEY,
+    GNAME CHAR(1) REFERENCES GROUPS(GNAME),
+    NUM_WC INT CHECK(NUM_WC > 0)
+ );   
+  
+ ALTER TABLE GROUPS
+ ADD FOREIGN KEY(FPLACE) REFERENCES TEAMS(COUNTRY);
+ 
+ ALTER TABLE GROUPS
+ ADD FOREIGN KEY(SPLACE) REFERENCES TEAMS(COUNTRY); 
+  
+ 
+ CREATE TABLE PLAYERS(
+  PNAME VARCHAR(50) NOT NULL PRIMARY KEY,
+  TEAM VARCHAR(20)  REFERENCES TEAMS(COUNTRY),
+  NUM_PLAYER INT CHECK(NUM_PLAYER BETWEEN 1 AND 22),
+  NUM_GOALS INT CHECK(NUM_GOALS > 0)
+ );
+  
+  
+ CREATE TABLE MATCHES(
+   MNUMBER INT NOT NULL PRIMARY KEY CHECK(MNUMBER > 0),
+   TSTAGE VARCHAR(8),
+   STAGE CHAR(3),
+   TEAM_HOST VARCHAR(20) REFERENCES TEAMS(COUNTRY),
+   TEAM_GUEST VARCHAR(20) REFERENCES TEAMS(COUNTRY),
+   RESULT CHAR(1),
+   SCORES CHAR(5),
+   DATE DATE,
+   TIME TIME);
+   
+   
+   -- 09.2010
+   
+   -- 1.  Отговор B) 
+   
+   SET SCHEMA DB2MOVIES;
+   
+   SELECT *
+   FROM STARSIN;
+   
+   SELECT NAME
+   FROM MOVIESTAR
+   WHERE NAME NOT IN (SELECT DISTINCT STARNAME
+                      FROM STARSIN 
+                      WHERE MOVIEYEAR > 1970); 
+                      
+   -- 2. Отговор Б)
+   
+   
+    -- 07.2010
+    
+    -- 1. Отговор B)
+    
+    -- 2. Отговор Г)
+    
+    -- 09.2010 (КН)
+    
+    -- 1. Отговор В)
+    
+    SET SCHEMA DB2MOVIES;
+    
+    SELECT * FROM STARSIN;
+    
+    SELECT * FROM MOVIESTAR 
+    LEFT JOIN STARSIN 
+    ON NAME = STARNAME
+    WHERE MOVIETITLE IS NULL ;
+    
+    SELECT DISTINCT NAME
+    FROM MOVIESTAR
+    LEFT JOIN STARSIN
+    ON NAME = STARNAME
+    WHERE GENDER = 'F'
+    AND MOVIETITLE NOT LIKE 'A%';
+    
+    SELECT NAME
+    FROM MOVIESTAR
+    WHERE GENDER = 'F' AND NAME  IN
+    (SELECT DISTINCT STARNAME
+     FROM STARSIN
+     WHERE NOT MOVIETITLE LIKE 'A%');
+     
+     
+    SELECT MS.NAME
+    FROM MOVIESTAR MS
+    WHERE MS.GENDER = 'F'
+    AND NOT EXISTS
+    (SELECT 1
+    FROM STARSIN SI
+    WHERE SI.STARNAME = MS.NAME
+    AND SI.MOVIETITLE LIKE 'A%');
+    
+    -- 2. Отговор A)
+    
+    -- 07.2010 (КН)
+    
+    -- 1. Отговор Б)
+    
+    -- 2. Отговор В)
+    
+    -- 09.2009 (КН)
+    
+     SET SCHEMA DB2SAMPLE;
+     
+     CREATE ALIAS DEPT FOR DEPARTMENT;
+     
+     SELECT * FROM DEPT;
+     SELECT * FROM EMPLOYEE;
+     SELECT * FROM PROJECT;
+     
+     -- А)
+     
+     SELECT T1.DEPTNAME, T1.CNT_PROJ, T2.SUM_RESMGR_SAL
+     FROM 
+     (SELECT D.DEPTNO, D.DEPTNAME, COUNT(*) AS CNT_PROJ
+      FROM PROJECT P, DEPT D
+      WHERE P.DEPTNO = D.DEPTNO
+      GROUP BY D.DEPTNO, D.DEPTNAME) T1,
+     (SELECT P.DEPTNO, SUM(SALARY) SUM_RESMGR_SAL
+      FROM PROJECT P, EMPLOYEE E
+      WHERE P.RESPEMP=E.EMPNO
+      GROUP BY P.DEPTNO) T2
+     WHERE  T1.DEPTNO = T2.DEPTNO; 
+     
+     
+     -- Б)
+     
+    SELECT D.DEPTNAME, COUNT(*) AS CNT_PROJ
+    FROM PROJECT P, DEPT D
+    WHERE P.DEPTNO = D.DEPTNO
+    GROUP BY D.DEPTNO, D.DEPTNAME
+    HAVING COUNT(*) >= ALL (SELECT COUNT(*)
+                            FROM PROJECT
+                            GROUP BY DEPTNO);
+   
+    
+    -- 07.2009 (КН)
+    
+     SET SCHEMA DB2SAMPLE;
+     
+         
+     -- А)
+     
+     SELECT T1.DEPTNAME, T1.CNT_PROJ, T2.SUM_RESMGR_SAL
+     FROM 
+     (SELECT D.DEPTNO, D.DEPTNAME, COUNT(*) AS CNT_PROJ
+      FROM PROJECT P, DEPT D
+      WHERE P.DEPTNO = D.DEPTNO
+      GROUP BY D.DEPTNO, D.DEPTNAME) T1,
+     (SELECT P.DEPTNO, SUM(SALARY) SUM_RESMGR_SAL
+      FROM PROJECT P, EMPLOYEE E
+      WHERE P.RESPEMP=E.EMPNO
+      GROUP BY P.DEPTNO) T2
+     WHERE  T1.DEPTNO = T2.DEPTNO; 
+     
+     
+     -- Б)
+     
+     SELECT DEPTNAME, SUM_RESMGR_SAL
+     FROM DEPT D,
+     (SELECT P.DEPTNO, SUM(SALARY) SUM_RESMGR_SAL
+      FROM PROJECT P, EMPLOYEE E
+      WHERE P.RESPEMP=E.EMPNO
+      GROUP BY P.DEPTNO) T2
+     WHERE  D.DEPTNO =  T2.DEPTNO
+     AND SUM_RESMGR_SAL =  (SELECT SUM(SALARY) 
+                            FROM PROJECT P, EMPLOYEE E
+                            WHERE P.RESPEMP=E.EMPNO
+                            GROUP BY P.DEPTNO
+                            HAVING SUM(SALARY) >= ALL (SELECT SUM(SALARY) 
+                                                       FROM PROJECT P, EMPLOYEE E
+                           							   WHERE P.RESPEMP=E.EMPNO
+                                                       GROUP BY P.DEPTNO));
+      
+    -- 09.2008 (КН)
+    
+    -- 1. Отговор B)
+    
+    -- 2. Отговор D)
+    
+    -- 07.2008 (КН)
+    
+    -- 1. Отговор B)
+   
+                     
+                   
+  
+   
+                                       
