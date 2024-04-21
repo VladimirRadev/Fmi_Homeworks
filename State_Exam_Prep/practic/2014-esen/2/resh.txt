@@ -1,0 +1,17 @@
+Gore dolu taka izlizat poradi tova che ne se znae koi proces koi she izprevari
+1) printf(500) (p1 process)
+2) printf(501) (p1 process)
+			<- END of p1
+3) printf(1002) (ch1ch1 process)
+4) printf(1003) (ch1ch1 process)
+			<- END of ch1ch1
+5) printf(2000) (ch1 process)
+6.1) ako execlp e minalo ch1 process umira i izkarva na konzolata rezultata ot : ls -l
+6.2) ako execlp ne e minalo 
+	printf(2002) (ch1 process)
+7)printf (2003) (ch1 process)
+			<-END of ch1
+
+
+	sled purviq fork -> p1, ch1
+	sled vtoriq fork -> ch1, ch1ch1 
