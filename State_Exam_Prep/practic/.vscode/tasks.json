@@ -7,9 +7,9 @@
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
-                "${workspaceFolder}/2014-esen/4/*.cpp",
+                "${workspaceFolder}/2015-lqto/2/*.cpp",
                 "-o",
-                "${workspaceFolder}/2014-esen/4/4.exe"
+                "${workspaceFolder}/2015-lqto/2/2.exe"
             ],
             "options": {
                 "cwd": "${fileDirname}"
