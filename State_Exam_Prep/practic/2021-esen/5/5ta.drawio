@@ -1,0 +1,100 @@
+<mxfile host="app.diagrams.net" modified="2024-05-20T08:35:14.822Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36" etag="l47R78SN6z4Fcxhsj_Tj" version="24.4.4" type="device">
+  <diagram name="Page-1" id="wEI2WCX_wevpIC57bIjx">
+    <mxGraphModel dx="2933" dy="2494" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="NEMf4QC1jeJ61ISs-GCz-1" value="" style="shape=folder;fontStyle=1;spacingTop=10;tabWidth=40;tabHeight=14;tabPosition=left;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="-590" y="-370" width="890" height="1010" as="geometry" />
+        </mxCell>
+        <mxCell id="NEMf4QC1jeJ61ISs-GCz-2" value="Server" style="html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="-590" y="-400" width="110" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="NEMf4QC1jeJ61ISs-GCz-3" value="" style="shape=folder;fontStyle=1;spacingTop=10;tabWidth=40;tabHeight=14;tabPosition=left;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="300" y="-370" width="520" height="410" as="geometry" />
+        </mxCell>
+        <mxCell id="NEMf4QC1jeJ61ISs-GCz-4" value="" style="shape=folder;fontStyle=1;spacingTop=10;tabWidth=40;tabHeight=14;tabPosition=left;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="305" y="170" width="545" height="470" as="geometry" />
+        </mxCell>
+        <mxCell id="NEMf4QC1jeJ61ISs-GCz-5" value="External server" style="html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="300" y="-400" width="110" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="NEMf4QC1jeJ61ISs-GCz-6" value="DB" style="html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="305" y="140" width="110" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="NEMf4QC1jeJ61ISs-GCz-7" value="" style="shape=folder;fontStyle=1;spacingTop=10;tabWidth=40;tabHeight=14;tabPosition=left;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="-550" y="-290" width="390" height="250" as="geometry" />
+        </mxCell>
+        <mxCell id="NEMf4QC1jeJ61ISs-GCz-8" value="User Managment" style="html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="-550" y="-320" width="110" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="NEMf4QC1jeJ61ISs-GCz-9" value="UI" style="shape=folder;fontStyle=1;spacingTop=10;tabWidth=40;tabHeight=14;tabPosition=left;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="-550" y="50" width="670" height="330" as="geometry" />
+        </mxCell>
+        <mxCell id="NEMf4QC1jeJ61ISs-GCz-10" value="User registration" style="shape=folder;fontStyle=1;spacingTop=10;tabWidth=40;tabHeight=14;tabPosition=left;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="-532.5" y="-240" width="82.5" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="NEMf4QC1jeJ61ISs-GCz-11" value="" style="shape=folder;fontStyle=1;spacingTop=10;tabWidth=40;tabHeight=14;tabPosition=left;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="-350" y="-240" width="160" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="NEMf4QC1jeJ61ISs-GCz-12" value="Authentication" style="html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="-350" y="-270" width="110" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="NEMf4QC1jeJ61ISs-GCz-13" value="Authorization" style="shape=folder;fontStyle=1;spacingTop=10;tabWidth=40;tabHeight=14;tabPosition=left;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="-370" y="-100" width="190" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="NEMf4QC1jeJ61ISs-GCz-14" value="Digital signiture" style="shape=folder;fontStyle=1;spacingTop=10;tabWidth=40;tabHeight=14;tabPosition=left;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="-330" y="-210" width="70" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="NEMf4QC1jeJ61ISs-GCz-15" value="" style="shape=folder;fontStyle=1;spacingTop=10;tabWidth=40;tabHeight=14;tabPosition=left;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="356" y="270" width="244" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="NEMf4QC1jeJ61ISs-GCz-16" value="Security" style="html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="356" y="240" width="110" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="NEMf4QC1jeJ61ISs-GCz-17" value="Password hashing" style="shape=folder;fontStyle=1;spacingTop=10;tabWidth=40;tabHeight=14;tabPosition=left;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="376" y="320" width="70" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="NEMf4QC1jeJ61ISs-GCz-18" value="Data Crypting" style="shape=folder;fontStyle=1;spacingTop=10;tabWidth=40;tabHeight=14;tabPosition=left;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="480" y="320" width="70" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="NEMf4QC1jeJ61ISs-GCz-19" value="" style="shape=folder;fontStyle=1;spacingTop=10;tabWidth=40;tabHeight=14;tabPosition=left;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="350.5" y="470" width="255" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="NEMf4QC1jeJ61ISs-GCz-20" value="Data Manipulation" style="html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="350.5" y="440" width="110" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="NEMf4QC1jeJ61ISs-GCz-22" value="Storing" style="shape=folder;fontStyle=1;spacingTop=10;tabWidth=40;tabHeight=14;tabPosition=left;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="376" y="510" width="70" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="NEMf4QC1jeJ61ISs-GCz-23" value="Extracting" style="shape=folder;fontStyle=1;spacingTop=10;tabWidth=40;tabHeight=14;tabPosition=left;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="500" y="510" width="70" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="NEMf4QC1jeJ61ISs-GCz-24" value="Query executor" style="shape=folder;fontStyle=1;spacingTop=10;tabWidth=40;tabHeight=14;tabPosition=left;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="376" y="580" width="70" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="NEMf4QC1jeJ61ISs-GCz-26" value="Db connection" style="shape=folder;fontStyle=1;spacingTop=10;tabWidth=40;tabHeight=14;tabPosition=left;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="90" y="495" width="200" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="NEMf4QC1jeJ61ISs-GCz-27" value="Synchronization" style="shape=folder;fontStyle=1;spacingTop=10;tabWidth=40;tabHeight=14;tabPosition=left;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="-560" y="495" width="180" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="NEMf4QC1jeJ61ISs-GCz-28" value="Protocol connection" style="shape=folder;fontStyle=1;spacingTop=10;tabWidth=40;tabHeight=14;tabPosition=left;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="120" y="-158.5" width="130" height="119" as="geometry" />
+        </mxCell>
+        <mxCell id="NEMf4QC1jeJ61ISs-GCz-29" value="" style="shape=folder;fontStyle=1;spacingTop=10;tabWidth=40;tabHeight=14;tabPosition=left;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="330" y="-310" width="280" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="NEMf4QC1jeJ61ISs-GCz-30" value="Registries" style="html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="330" y="-340" width="110" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="NEMf4QC1jeJ61ISs-GCz-31" value="" style="shape=folder;fontStyle=1;spacingTop=10;tabWidth=40;tabHeight=14;tabPosition=left;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="330" y="-149" width="270" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="NEMf4QC1jeJ61ISs-GCz-32" value="Healthcare record" style="html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="330" y="-180" width="110" height="50" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
