@@ -1,0 +1,7 @@
+2A) в майн.цпп
+2Б) ДА // moje primerno ediniqt copy constructor da priema const referenciq , a drugiq samo referenciq
+2В) ДА // skrito 5 se podava kato argument na konstructora na foo
+    НЕ // foo(5) vrushta object ot foo , a ne int 
+    ДА // 'a' e 97 w ascii i si se podava kato int
+
+     \ \ \ w test.cpp

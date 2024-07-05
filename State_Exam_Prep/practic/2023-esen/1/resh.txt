@@ -1,0 +1,43 @@
+zad1 
+        1)  
+            
+            int power(int base, unsigned int power)
+            {
+            int result = 1;
+            while(power > 0) {
+                if(power % 2 == 1) {
+                 result = result * base;
+                }
+                power /= 2;
+                base *= base;
+                }
+                return result;
+            }
+        2)
+            10,8,16
+        3) 
+            12345
+            01234
+        4) 
+            12345678 ( zashtoto char* , t.e otmestvane s 1 byte i te sa v hex toest 11 = 16^1*1 + 16^0*1 = 17 + 1 => 18 = 0x12 = 1*16^1+2*16^0)
+                     ( i taka za vsichkite icrementirash s edno)
+        5)
+            char pazi stoinosti ot [-128,127] tui kato e 8bita
+            unsigned char paszi ot [0,255] 
+            toest reshenieto e da promenim tipa taka che da handlnem stoinosta ot subiraemite
+        6)
+            box[i][i] //aei
+            box[i][size-i -1] //ceg
+            box[size-i-1][i] // gec
+
+            for(int i = 0; i < size; ++i)
+            cout << box[0][i]; //abc
+
+            for(int i = 1; i < size; ++i)
+            cout << box[i][size-1]; //fi
+
+            for(int i = size - 2; i >= 0; --i)
+            cout << box[size-1][i]; //hg
+
+            for(int i = size-2; i > 0; --i)
+            cout << box[i][0]; //d

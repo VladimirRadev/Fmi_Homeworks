@@ -1,0 +1,42 @@
+2) 
+
+*)B d;
+A()
+B()
+
+*)B copy = d;
+//kogat ne sum ukazal s inicializirash spisuk da izvika i kopirasht na A , po standart vika def const A()
+A()
+B(B&)
+
+*)A b = d;
+A(A&)
+
+*)A& ref = d;
+нищо, просто се насочва реф към d. не се създава нов обект
+
+*)B arr[2];
+//два пъти се вика дефаулт конструктор на B
+A()
+B()
+A()
+B()
+
+*)f(d);
+A(A&) // opitva se da izvika kopirash konstructor s A& kum d (obekt ot B)
+f(A) // printira tova v f
+~A() // razrushava obekt b ot class A pri izlizane ot funkciqta
+
+*)A* p = new B(d);
+A()
+B(B&)
+
+*)delete p;
+~B()
+~A()
+
+*)d = d;
+op=(B&) // vika se zashtoto d e ot tip B i ot lqvo i otdqsno , zatova se vika op= na klasa B , i po default ne se vika op= na A
+
+*)ref = d;
+op=(A&) //vika se op=(A&) zashtoto ref e ot tip A ne zavisimo che d e obekt ot classs b

@@ -52,7 +52,8 @@
         "deque": "cpp",
         "iomanip": "cpp",
         "xlocmon": "cpp",
-        "xloctime": "cpp"
+        "xloctime": "cpp",
+        "stack": "cpp"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }

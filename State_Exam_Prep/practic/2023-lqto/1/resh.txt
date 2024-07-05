@@ -1,0 +1,52 @@
+zad1 
+    1)
+
+        char* removeWhitespace(char *str)
+        {
+            size_t read = 0, write = 0;
+            while (str[read])
+            {
+                if (isWhitespace(str[read]))
+                    read++;
+                else
+                    str[write++] = str[read++];
+            }
+            str[write] = '\0';
+            return str;
+        }
+    2)
+        red1- 02468
+        red2- 16( 0x10 v hex = 16^1*1 + 0*16^0  = 16 v decimal)
+        red3- 2
+        red4- acc
+    3)
+
+                    void pass(int *arr,
+                    size_t size,
+                    bool &swappedAtLeastOnce)
+            {
+                if (size <= 1)
+                    return;
+                if (arr[0] > arr[1])
+                {
+                    std::swap(arr[0], arr[1]);
+                    swappedAtLeastOnce = true;
+                }
+                pass(arr + 1,
+                        size - 1,
+                    swappedAtLeastOnce);
+            }
+            void bubbleSort(int *arr, size_t size)
+            {
+                bool swappedAtLeastOnce = false;
+                pass(arr, size, swappedAtLeastOnce);
+                if (swappedAtLeastOnce)
+                    bubbleSort(arr, size);
+            }
+
+    4)
+        A: 2.5
+        B: 32 (0b100000)
+        C: 10 (!2 <=> !true <=> false <=> 0 => arr[0])
+        D: 30
+        E: 4

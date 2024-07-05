@@ -1,0 +1,31 @@
+2A)
+	а)false
+	б)false
+	в)true
+	г)труе
+	д)труе
+	е)фалсе
+	ж)труе
+	з)фалсе
+	и)фалсе
+	к)труе
+	л)фалсе
+	м)false
+
+
+2Б)
+	
+	1 -
+		base::base()\n	
+		derived::derived()\n
+		
+	
+	2-
+		derived::f()\n
+
+	3- 
+		base::f()\n"
+	
+	4 - 	
+		base::~base() ( защото не е виртуален деструктора в base, трие часта base от класа derived )
+		base::~base()\n ( извиква се за обекта obj)

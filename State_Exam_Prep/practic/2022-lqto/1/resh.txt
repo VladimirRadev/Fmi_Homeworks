@@ -1,0 +1,23 @@
+1.1) 10;5;5;6;-1 //RED1
+     10;5;6;5;-1 //RED2        
+     10;6;5;5;-1 //RED3
+     10;6;5;5;-1 //RED4
+     10;6;5;5;-1 //RED5
+1.2) Г)
+1.3) bool isEven(unsigned int);
+    bool isOdd(unsigned int n) {
+        if (n == 0) return ____false____;
+        if (n == 1) return ____true____;
+        return isEven(___n - 1_____);
+        }
+    bool isEven(unsigned int n) {
+        if (n == 0) return __true______;
+        if (n == 1) return __false___;
+        return isOdd(_____n - 1____);
+        }
+1.4) shiftvane na lqvo s i , (pr. i = 3 => 1 << 3 = 0b1000 = 2^3 = 8)
+    a)1;2;4;8;16;32;64;128;256;
+    b)1x ( shoto nqma break; pri casevote koeto rezultira do fall through problema
+    , toest she se printira vsichko nadolu sled case 1: , vkluchitelno i ako slojim case 2: pod case 1:)
+    c)0124
+    d)1;2;30;4;

@@ -1,0 +1,31 @@
+zad1
+    1) 
+        red1 - false ( 2 != 3)
+        red2 - true
+        red3 - true
+        red4 - true
+    2)
+        ace
+    3)
+        strcpy(result,s1);
+        strcat(result," ");
+        strcat(result,s2);
+    4)
+            bool g(const char* text, const char* word)
+            {
+                if (!*word) return true;
+                if (!*text) return false;
+                if (*word != *text) return false;
+                return g(text + 1, word + 1);
+            }
+            bool f(const char* text, const char* word)
+            {
+                if (!*word) return true;
+                if (!*text) return false;
+                return g(text, word) ||
+                f(text + 1, word);
+            }
+    5)
+        gec
+    6) 
+        2

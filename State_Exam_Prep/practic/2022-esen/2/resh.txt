@@ -1,0 +1,65 @@
+zad2
+    1)
+        copy constructor ( конструктор за копиране)
+        operator= (оператор за присвояване)
+        destructor( деструктор)
+    2)
+
+
+        class foo {
+                public:
+                    virtual void f() {};
+                    void g() {};
+        };
+
+
+            foo obj;
+            foo& ref = obj;
+            obj.f(); ______статично_________ (то е обект , а не референция или пойнтер за да имаме подтипов полиморфизъм и да се свърже динамично)
+            obj.g(); ______статично______
+            ref.f(); ______динамично______ ( тук вече се извиква динамично защото е референция и се стартира подтиповия полиморфизъм който търси имплементацията на фунцкията ф за този обект към който сочи референцията)
+            ref.g(); ______статично_____
+    3)
+            class base {
+                public: int a;
+                private: int b;
+                };
+            class derived : protected base { };
+
+             Видимост на a: protected
+             Видимост на b: private ( но и не е достъпна за вътрешността на класа тъй като е private в base)
+    4)
+            ne
+            da
+    5)  
+            (0)-5-
+    6)
+            class test {
+                public:
+                virtual void f() = 0 ;
+                virtual ~test() {};
+                };
+    7)
+            template<typename T> 
+            class Array
+            {
+                    static const size_t size = 10;
+                    T data[size];
+
+                public:
+                    T& at(size_t index)
+                    {
+                        if (index >= size)
+                            throw std::out_of_range("error");
+                        return data[index];
+                    }
+            };
+            void test()
+            {
+                Array<int> a;
+                a.at(0) = 5;
+                std::cout << a.at(0);
+                Array<Array<int>> b;
+                b.at(0) = a;
+                std::cout << b.at(0).at(0);
+            }
