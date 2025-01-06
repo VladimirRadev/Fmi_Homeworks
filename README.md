@@ -1,2 +1,2 @@
 # Fmi_Homeworks
-This is repository for FMI's programming courses homeworks,projects, exercises. It contains all my work during these years.
+This is a repository containing FMI programming courses' homeworks,projects, exercises. It holds all my job during these years.
